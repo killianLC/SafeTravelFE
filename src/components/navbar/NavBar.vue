@@ -20,32 +20,22 @@ export default {
         },
         {
           label: "Yoann",
-          icon: "pi pi-fw pi-file",
+          icon: "pi pi-fw pi-user",
           items: [
             {
-              label: "New",
-              icon: "pi pi-fw pi-plus",
-              items: [
-                {
-                  label: "Bookmark",
-                  icon: "pi pi-fw pi-bookmark",
-                },
-                {
-                  label: "Video",
-                  icon: "pi pi-fw pi-video",
-                },
-              ],
+              label: "Profil",
+              icon: "pi pi-fw pi-user-edit",
             },
             {
-              label: "Delete",
-              icon: "pi pi-fw pi-trash",
+              label: "Mes voyages",
+              icon: "pi pi-fw pi-car",
             },
             {
               separator: true,
             },
             {
-              label: "Export",
-              icon: "pi pi-fw pi-external-link",
+              label: "Deconnexion",
+              icon: "pi pi-fw pi-sign-out",
             },
           ],
         },
@@ -57,18 +47,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>

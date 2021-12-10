@@ -1,17 +1,16 @@
 <template>
   <NavBar></NavBar>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to SafeTravel"/>
+  <Home/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Home from './components/home/Home.vue'
 import NavBar from './components/navbar/NavBar.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Home,
     NavBar,
   }
 }
