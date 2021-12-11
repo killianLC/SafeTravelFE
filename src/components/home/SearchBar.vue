@@ -1,5 +1,13 @@
 <template>
-  <InputText id="username" type="text" />
+  <span class="p-input-icon-left w-full">
+    <i class="pi pi-search" />
+    <InputText
+      class="p-inputtext-lg w-full"
+      id="username"
+      type="text"
+      placeholder="Rechercher votre ville"
+    />
+  </span>
 </template>
 
 <script>
