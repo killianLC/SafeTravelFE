@@ -17,6 +17,7 @@ export default {
         {
           label: "SafeTravel",
           icon: "pi pi-fw pi-briefcase",
+          to: '/city'
         },
         {
           label: "Yoann",

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid h-10rem sm:h-30rem align-content-center">
+  <div class="grid h-10rem sm:h-30rem m-0 align-content-center">
     <div class="col-8 col-offset-2"><SearchBar /></div>
   </div>
   <Rank/>
