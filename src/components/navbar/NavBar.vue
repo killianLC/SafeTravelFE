@@ -17,7 +17,7 @@ export default {
         {
           label: "SafeTravel",
           icon: "pi pi-fw pi-briefcase",
-          to: '/city'
+          to: '/home'
         },
         {
           label: "Yoann",
@@ -26,6 +26,7 @@ export default {
             {
               label: "Profil",
               icon: "pi pi-fw pi-user-edit",
+              to: '/profil'
             },
             {
               label: "Mes voyages",
