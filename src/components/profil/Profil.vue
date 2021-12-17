@@ -1,14 +1,29 @@
 <template>
-  <h1>Mon profil</h1>
+  <div>
+    <div class="grid">
+        <div class="col-12 md:col-6"><Informations /></div>
+        <div class="col-12 md:col-6"><MotDePasse /></div>
+        <div class="col-12"><Favoris /></div>
+    </div>
+  </div>
 </template>
 
 <script>
+import Favoris from "./Favoris.vue";
+import Informations from "./Informations.vue";
+import MotDePasse from "./MotDePasse.vue";
+
 export default {
   name: "Profil",
-  components: {},
+  components: {
+    Favoris,
+    Informations,
+    MotDePasse,
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
+
