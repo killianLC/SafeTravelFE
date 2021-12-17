@@ -17,7 +17,7 @@ export default {
         {
           label: "SafeTravel",
           icon: "pi pi-fw pi-briefcase",
-          to: '/home'
+          to: '/'
         },
         {
           label: "Yoann",

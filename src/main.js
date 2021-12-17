@@ -13,7 +13,7 @@ import '/node_modules/primeflex/primeflex.css'               //primeFlex
 import Home from './components/home/Home.vue';
 import Profil from './components/profil/Profil.vue';
 const routes = [
-    { path: '/home', component: Home },
+    { path: '/', component: Home },
     { path: '/profil', component: Profil },
 ];
 
