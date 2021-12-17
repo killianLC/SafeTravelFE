@@ -1,11 +1,17 @@
 <template>
-  <h1>VILLE</h1>
+  <h1>
+    VILLE
+    {{ $route.params.id }}
+  </h1>
+  <Informations />
 </template>
 
 <script>
+import Informations from "../city/Informations.vue";
+
 export default {
   name: "City",
-  components: {},
+  components: { Informations },
 };
 </script>
 

@@ -1,5 +1,10 @@
 # safetravelfe
 
+# Lib
+- Vue js 3.0
+- Prime Vue
+- Prime flex
+
 ## Project setup
 ```
 npm install

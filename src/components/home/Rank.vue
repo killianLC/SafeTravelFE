@@ -2,8 +2,17 @@
   <Card class="m-3 border-2 border-blue-400">
     <template #title> Classement </template>
     <template #content>
-      <DataTable :value="cities" sortField="rating" :sortOrder="-1" responsiveLayout="scroll">
-        <Column field="name" header="Name"></Column>
+      <DataTable
+        :value="cities"
+        sortField="rating"
+        :sortOrder="-1"
+        responsiveLayout="scroll"
+      >
+        <Column field="name" header="Name">
+          <template #body="slotProps">
+            <router-link :to="{ name: 'city', params: { id: slotProps.data.name }}">{{ slotProps.data.name }}</router-link>
+          </template>
+        </Column>
         <Column field="description" header="Description"></Column>
         <Column field="rating" header="Rating" :sortable="true"></Column>
       </DataTable>
@@ -13,15 +22,15 @@
 
 <script>
 import Card from "primevue/card";
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
 
 export default {
   name: "SearchBar",
   components: {
     Card,
     DataTable,
-    Column
+    Column,
   },
   data() {
     return {
