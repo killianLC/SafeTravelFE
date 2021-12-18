@@ -10,7 +10,7 @@
       >
         <Column field="name" header="Name">
           <template #body="slotProps">
-            <router-link :to="{ name: 'city', params: { id: slotProps.data.name }}">{{ slotProps.data.name }}</router-link>
+            <router-link :to="{ name: 'city', params: { name: slotProps.data.name }}">{{ slotProps.data.name }}</router-link>
           </template>
         </Column>
         <Column field="description" header="Description"></Column>
@@ -26,7 +26,7 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 
 export default {
-  name: "SearchBar",
+  name: "Rank",
   components: {
     Card,
     DataTable,
@@ -43,19 +43,19 @@ export default {
         },
         {
           id: "1001",
-          name: "Black Watch",
+          name: "Lyon",
           description: "Product Description",
           rating: 4,
         },
         {
           id: "1002",
-          name: "Blue Band",
+          name: "Marseille",
           description: "Product Description",
           rating: 3,
         },
         {
           id: "1003",
-          name: "Blue T-Shirt",
+          name: "Nantes",
           description: "Product Description",
           rating: 5,
         },

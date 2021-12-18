@@ -1,17 +1,36 @@
 <template>
-  <h1>
-    VILLE
-    {{ $route.params.id }}
-  </h1>
-  <Informations />
+  <div class="grid">
+    <div class="col-12 md:col-8"><BasicInformation :city="city" /></div>
+    <div class="col-12 md:col-4"><Carte :city="city" /></div>
+  </div>
 </template>
 
 <script>
-import Informations from "../city/Informations.vue";
+import BasicInformation from "./BasicInformation.vue";
+import Carte from "./Carte.vue";
 
 export default {
   name: "City",
-  components: { Informations },
+  components: { BasicInformation, Carte },
+  data() {
+    return {
+      city: Object,
+    };
+  },
+  created() {
+    fetch(
+      "https://api.teleport.org/api/cities/?search=" + this.$route.params.name
+    )
+      .then((resp) => resp.json())
+      .then((data) => {
+        fetch(data._embedded["city:search-results"][0]._links["city:item"].href)
+          .then((resp) => resp.json())
+          .then((data) => {
+            this.city = data;
+            console.log(this.city);
+          });
+      });
+  },
 };
 </script>
 

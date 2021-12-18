@@ -25,7 +25,7 @@ const routes = [
     name: 'profil'
   },
   {
-    path: '/city/:id',
+    path: '/city/:name',
     component: City,
     name: 'city'
   }
