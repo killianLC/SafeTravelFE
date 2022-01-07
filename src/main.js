@@ -10,14 +10,21 @@ import 'primeicons/primeicons.css'                           //icons
 import '/node_modules/primeflex/primeflex.css'               //primeFlex
 
 
+import City from './components/city/City.vue';
+import Inscription from './components/inscription/Inscription.vue'
 import Home from './components/home/Home.vue';
 import Profil from './components/profil/Profil.vue';
-import City from './components/city/City.vue';
+
 const routes = [
   {
     path: '/',
     component: Home,
     name: 'user',
+  },
+  {
+    path: '/inscription',
+    component: Inscription,
+    name: 'inscription'
   },
   {
     path: '/profil',

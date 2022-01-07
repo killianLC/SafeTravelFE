@@ -3,13 +3,11 @@
     <template #title>Mot de passe</template>
     <template #content>
       <div class="p-fluid">
-        <div class="p-field">
-          <label for="password">Mot de passe</label>
-          <InputText id="password" type="password" />
+        <div class="field">
+          <InputText id="password" type="password" placeholder="Mot de passe"/>
         </div>
-        <div class="p-field">
-          <label for="confirm-password">Confirmer le mot de passe</label>
-          <InputText id="confirm-password" type="password" />
+        <div class="field">
+          <InputText id="confirm-password" type="password" placeholder="Confirmer le mot de passe"/>
         </div>
       </div>
     </template>

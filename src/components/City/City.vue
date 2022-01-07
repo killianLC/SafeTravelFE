@@ -3,15 +3,17 @@
     <div class="col-12 md:col-8"><BasicInformation :city="city" /></div>
     <div class="col-12 md:col-4"><Carte :city="city" /></div>
   </div>
+  <div class="col-12 md:col-12"><Commentaire :city="city" /></div>
 </template>
 
 <script>
 import BasicInformation from "./BasicInformation.vue";
 import Carte from "./Carte.vue";
+import Commentaire from "./Commentaire.vue";
 
 export default {
   name: "City",
-  components: { BasicInformation, Carte },
+  components: { BasicInformation, Carte, Commentaire},
   data() {
     return {
       city: Object,
