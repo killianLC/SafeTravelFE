@@ -1,9 +1,9 @@
 <template>
   <div class="flex justify-content-center">
     <Card>
-      <template #title><div class="text-center">Inscription</div></template>
+      <template #title><div class="text-center">Connexion</div></template>
       <template #content>
-        <InscriptionForm />
+        <ConnexionForm />
       </template>
     </Card>
   </div>
@@ -11,13 +11,13 @@
 
 <script>
 import Card from "primevue/card";
-import InscriptionForm from "./InscriptionForm.vue";
+import ConnexionForm from "./ConnexionForm.vue";
 
 export default {
-  name: "Inscription",
+  name: "Connexion",
   components: {
     Card,
-    InscriptionForm,
+    ConnexionForm,
   },
 };
 </script>

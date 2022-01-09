@@ -1,6 +1,5 @@
 <template>
-  <Menubar :model="items">
-  </Menubar>
+  <Menubar :model="items"> </Menubar>
 </template>
 
 <script>
@@ -16,28 +15,38 @@ export default {
       items: [
         {
           label: "SafeTravel",
-          icon: "pi pi-fw pi-briefcase",
-          to: '/'
+          icon: "pi pi-briefcase",
+          to: "/",
         },
         {
           label: "Yoann",
-          icon: "pi pi-fw pi-user",
+          icon: "pi pi-user",
           items: [
             {
               label: "Profil",
-              icon: "pi pi-fw pi-user-edit",
-              to: '/profil'
+              icon: "pi pi-user-edit",
+              to: "/profil",
             },
             {
               label: "Mes voyages",
-              icon: "pi pi-fw pi-car",
+              icon: "pi pi-car",
+            },
+            {
+              label: "Inscription",
+              icon: "pi pi-user-plus",
+              to: "/inscription",
+            },
+            {
+              label: "Connexion",
+              icon: "pi pi-sign-in",
+              to: "/connexion",
             },
             {
               separator: true,
             },
             {
               label: "Deconnexion",
-              icon: "pi pi-fw pi-sign-out",
+              icon: "pi pi-sign-out",
             },
           ],
         },
@@ -49,5 +58,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>

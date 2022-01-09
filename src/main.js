@@ -11,7 +11,8 @@ import '/node_modules/primeflex/primeflex.css'               //primeFlex
 
 
 import City from './components/city/City.vue';
-import Inscription from './components/inscription/Inscription.vue'
+import Inscription from './components/inscription/Inscription.vue';
+import Connexion from './components/connexion/Connexion.vue';
 import Home from './components/home/Home.vue';
 import Profil from './components/profil/Profil.vue';
 
@@ -25,6 +26,11 @@ const routes = [
     path: '/inscription',
     component: Inscription,
     name: 'inscription'
+  },
+  {
+    path: '/connexion',
+    component: Connexion,
+    name: 'connexion'
   },
   {
     path: '/profil',
