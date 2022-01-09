@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <template #title>Mot de passe</template>
+    <template #title><i class="pi pi-cog" />&nbsp;Mot de passe</template>
     <template #content>
       <div class="p-fluid">
         <div class="field">

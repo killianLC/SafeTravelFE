@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template #title>
-      <i class="pi pi-star" />&nbsp;Mes villes favorites
+      <i class="pi pi-heart" />&nbsp;Mes villes favorites
     </template>
     <template #content>
       <div class="grid">

@@ -1,8 +1,11 @@
 <template>
   <div class="grid">
     <div class="col-12 md:col-4"><BasicInformation :city="city" /></div>
-    <div class="col-12 md:col-4"><Carte :city="city" /></div>
+    <div class="col-12 md:col-4"><Covid :city="city" /></div>
     <div class="col-12 md:col-4"><GlobalRating :city="city" /></div>
+    <div class="col-12 md:col-6 lg:col-4"><Carte :city="city" /></div>
+    <div class="col-12 md:col-6 lg:col-4"><News :city="city" /></div>
+    <div class="col-12 md:col-6 lg:col-4"><Pictures :city="city" /></div>
     <div class="col-12 md:col-12"><Commentaire :city="city" /></div>
   </div>
 </template>
@@ -12,10 +15,13 @@ import BasicInformation from "./informations/BasicInformation.vue";
 import Carte from "./informations/Carte.vue";
 import Commentaire from "./commentaires/Commentaire.vue";
 import GlobalRating from "./rating/GlobalRating.vue";
+import News from "./news/News.vue";
+import Pictures from "./pictures/Pictures.vue";
+import Covid from "./covid/Covid.vue";
 
 export default {
   name: "City",
-  components: { BasicInformation, Carte, Commentaire, GlobalRating },
+  components: { BasicInformation, Carte, Commentaire, GlobalRating, News, Pictures, Covid },
   data() {
     return {
       city: Object,

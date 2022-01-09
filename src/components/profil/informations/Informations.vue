@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <template #title>Informations</template>
+    <template #title><i class="pi pi-id-card" />&nbsp;Informations</template>
     <template #content>
       <div class="formgrid grid">
         <div class="field col-12 md:col-6">

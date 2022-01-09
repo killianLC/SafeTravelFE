@@ -1,7 +1,13 @@
 <template>
   <Card class="bg-primary">
     <template #title>
-      <div><i class="pi pi-star-fill" />&nbsp;Paris <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" class="w-auto h-1rem"></div>
+      <div>
+        <i class="pi pi-heart-fill" />&nbsp;Paris
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg"
+          class="w-auto h-1rem"
+        />
+      </div>
       <Button
         icon="pi pi-times"
         class="p-button-rounded text-gray-900 p-button-outlined"
