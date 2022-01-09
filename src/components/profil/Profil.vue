@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import Favoris from "./Favoris.vue";
-import Informations from "./Informations.vue";
-import MotDePasse from "./MotDePasse.vue";
+import Favoris from "./favoris/Favoris.vue";
+import Informations from "./informations/Informations.vue";
+import MotDePasse from "./informations/MotDePasse.vue";
 
 export default {
   name: "Profil",

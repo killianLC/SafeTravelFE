@@ -1,5 +1,5 @@
 <template>
-  <Card class="m-3 border-2 border-blue-400">
+  <Card class="m-3 border-2 border-primary">
     <template #title> Classement </template>
     <template #content>
       <DataTable

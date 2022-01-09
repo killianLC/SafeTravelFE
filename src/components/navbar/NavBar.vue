@@ -1,5 +1,6 @@
 <template>
-  <Menubar :model="items"> </Menubar>
+  <Menubar :model="items"> 
+  </Menubar>
 </template>
 
 <script>
@@ -16,6 +17,7 @@ export default {
         {
           label: "SafeTravel",
           icon: "pi pi-briefcase",
+          class: "text-primary",
           to: "/",
         },
         {
