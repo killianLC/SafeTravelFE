@@ -1,6 +1,12 @@
 <template>
   <Card>
-    <template #title><i class="pi pi-building" /> {{ city.name }}</template>
+    <template #title>
+      <div><i class="pi pi-building" /> {{ city.name }}</div>
+      <Button
+        icon="pi pi-heart-fill"
+        class="p-button-rounded text-gray-900 p-button-outlined btn-fav"
+      />
+    </template>
     <template #content>
       <ul class="list-none">
         <li>
@@ -43,5 +49,15 @@ export default {
 .p-card :deep(.p-card-content) {
   font-weight: 500;
   font-size: 1.2rem;
+}
+
+.p-card :deep(.p-card-title) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-fav {
+  max-height: 32px;
+  max-width: 32px;
 }
 </style>

@@ -6,7 +6,7 @@
       id="username"
       type="text"
       placeholder="Rechercher votre ville"
-      @keyup.enter="search()"
+      @keyup.enter="search"
       v-model="value"
     />
   </span>

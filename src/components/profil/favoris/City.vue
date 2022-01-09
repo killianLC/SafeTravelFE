@@ -8,6 +8,7 @@
       <Button
         icon="pi pi-times"
         class="p-button-rounded text-gray-900 p-button-outlined"
+        @click="deleteFav"
       />
     </template>
     <template #content>
@@ -16,7 +17,10 @@
       </div>
     </template>
     <template #footer>
-      <router-link :to="{ name: 'city', params: { name: city.name } }" class="no-underline">
+      <router-link
+        :to="{ name: 'city', params: { name: city.name } }"
+        class="no-underline"
+      >
         <Button
           icon="pi pi-eye"
           label="Consutler"
@@ -39,6 +43,11 @@ export default {
   },
   props: {
     city: Object,
+  },
+  methods: {
+    deleteFav() {
+      console.log('delete')
+    },
   },
 };
 </script>
