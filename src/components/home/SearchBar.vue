@@ -6,6 +6,8 @@
       id="username"
       type="text"
       placeholder="Rechercher votre ville"
+      @keyup.enter="search()"
+      v-model="value"
     />
   </span>
 </template>
@@ -17,6 +19,16 @@ export default {
   name: "SearchBar",
   components: {
     InputText,
+  },
+  data() {
+    return {
+      value: "",
+    };
+  },
+  methods: {
+    search() {
+      this.$router.push({ name: "city", params: { name: this.value } });
+    },
   },
 };
 </script>
