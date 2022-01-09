@@ -1,0 +1,12 @@
+<svg width="566" height="196" xmlns="http://www.w3.org/2000/svg">
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <rect stroke="#000" stroke-width="0" id="svg_1" height="100" width="188" y="0" x="189" fill="#ffc107"/>
+  <rect stroke="#000" stroke-width="0" id="svg_2" height="41" width="200.66667" y="62.66667" x="0" fill="#ffc107"/>
+  <rect stroke="#000" stroke-width="0" id="svg_3" height="100" width="565.00003" y="96.33333" x="1.16663" fill="#ffc107"/>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Arial'" font-size="67" id="svg_4" y="65.33333" x="262.89582" stroke-width="0" stroke="#000" fill="#1d1e27">1</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Arial'" font-size="67" id="svg_5" y="132.66667" x="75.00001" stroke-width="0" stroke="#000" fill="#1d1e27">2</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Arial'" font-size="67" id="svg_6" y="166.66667" x="452.99999" stroke-width="0" stroke="#000" fill="#1d1e27">3</text>
+ </g>
+
+</svg>

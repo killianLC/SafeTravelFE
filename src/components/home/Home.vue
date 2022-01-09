@@ -7,7 +7,7 @@
 
 <script>
 import SearchBar from "./SearchBar.vue";
-import Rank from "./Rank.vue";
+import Rank from "./rank/Rank.vue";
 
 export default {
   name: "Home",

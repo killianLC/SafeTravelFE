@@ -2,6 +2,7 @@
   <Card class="m-3 border-2 border-primary">
     <template #title><i class="pi pi-chart-bar" />&nbsp;Classement </template>
     <template #content>
+      <Podium :cities="cities" />
       <DataTable
         :value="cities"
         sortField="rating"
@@ -10,7 +11,7 @@
       >
         <Column field="name" header="Name">
           <template #body="slotProps">
-            <router-link :to="{ name: 'city', params: { name: slotProps.data.name }}">{{ slotProps.data.name }}</router-link>
+            <router-link :to="{ name: 'city', params: { name: slotProps.data.name }}" class="no-underline text-dark font-bold text-lg">{{ slotProps.data.name }}</router-link>
           </template>
         </Column>
         <Column field="description" header="Description"></Column>
@@ -24,6 +25,7 @@
 import Card from "primevue/card";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
+import Podium from "./Podium.vue"
 
 export default {
   name: "Rank",
@@ -31,6 +33,7 @@ export default {
     Card,
     DataTable,
     Column,
+    Podium
   },
   data() {
     return {
@@ -40,60 +43,28 @@ export default {
           name: "Paris",
           description: "Product Description",
           rating: 5,
+          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
         },
         {
           id: "1001",
           name: "Lyon",
           description: "Product Description",
           rating: 4,
+          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
         },
         {
           id: "1002",
           name: "Marseille",
           description: "Product Description",
           rating: 3,
+          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
         },
         {
           id: "1003",
           name: "Nantes",
           description: "Product Description",
           rating: 5,
-        },
-        {
-          id: "1004",
-          name: "Bracelet",
-          description: "Product Description",
-          rating: 4,
-        },
-        {
-          id: "1005",
-          name: "Brown Purse",
-          description: "Product Description",
-          rating: 4,
-        },
-        {
-          id: "1006",
-          name: "Chakra Bracelet",
-          description: "Product Description",
-          rating: 3,
-        },
-        {
-          id: "1007",
-          name: "Galaxy Earrings",
-          description: "Product Description",
-          rating: 5,
-        },
-        {
-          id: "1008",
-          name: "Game Controller",
-          description: "Product Description",
-          rating: 4,
-        },
-        {
-          id: "1009",
-          name: "Gaming Set",
-          description: "Product Description",
-          rating: 3,
+          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
         },
       ],
     };

@@ -2,11 +2,8 @@
   <Card class="bg-primary">
     <template #title>
       <div>
-        <i class="pi pi-heart-fill" />&nbsp;Paris
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg"
-          class="w-auto h-1rem"
-        />
+        <i class="pi pi-heart-fill" />&nbsp;{{ city.name }}
+        <img :src="city.flag" class="w-auto h-1rem" />
       </div>
       <Button
         icon="pi pi-times"
@@ -15,10 +12,18 @@
     </template>
     <template #content>
       <div class="flex">
-        <span class="score">7/10</span>
+        <span class="score bg-dark">{{ city.score }}</span>
       </div>
     </template>
-    <template #footer></template>
+    <template #footer>
+      <router-link :to="{ name: 'city', params: { name: city.name } }" class="no-underline">
+        <Button
+          icon="pi pi-eye"
+          label="Consutler"
+          class="text-primary bg-dark w-full p-button-rounded"
+        />
+      </router-link>
+    </template>
   </Card>
 </template>
 
@@ -31,6 +36,9 @@ export default {
   components: {
     Card,
     Button,
+  },
+  props: {
+    city: Object,
   },
 };
 </script>
@@ -45,7 +53,6 @@ export default {
   color: var(--primary-color);
   font-size: 5rem;
   font-weight: 600;
-  background-color: #1d1e27;
   border-radius: 10%;
   padding: 0 1rem;
   margin: auto;

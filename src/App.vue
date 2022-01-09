@@ -25,20 +25,11 @@ body {
   background-attachment: fixed;
 }
 
-@keyframes p-progress-spinner-color {
-    100%,
-    0% {
-        stroke: #d62d20;
-    }
-    40% {
-        stroke: #d62d20;
-    }
-    66% {
-        stroke: #d62d20;
-    }
-    80%,
-    90% {
-        stroke: #d62d20;
-    }
+.bg-dark {
+  background-color: #1d1e27 !important;
+}
+
+.text-dark {
+  color: #1d1e27 !important;
 }
 </style>

@@ -3,7 +3,7 @@
     <template #title><i class="pi pi-bookmark" /> Note global</template>
     <template #content>
       <ProgressSpinner strokeWidth="5" fill="#1d1e27" animationDuration="1s" />
-      <span class="fadeinleft score">7/10</span>
+      <span class="fadeinleft score bg-dark">7/10</span>
       <span>*Moyenne des notes de la ville...</span>
     </template>
   </Card>
@@ -35,7 +35,6 @@ export default {
   font-size: 5rem;
   font-weight: 600;
   animation: 0s ease-in 3s normal forwards 1 fadein;
-  background-color: #1d1e27;
   border-radius: 10%;
   padding: 0 1rem;
   margin: auto;
