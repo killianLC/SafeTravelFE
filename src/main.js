@@ -15,6 +15,7 @@ import Inscription from './components/inscription/Inscription.vue';
 import Connexion from './components/connexion/Connexion.vue';
 import Home from './components/home/Home.vue';
 import Profil from './components/profil/Profil.vue';
+import Travels from './components/travel/Travels.vue';
 
 const routes = [
   {
@@ -41,6 +42,11 @@ const routes = [
     path: '/city/:name',
     component: City,
     name: 'city'
+  },
+  {
+    path: '/travels',
+    component: Travels,
+    name: 'travels'
   }
 ];
 

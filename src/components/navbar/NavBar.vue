@@ -32,6 +32,7 @@ export default {
             {
               label: "Mes voyages",
               icon: "pi pi-car",
+              to : "/travels"
             },
             {
               label: "Inscription",
