@@ -26,7 +26,6 @@
       <a href="" class="no-underline">
         <Button label="Voir plus sur Google Image" icon="pi pi-google" />
       </a>
-      <a href=""></a>
     </template>
   </Card>
 </template>

@@ -24,7 +24,6 @@
       <a href="" class="no-underline">
         <Button label="Consulter sur Google" icon="pi pi-google" />
       </a>
-      <a href=""></a>
     </template>
   </Card>
 </template>

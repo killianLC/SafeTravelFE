@@ -3,8 +3,21 @@
     <template #title>
       <div class="flex justify-content-between">
         <div>
-          {{ travel.origin }} <i class="pi pi-caret-right" />
-          {{ travel.destination }}
+          <router-link
+            :to="{ name: 'city', params: { name: travel.origin } }"
+            class="no-underline text-dark"
+          >
+            <img :src="travel.flagOrigin" class="w-auto h-1rem" />
+            {{ travel.origin }}
+          </router-link>
+          &nbsp;<i class="pi pi-caret-right" />&nbsp;
+          <router-link
+            :to="{ name: 'city', params: { name: travel.destination } }"
+            class="no-underline text-dark"
+          >
+            <img :src="travel.flagDestination" class="w-auto h-1rem" />
+            {{ travel.destination }}
+          </router-link>
         </div>
         <Tag
           :value="travel.date"
@@ -15,7 +28,10 @@
       </div>
     </template>
     <template #content>
-        <span class="text-xl font-bold">{{ travel.numberParticipants }} <i class="pi pi-users" /> participants</span>
+      <span class="text-xl font-bold"
+        >{{ travel.numberParticipants }}
+        <i class="pi pi-users" /> participants</span
+      >
     </template>
     <template #footer>
       <Button

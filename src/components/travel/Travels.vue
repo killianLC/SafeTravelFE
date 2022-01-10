@@ -12,7 +12,9 @@
         </div>
       </div>
     </template>
-    <template #footer> </template>
+    <template #footer>
+      
+    </template>
   </Card>
 </template>
 
@@ -31,19 +33,25 @@ export default {
       travels: [
         {
           origin: "Paris",
+          flagOrigin: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
           destination: "New-York",
+          flagDestination: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg",
           numberParticipants: "3",
           date: "12/12/2020",
         },
         {
           origin: "Brest",
+          flagOrigin: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
           destination: "Nantes",
+          flagDestination: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
           numberParticipants: "1",
           date: "30/04/2022",
         },
         {
           origin: "Londres",
+          flagOrigin: "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg",
           destination: "Berlin",
+          flagDestination: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg",
           numberParticipants: "6",
           date: "21/06/2021",
         },
