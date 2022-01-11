@@ -32,6 +32,7 @@ export default {
     return {
       travels: [
         {
+          id:1,
           origin: "Paris",
           flagOrigin: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
           destination: "New-York",
@@ -40,6 +41,7 @@ export default {
           date: "12/12/2020",
         },
         {
+          id:2,
           origin: "Brest",
           flagOrigin: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
           destination: "Nantes",
@@ -48,6 +50,7 @@ export default {
           date: "30/04/2022",
         },
         {
+          id:3,
           origin: "Londres",
           flagOrigin: "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg",
           destination: "Berlin",

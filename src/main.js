@@ -16,6 +16,7 @@ import Connexion from './components/connexion/Connexion.vue';
 import Home from './components/home/Home.vue';
 import Profil from './components/profil/Profil.vue';
 import Travels from './components/travel/Travels.vue';
+import TravelDetails from './components/travel/travelDetails/TravelDetails.vue';
 
 const routes = [
   {
@@ -47,6 +48,11 @@ const routes = [
     path: '/travels',
     component: Travels,
     name: 'travels'
+  },
+  {
+    path: '/travel/:id',
+    component: TravelDetails,
+    name: 'travelDetails'
   }
 ];
 

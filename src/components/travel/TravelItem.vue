@@ -34,11 +34,15 @@
       >
     </template>
     <template #footer>
-      <Button
-        icon="pi pi-eye"
-        label="Consutler"
-        class="text-primary bg-dark w-full p-button-rounded"
-      />
+      <router-link
+        :to="{ name: 'travelDetails', params: { id: travel.id } }"
+        class="no-underline text-dark"
+      >
+        <Button
+          icon="pi pi-eye"
+          label="Consutler"
+          class="text-primary bg-dark w-full p-button-rounded"
+      /></router-link>
     </template>
   </Card>
 </template>
