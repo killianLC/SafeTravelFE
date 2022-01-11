@@ -10,6 +10,7 @@ import SearchBar from "./SearchBar.vue";
 import Rank from "./rank/Rank.vue";
 
 export default {
+  title: "Home test",
   name: "Home",
   components: {
     SearchBar,

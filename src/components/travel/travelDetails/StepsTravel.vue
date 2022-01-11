@@ -1,36 +1,7 @@
 <template>
   <Card>
     <template #title>
-      <div class="flex justify-content-between">
-        <div>
-          <router-link
-            :to="{ name: 'city', params: { name: steps[0].name } }"
-            class="no-underline text-dark"
-          >
-            <img :src="steps[0].flag" class="w-auto h-1rem" />
-            {{ steps[0].name }}
-          </router-link>
-          &nbsp;<i class="pi pi-caret-right" />&nbsp;
-          {{ steps.length-2 }} etapes
-          &nbsp;<i class="pi pi-caret-right" />&nbsp;
-          <router-link
-            :to="{
-              name: 'city',
-              params: { name: steps[steps.length - 1].name },
-            }"
-            class="no-underline text-dark"
-          >
-            <img :src="steps[steps.length - 1].flag" class="w-auto h-1rem" />
-            {{ steps[steps.length - 1].name }}
-          </router-link>
-        </div>
-        <Tag
-          :value="steps[0].date"
-          icon="pi pi-calendar"
-          rounded
-          class="bg-gray-900 text-primary"
-        ></Tag>
-      </div>
+        Modifier les étapes du voyages
     </template>
     <template #content>
       <div class="p-inputgroup mb-4">
@@ -61,7 +32,6 @@
 
 <script>
 import Card from "primevue/card";
-import Tag from "primevue/tag";
 import OrderList from "primevue/orderlist";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
@@ -70,7 +40,6 @@ export default {
   name: "StepsTravel",
   components: {
     Card,
-    Tag,
     OrderList,
     Button,
     InputText,

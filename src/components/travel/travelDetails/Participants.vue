@@ -1,10 +1,8 @@
 <template>
   <Card>
     <template #title>
-      <span class="text-xl font-bold"
-        >{{ participants.length }} <i class="pi pi-users" /> participants</span
-      ></template
-    >
+      {{ participants.length }} <i class="pi pi-users" /> participants
+    </template>
     <template #content>
       <Listbox
         v-model="selectedCity"
@@ -18,7 +16,7 @@
         icon="pi pi-plus-circle"
         label="Inviter un voyageur"
         class="text-primary bg-dark w-full p-button-rounded"
-    />
+      />
     </template>
   </Card>
 </template>
@@ -33,7 +31,7 @@ export default {
   components: {
     Card,
     Listbox,
-    Button
+    Button,
   },
   props: {
     participants: Array,
