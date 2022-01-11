@@ -6,6 +6,7 @@
     <template #content>
       <div class="p-inputgroup mb-4">
         <InputText placeholder="Ville" v-model="cityInput" />
+        <Calendar v-model="dateInput" placeholder="date" dateFormat="dd.mm.yy" />
         <Button icon="pi pi-plus" label="Ajouter" @click="addStep"/>
       </div>
       <OrderList v-model="steps" listStyle="height:auto" dataKey="name">
@@ -35,6 +36,7 @@ import Card from "primevue/card";
 import OrderList from "primevue/orderlist";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import Calendar from 'primevue/calendar';
 
 export default {
   name: "StepsTravel",
@@ -43,6 +45,7 @@ export default {
     OrderList,
     Button,
     InputText,
+    Calendar
   },
   created() {
     this.steps = this.travel.steps;
@@ -54,6 +57,7 @@ export default {
     return {
       steps: [],
       cityInput: "",
+      dateInput: "",
     };
   },
   methods: {
@@ -61,7 +65,7 @@ export default {
       this.steps.push({
         name: this.cityInput,
         flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        date: "2020-01-01",
+        date: this.dateInput,
       });
     },
     removeStep(name){
