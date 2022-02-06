@@ -1,70 +1,65 @@
 <template>
   <Card>
     <template #title>
-      <i class="pi pi-heart" />&nbsp;Mes villes favorites
+      <i class="pi pi-star" />&nbsp;Mes notes
     </template>
     <template #content>
       <div class="grid">
         <div
-          class="col-12 md:col-12 lg:col-6"
+          class="col-12"
           v-for="city in cities"
           :key="city.name"
         >
-          <City :city="city" />
+          <Rate :city="city" />
         </div>
       </div>
     </template>
     <template #footer>
-      <router-link to="/" class="no-underline"
-        ><Button icon="pi pi-plus-circle" label="Découvrir de nouvelles villes"
-      /></router-link>
     </template>
   </Card>
 </template>
 
 <script>
 import Card from "primevue/card";
-import Button from "primevue/button";
-import City from "./City.vue";
+import Rate from "./Rate.vue";
 
 export default {
-  name: "Favoris",
+  name: "Ratings",
   components: {
     Card,
-    Button,
-    City,
+    Rate,
   },
   data() {
     return {
       cities: [
         {
           name: "Paris",
-          score: "6/10",
+          rate: 4,
           flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
         },
         {
           name: "Barcelone",
-          score: "7/10",
+          rate: 6,
           flag: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg",
         },
         {
           name: "Rome",
-          score: "4/10",
+          rate: 2,
           flag: "https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg?",
         },
         {
           name: "Berlin",
-          score: "5/10",
+          rate: 3,
           flag: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg",
         },
         {
           name: "Stockholm",
-          score: "9/10",
+          rate: 9,
           flag: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg",
         },
         {
           name: "Lyon",
-          score: "8/10",
+          rate: 10,
           flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
         },
       ],

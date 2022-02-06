@@ -60,7 +60,7 @@ export default {
 }
 .score {
   color: var(--primary-color);
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 600;
   border-radius: 10%;
   padding: 0 1rem;

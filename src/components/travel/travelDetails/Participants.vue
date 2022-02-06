@@ -9,14 +9,27 @@
         :options="participants"
         optionLabel="name"
         :filter="true"
-      />
+      >
+        <template #option="slotProps">
+          <div class="flex justify-content-between">
+            <div class="flex align-items-center">
+              <i class="pi pi-user"></i>
+              <span class="ml-2">{{ slotProps.option.name }}</span>
+            </div>
+            <Button
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-danger"
+              @click="removeStep(slotProps.item.name)"
+            />
+          </div>
+        </template>
+      </Listbox>
     </template>
     <template #footer>
-      <Button
-        icon="pi pi-plus-circle"
-        label="Inviter un voyageur"
-        class="text-primary bg-dark w-full p-button-rounded"
-      />
+      <div class="p-inputgroup">
+        <InputText placeholder="Inviter un voyageur" />
+        <Button icon="pi pi-user-plus" label="Ajouter" />
+      </div>
     </template>
   </Card>
 </template>
@@ -25,6 +38,7 @@
 import Card from "primevue/card";
 import Listbox from "primevue/listbox";
 import Button from "primevue/button";
+import InputText from "primevue/inputtext";
 
 export default {
   name: "Participants",
@@ -32,6 +46,7 @@ export default {
     Card,
     Listbox,
     Button,
+    InputText,
   },
   props: {
     participants: Array,

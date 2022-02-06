@@ -13,7 +13,7 @@
 
 <script>
 import Participants from "./Participants.vue";
-import StepsTravel from "./StepsTravel.vue";
+import StepsTravel from "./Edit.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import PresentationTravel from "./PresentationTravel.vue";
 
@@ -62,7 +62,7 @@ export default {
         date: "12/12/2020",
       },
       home: { icon: "pi pi-home", to: "/" },
-      items: [{ label: "Mes voyages", to: "/travels" }],
+      items: [{ label: "Mes voyages", to: "/travels" }, {label: "Mon voyage", to:this.$route}],
     };
   },
 };
