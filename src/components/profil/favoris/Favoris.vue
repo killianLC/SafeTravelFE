@@ -8,7 +8,7 @@
         <div
           class="col-12 md:col-12 lg:col-6"
           v-for="city in cities"
-          :key="city.name"
+          :key="city.cityDto.name"
         >
           <City :city="city" />
         </div>
@@ -22,10 +22,11 @@
   </Card>
 </template>
 
-<script>
+<script type="">
 import Card from "primevue/card";
 import Button from "primevue/button";
 import City from "./City.vue";
+const axios = require('axios');
 
 export default {
   name: "Favoris",
@@ -36,39 +37,25 @@ export default {
   },
   data() {
     return {
-      cities: [
-        {
-          name: "Paris",
-          score: "6/10",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        },
-        {
-          name: "Barcelone",
-          score: "7/10",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg",
-        },
-        {
-          name: "Rome",
-          score: "4/10",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg?",
-        },
-        {
-          name: "Berlin",
-          score: "5/10",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg",
-        },
-        {
-          name: "Stockholm",
-          score: "9/10",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg",
-        },
-        {
-          name: "Lyon",
-          score: "8/10",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        },
-      ],
-    };
+      cities: [],
+    }
+  },
+  created() {
+    axios.get('http://localhost:8080/comment/user/1', {
+      headers: {
+        Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5b2FubmJvdWdhdWx0QGdtYWlsLmNvbSIsImlhdCI6MTY0NDQxNjQ3NSwiZXhwIjoxNjQ0NDQ2NDc1fQ.kMJtdp4vMR6XOrjtcHZJv5K8lO27sB-qCKcL-7p0zgyUK3Uej1un0uRqOoTz2nUuCZ6zNZEbDyEIYL5IAWWn3Q'
+      }
+    })
+    .then((response) => {
+      // handle success
+      this.cities = response.data;
+      console.log(response);
+
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    })
   },
 };
 </script>

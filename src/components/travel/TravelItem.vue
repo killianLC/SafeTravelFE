@@ -40,7 +40,7 @@
       >
         <Button
           icon="pi pi-eye"
-          label="Consutler"
+          label="Consulter"
           class="text-primary bg-dark w-full p-button-rounded"
       /></router-link>
     </template>

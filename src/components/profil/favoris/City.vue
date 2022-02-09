@@ -2,7 +2,7 @@
   <Card class="bg-primary">
     <template #title>
       <div>
-        <i class="pi pi-heart-fill" />&nbsp;{{ city.name }}
+        <i class="pi pi-heart-fill" />&nbsp;{{ city.cityDto.name }}
         <img :src="city.flag" class="w-auto h-1rem" />
       </div>
       <Button
@@ -13,17 +13,17 @@
     </template>
     <template #content>
       <div class="flex">
-        <span class="score bg-dark">{{ city.score }}</span>
+        <span class="score bg-dark">{{ city.rating }}</span>
       </div>
     </template>
     <template #footer>
       <router-link
-        :to="{ name: 'city', params: { name: city.name } }"
+        :to="{ name: 'city', params: { name: city.cityDto.name } }"
         class="no-underline"
       >
         <Button
           icon="pi pi-eye"
-          label="Consutler"
+          label="Consulter"
           class="text-primary bg-dark w-full p-button-rounded"
         />
       </router-link>
