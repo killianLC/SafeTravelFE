@@ -1,5 +1,6 @@
 import axios from 'axios';
 var CryptoJS = require("crypto-js");
+import { useStore } from 'vuex'
 
 const API_URL = 'http://localhost:8080/auth/';
 class AuthService {
@@ -15,6 +16,8 @@ class AuthService {
 
                 var user = { id: response.data.id, firstname: response.data.firstname, lastname: response.data.lastname,  email: response.data.email, roles: response.data.roles }
                 window.sessionStorage.setItem("user", JSON.stringify(user));
+                const store = useStore()
+                store.commit('user',JSON.stringify(user));
             }
             isLogged = true;
         })

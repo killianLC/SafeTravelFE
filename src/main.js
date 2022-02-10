@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createStore } from 'vuex'
 import App from './App.vue'
 import PrimeVue from 'primevue/config'
 import { createWebHashHistory, createRouter } from 'vue-router'
@@ -112,9 +113,23 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 
+const store = createStore({
+  state () {
+    return {
+      user: null
+    }
+  },
+  mutations: {
+    setUser (state, user) {
+      state.user = user;
+    }
+  }
+})
+
 const app = createApp(App);
 
 app.use(router);
+app.use(store)
 app.use(PrimeVue);
 app.use(ToastService);
 
