@@ -1,6 +1,6 @@
 <template>
   <Menubar>
-    <template #start> SafeTravel </template>
+    <template #start><router-link to="/" class="no-underline font-bold"><Button label="SafeTravel" icon="pi pi-briefcase" class="p-button-secondary p-button-text" /></router-link></template>
     <template #end>
       <div v-if="isLogged">
       <Button type="button" label="Yoann" @click="toggle" />
