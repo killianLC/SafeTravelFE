@@ -6,7 +6,7 @@
     <template #content>
       <div class="grid">
         <div
-          class="col-12"
+          class="col-6"
           v-for="city in cities"
           :key="city.name"
         >
@@ -34,32 +34,32 @@ export default {
       cities: [
         {
           name: "Paris",
-          rate: 4,
+          rate: 4.2,
           flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
         },
         {
           name: "Barcelone",
-          rate: 6,
+          rate: 3.6,
           flag: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg",
         },
         {
           name: "Rome",
-          rate: 2,
+          rate: 4.5,
           flag: "https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg?",
         },
         {
           name: "Berlin",
-          rate: 3,
+          rate: 1.4,
           flag: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg",
         },
         {
           name: "Stockholm",
-          rate: 9,
+          rate: 3.6,
           flag: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg",
         },
         {
           name: "Lyon",
-          rate: 10,
+          rate: 5,
           flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
         },
       ],

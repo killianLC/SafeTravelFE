@@ -3,11 +3,11 @@
     <template #title>
       <div>
         {{ city.name }}
-        <img :src="city.flag" class="w-auto h-1rem" />
+        <Flag :image="city.flag" />
       </div>
     </template>
     <template #content>
-      <Rating v-model="rate" :stars="10" :cancel="false" />
+      <Rating v-model="rate" :stars="5" :cancel="false" />
     </template>
   </Card>
 </template>
@@ -15,12 +15,14 @@
 <script>
 import Card from "primevue/card";
 import Rating from "primevue/rating";
+import Flag from "../../Flag"
 
 export default {
   name: "Rate",
   components: {
     Card,
     Rating,
+    Flag
   },
   data: function () {
     return {

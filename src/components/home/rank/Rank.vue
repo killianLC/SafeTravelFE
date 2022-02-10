@@ -2,20 +2,32 @@
   <Card class="m-3 border-2 border-primary">
     <template #title><i class="pi pi-chart-bar" />&nbsp;Classement </template>
     <template #content>
-      <Podium :cities="cities" />
+      <Podium :cities="cities" class="mb-4" />
       <DataTable
         :value="cities"
         sortField="rating"
         :sortOrder="-1"
         responsiveLayout="scroll"
       >
-        <Column field="name" header="Name">
+        <Column header="Classement">
           <template #body="slotProps">
-            <router-link :to="{ name: 'city', params: { name: slotProps.data.name }}" class="no-underline text-dark font-bold text-lg">{{ slotProps.data.name }}</router-link>
+            <span class="font-bold">{{ slotProps.index + 1 }}</span>
           </template>
         </Column>
-        <Column field="description" header="Description"></Column>
-        <Column field="rating" header="Rating" :sortable="true"></Column>
+        <Column field="name" header="Ville">
+          <template #body="slotProps">
+            <router-link
+              :to="{ name: 'city', params: { name: slotProps.data.name } }"
+              class="no-underline text-dark font-bold text-lg"
+              ><Flag :image="slotProps.data.flag"/> {{ slotProps.data.name }}</router-link
+            >
+          </template>
+        </Column>
+        <Column field="rating" header="Note">
+          <template #body="slotProps">
+            <span class="font-bold">{{ slotProps.data.rating }} / 5</span>
+          </template>
+        </Column>
       </DataTable>
     </template>
   </Card>
@@ -25,7 +37,8 @@
 import Card from "primevue/card";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
-import Podium from "./Podium.vue"
+import Podium from "./Podium.vue";
+import Flag from "../../Flag.vue";
 
 export default {
   name: "Rank",
@@ -33,7 +46,8 @@ export default {
     Card,
     DataTable,
     Column,
-    Podium
+    Podium,
+    Flag
   },
   data() {
     return {
@@ -73,5 +87,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped>  
 </style>

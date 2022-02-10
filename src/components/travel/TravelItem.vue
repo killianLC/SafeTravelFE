@@ -7,7 +7,7 @@
             :to="{ name: 'city', params: { name: travel.origin } }"
             class="no-underline text-dark"
           >
-            <img :src="travel.flagOrigin" class="w-auto h-1rem" />
+            <Flag :image="travel.flagOrigin" />
             {{ travel.origin }}
           </router-link>
           &nbsp;<i class="pi pi-caret-right" />&nbsp;
@@ -15,7 +15,7 @@
             :to="{ name: 'city', params: { name: travel.destination } }"
             class="no-underline text-dark"
           >
-            <img :src="travel.flagDestination" class="w-auto h-1rem" />
+            <Flag :image="travel.flagDestination" />
             {{ travel.destination }}
           </router-link>
         </div>
@@ -51,6 +51,7 @@
 import Card from "primevue/card";
 import Tag from "primevue/tag";
 import Button from "primevue/button";
+import Flag from "../Flag.vue"
 
 export default {
   name: "TravelItem",
@@ -58,6 +59,7 @@ export default {
     Card,
     Tag,
     Button,
+    Flag
   },
   props: {
     travel: Object,

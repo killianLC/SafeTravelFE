@@ -2,7 +2,7 @@
   <Card>
     <template #title><i class="pi pi-bookmark" /> Votre note</template>
     <template #content>
-      <Rating v-model="val" :stars="10" :cancel="false" />
+      <Rating v-model="val" :stars="5" :cancel="false" />
     </template>
   </Card>
 </template>

@@ -3,7 +3,7 @@
     <template #title><i class="pi pi-bookmark" /> Note global</template>
     <template #content>
       <ProgressSpinner strokeWidth="5" fill="#1d1e27" animationDuration="1s" />
-      <span class="fadeinleft score bg-dark">7/10</span>
+      <span class="fadeinleft score bg-dark">3.6/5</span>
       <span>*Moyenne des notes de la ville...</span>
     </template>
   </Card>

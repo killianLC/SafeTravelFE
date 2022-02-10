@@ -1,8 +1,10 @@
 <template>
-  <div class="grid h-10rem sm:h-30rem m-0 align-content-center">
-    <div class="col-8 col-offset-2"><SearchBar /></div>
+  <div class="grid h-10rem sm:h-10rem m-0 align-content-center">
+    <div class="col-12 sm:col-8 sm:col-offset-2"><SearchBar /></div>
+  </div>  
+  <div class="grid m-0">
+    <div class="col-12 sm:col-8 sm:col-offset-2"><Rank /></div>
   </div>
-  <Rank/>
 </template>
 
 <script>

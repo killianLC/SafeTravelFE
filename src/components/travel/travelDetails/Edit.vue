@@ -12,7 +12,7 @@
         <template #option="slotProps">
           <div class="flex justify-content-between">
             <div class="flex align-items-center min-w-100">
-              <img :src="slotProps.option.flag" class="w-auto h-1rem mr-2" />
+              <Flag :image="slotProps.option.flag" class="mr-2"/>
               <span>{{ slotProps.option.name }}</span>
             </div>
             <Calendar
@@ -50,6 +50,7 @@ import Calendar from "primevue/calendar";
 import Textarea from "primevue/textarea";
 import Divider from "primevue/divider";
 import Listbox from "primevue/listbox";
+import Flag from '../../Flag.vue';
 
 export default {
   name: "Edit",
@@ -61,6 +62,7 @@ export default {
     Textarea,
     Divider,
     Listbox,
+    Flag,
   },
   created() {
     this.steps = this.travel.steps;

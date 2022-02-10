@@ -3,7 +3,7 @@
     <template #title>
       <div>
         <i class="pi pi-heart-fill" />&nbsp;{{ city.cityDto.name }}
-        <img :src="city.flag" class="w-auto h-1rem" />
+        <Flag :image="city.flag" />
       </div>
       <Button
         icon="pi pi-times"
@@ -34,12 +34,14 @@
 <script>
 import Card from "primevue/card";
 import Button from "primevue/button";
+import Flag from "../../Flag";
 
 export default {
   name: "City",
   components: {
     Card,
     Button,
+    Flag
   },
   props: {
     city: Object,

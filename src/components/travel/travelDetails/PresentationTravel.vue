@@ -4,12 +4,12 @@
       <div class="flex justify-content-between">
         <div class="text-dark">
           <i class="pi pi-ticket" />&nbsp;
-          <img :src="travel.steps[0].flag" class="w-auto h-1rem" />
+          <Flag :image="travel.steps[0].flag" />
           {{ travel.steps[0].name }}
           &nbsp;<i class="pi pi-caret-right" />&nbsp;
           {{ travel.steps.length - 2 }} etapes &nbsp;
           <i class="pi pi-caret-right" />&nbsp;
-          <img :src="lastStep.flag" class="w-auto h-1rem" />
+          <Flag :image="lastStep.flag" />
           {{ lastStep.name }}
         </div>
         <div>
@@ -50,7 +50,7 @@
               <div class="step">
                 <div>
                   <i class="pi pi-building" /> {{ slotProps.item.name }}
-                  <img :src="travel.steps[0].flag" class="w-auto h-1rem" />
+                  <Flag :image="travel.steps[0].flag" />
                 </div>
                 {{ slotProps.item.date }}
               </div>
@@ -80,6 +80,7 @@ import Timeline from "primevue/timeline";
 import Divider from "primevue/divider";
 import Avatar from "primevue/avatar";
 import AvatarGroup from "primevue/avatargroup";
+import Flag from "../../Flag.vue";
 
 export default {
   name: "PresentationTravel",
@@ -91,6 +92,7 @@ export default {
     Divider,
     Avatar,
     AvatarGroup,
+    Flag
   },
   props: {
     travel: Object,

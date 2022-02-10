@@ -7,7 +7,7 @@
     >
       <span class="absolute top-1">
         {{ cities[0].name }}
-        <img :src="cities[0].flag" class="top-flag" />
+        <Flag :image="cities[0].flag" class="top-flag" />
       </span>
     </router-link>
     <router-link
@@ -16,7 +16,7 @@
     >
       <span class="absolute top-2">
         {{ cities[1].name }}
-        <img :src="cities[1].flag" class="top-flag" />
+        <Flag :image="cities[1].flag" class="top-flag" />
       </span>
     </router-link>
     <router-link
@@ -25,16 +25,20 @@
     >
       <span class="absolute top-3">
         {{ cities[2].name }}
-        <img :src="cities[2].flag" class="top-flag" />
+        <Flag :image="cities[2].flag" class="top-flag" />
       </span>
     </router-link>
   </div>
 </template>
 
 <script>
+import Flag from "../../Flag.vue";
+
 export default {
   name: "Podium",
-  components: {},
+  components: {
+    Flag,
+  },
   props: {
     cities: Object,
   },
