@@ -1,15 +1,34 @@
 <template>
-  <Menubar :model="items"> 
+  <Menubar>
+    <template #start> SafeTravel </template>
+    <template #end>
+      <div v-if="isLogged">
+      <Button type="button" label="Yoann" @click="toggle" />
+      <Menu ref="menu" :model="items[1].items" :popup="true" />
+      </div>
+      <div v-else>
+        <router-link to="/connexion" class="no-underline mr-2">
+          <Button type="button" label="connexion" />
+        </router-link>
+        <router-link to="/inscription" class="no-underline">
+          <Button type="button" label="inscription" />
+        </router-link>
+      </div>
+    </template>
   </Menubar>
 </template>
 
 <script>
 import Menubar from "primevue/menubar";
+import Menu from "primevue/menu";
+import Button from "primevue/button";
 
 export default {
   name: "NavBar",
   components: {
     Menubar,
+    Menu,
+    Button,
   },
   data() {
     return {
@@ -32,17 +51,7 @@ export default {
             {
               label: "Mes voyages",
               icon: "pi pi-car",
-              to : "/travels"
-            },
-            {
-              label: "Inscription",
-              icon: "pi pi-user-plus",
-              to: "/inscription",
-            },
-            {
-              label: "Connexion",
-              icon: "pi pi-sign-in",
-              to: "/connexion",
+              to: "/travels",
             },
             {
               separator: true,
@@ -56,6 +65,16 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    toggle(event) {
+      this.$refs.menu.toggle(event);
+    },
+  },
+  computed: {
+    isLogged() {
+      return sessionStorage.getItem('user');
+    },
   },
 };
 </script>
