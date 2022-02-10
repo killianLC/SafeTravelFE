@@ -32,6 +32,7 @@
 
     <div class="field col-12 md:col-12">
       <Password
+      class="inputfield w-full"
         id="password"
         v-model="user.password"
         type="password"
@@ -100,4 +101,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.formgrid :deep(.p-password-input){
+  width: 100%;
+}
 </style>
