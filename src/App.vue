@@ -1,15 +1,18 @@
 <template>
+  <Toast />
   <NavBar></NavBar>
   <router-view class="m-2"></router-view>
 </template>
 
 <script>
-import NavBar from './components/navbar/NavBar.vue'
+import NavBar from './components/navbar/NavBar.vue';
+import Toast from 'primevue/toast';
 
 export default {
   name: 'App',
   components: {
     NavBar,
+    Toast,
   }
 }
 </script>

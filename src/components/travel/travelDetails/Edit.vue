@@ -7,7 +7,28 @@
         <label for="inputmask">Description</label>
       </span>
       <Divider />
-      <div class="p-inputgroup mb-4">
+      Etapes
+      <Listbox :options="steps" :multiple="true">
+        <template #option="slotProps">
+          <div class="flex justify-content-between">
+            <div class="flex align-items-center min-w-100">
+              <img :src="slotProps.option.flag" class="w-auto h-1rem mr-2" />
+              <span>{{ slotProps.option.name }}</span>
+            </div>
+            <Calendar
+              v-model="slotProps.option.date"
+              placeholder="date"
+              dateFormat="dd.mm.yy"
+            />
+            <Button
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-danger"
+              @click="removeStep(slotProps.option.name)"
+            />
+          </div>
+        </template>
+      </Listbox>
+      <div class="p-inputgroup mt-4">
         <InputText placeholder="Ville" v-model="cityInput" />
         <Calendar
           v-model="dateInput"
@@ -16,24 +37,6 @@
         />
         <Button icon="pi pi-plus" label="Ajouter" @click="addStep" />
       </div>
-      <OrderList v-model="steps" listStyle="height:auto" dataKey="name">
-        <template #header> Liste des étapes </template>
-        <template #item="slotProps">
-          <div class="flex justify-content-between">
-            <div class="flex align-items-center min-w-100">
-              <img :src="slotProps.item.flag" class="w-auto h-1rem" />
-              <span class="ml-2">{{ slotProps.item.name }}</span>
-            </div>
-
-              <span class="flex align-items-center">{{ slotProps.item.date }}</span>
-            <Button
-              icon="pi pi-trash"
-              class="p-button-rounded p-button-danger"
-              @click="removeStep(slotProps.item.name)"
-            />
-          </div>
-        </template>
-      </OrderList>
     </template>
     <template #footer> </template>
   </Card>
@@ -41,23 +44,23 @@
 
 <script>
 import Card from "primevue/card";
-import OrderList from "primevue/orderlist";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
 import Textarea from "primevue/textarea";
-import Divider from 'primevue/divider';
+import Divider from "primevue/divider";
+import Listbox from "primevue/listbox";
 
 export default {
   name: "Edit",
   components: {
     Card,
-    OrderList,
     Button,
     InputText,
     Calendar,
     Textarea,
-    Divider
+    Divider,
+    Listbox,
   },
   created() {
     this.steps = this.travel.steps;
@@ -94,7 +97,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.min-w-100{
+.min-w-100 {
   min-width: 100px;
 }
 </style>

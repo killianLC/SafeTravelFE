@@ -50,12 +50,15 @@ export default {
         participants: [
           {
             name: "John Doe",
+            isAccept: false
           },
           {
             name: "Jean Doe",
+            isAccept: false
           },
           {
             name: "Pierre Doe",
+            isAccept: true
           },
         ],
 

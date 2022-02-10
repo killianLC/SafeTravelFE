@@ -3,6 +3,7 @@ import App from './App.vue'
 import PrimeVue from 'primevue/config'
 import { createWebHashHistory, createRouter } from 'vue-router'
 import axios from 'axios';
+import ToastService from 'primevue/toastservice';
 
 import 'primevue/resources/themes/saga-orange/theme.css'     //theme
 import 'primevue/resources/primevue.min.css'                 //core css
@@ -115,5 +116,6 @@ const app = createApp(App);
 
 app.use(router);
 app.use(PrimeVue);
+app.use(ToastService);
 
 app.mount('#app');

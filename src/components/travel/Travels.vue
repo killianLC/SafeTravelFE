@@ -1,7 +1,6 @@
 <template>
   <div class="grid">
     <div class="col-12"><Breadcrumb :home="home" :model="items" /></div>
-
     <div class="col-12">
       <Card>
         <template #title> <i class="pi pi-car" />&nbsp;Mes voyages </template>
