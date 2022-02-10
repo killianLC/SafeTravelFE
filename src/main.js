@@ -73,7 +73,7 @@ const router = createRouter({
 // Request interceptor
 axios.interceptors.request.use(function (config) {
   // Add JWT Token to request
-  const token = localStorage.getItem("JWT_token");
+  const token = sessionStorage.getItem("JWT_token");
   if (token) {
     config.headers.common["Authorization"] = "Bearer " + token;
   }

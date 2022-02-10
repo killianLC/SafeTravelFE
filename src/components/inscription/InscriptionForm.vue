@@ -76,12 +76,15 @@ export default {
     }
   },
   methods: {
-    register() {
+    async register() {
       // Vérifs à faire
       if(this.user.email == "" || this.user.password == "") {
         console.log("A username and password must be present");
       } else {
-        AuthService.register(this.user);
+        const isRegister = await AuthService.register(this.user);
+        if(isRegister) { 
+          this.$router.push({name:"home"}); 
+        } 
       }
     }
   }  

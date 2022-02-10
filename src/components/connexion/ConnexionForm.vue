@@ -19,14 +19,19 @@
         placeholder="Mot de passe"
       />
     </div>
-    <Button icon="pi pi-check" v-on:click="login()" label="Se connecter" class="m-auto" />
+    <Button
+      icon="pi pi-check"
+      v-on:click="login()"
+      label="Se connecter"
+      class="m-auto"
+    />
   </div>
 </template>
 
 <script>
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
-import AuthService from '@/services/AuthService.ts'
+import AuthService from "@/services/AuthService.ts";
 
 export default {
   name: "ConnexionForm",
@@ -38,21 +43,23 @@ export default {
     return {
       user: {
         email: "",
-        password: ""
-      }
-    }
+        password: "",
+      },
+    };
   },
   methods: {
-    login() {
+    async login() {
       // Vérifs à faire
-      if(this.user.email == "" || this.user.password == "") {
+      if (this.user.email == "" || this.user.password == "") {
         console.log("A username and password must be present");
       } else {
-        AuthService.login(this.user);
-        this.$router.push('/')
+        const isLogged = await AuthService.login(this.user);
+        if(isLogged) { 
+          this.$router.push({name:"home"}); 
+        } 
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
