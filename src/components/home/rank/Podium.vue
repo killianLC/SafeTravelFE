@@ -2,6 +2,7 @@
   <div class="container">
     <img src="./Podium.svg" class="pt-5 max-w-full" />
     <router-link
+      v-if="cities[0]"
       :to="{ name: 'city', params: { name: cities[0].name } }"
       class="no-underline text-dark"
     >
@@ -11,6 +12,7 @@
       </span>
     </router-link>
     <router-link
+    v-if="cities[1]"
       :to="{ name: 'city', params: { name: cities[1].name } }"
       class="no-underline text-dark"
     >
@@ -20,6 +22,7 @@
       </span>
     </router-link>
     <router-link
+    v-if="cities[2]"
       :to="{ name: 'city', params: { name: cities[2].name } }"
       class="no-underline text-dark"
     >
@@ -40,7 +43,7 @@ export default {
     Flag,
   },
   props: {
-    cities: Object,
+    cities: Array,
   },
 };
 </script>

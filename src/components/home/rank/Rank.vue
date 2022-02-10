@@ -19,13 +19,14 @@
             <router-link
               :to="{ name: 'city', params: { name: slotProps.data.name } }"
               class="no-underline text-dark font-bold text-lg"
-              ><Flag :image="slotProps.data.flag"/> {{ slotProps.data.name }}</router-link
+              ><Flag :image="slotProps.data.flag" />
+              {{ slotProps.data.name }}</router-link
             >
           </template>
         </Column>
-        <Column field="rating" header="Note">
+        <Column field="note" header="Note">
           <template #body="slotProps">
-            <span class="font-bold">{{ slotProps.data.rating }} / 5</span>
+            <span class="font-bold">{{ slotProps.data.note }} / 5</span>
           </template>
         </Column>
       </DataTable>
@@ -47,45 +48,14 @@ export default {
     DataTable,
     Column,
     Podium,
-    Flag
+    Flag,
   },
-  data() {
-    return {
-      cities: [
-        {
-          id: "1000",
-          name: "Paris",
-          description: "Product Description",
-          rating: 5,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        },
-        {
-          id: "1001",
-          name: "Lyon",
-          description: "Product Description",
-          rating: 4,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        },
-        {
-          id: "1002",
-          name: "Marseille",
-          description: "Product Description",
-          rating: 3,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        },
-        {
-          id: "1003",
-          name: "Nantes",
-          description: "Product Description",
-          rating: 5,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        },
-      ],
-    };
+  props: {
+    cities: Array,
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>  
+<style scoped>
 </style>

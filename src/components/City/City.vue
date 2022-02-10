@@ -8,7 +8,6 @@
     <div class="col-12 md:col-6 lg:col-4"><Pictures :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Health :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><News :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4"><UserRating :city="city" /></div>
     <div class="col-12 md:col-12"><Commentaire :city="city" /></div>
   </div>
 </template>
@@ -23,7 +22,6 @@ import Pictures from "./pictures/Pictures.vue";
 import Covid from "./covid/Covid.vue";
 import Weather from "./weather/Weather.vue";
 import Health from "../city/health/Health.vue";
-import UserRating from "./rating/UserRating.vue";
 
 export default {
   name: "City",
@@ -37,7 +35,6 @@ export default {
     Covid,
     Weather,
     Health,
-    UserRating,
   },
   data() {
     return {

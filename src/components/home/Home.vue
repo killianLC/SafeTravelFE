@@ -3,7 +3,7 @@
     <div class="col-12 sm:col-8 sm:col-offset-2"><SearchBar /></div>
   </div>
   <div class="grid m-0">
-    <div class="col-12 sm:col-8 sm:col-offset-2"><Rank /></div>
+    <div class="col-12 sm:col-8 sm:col-offset-2"><Rank :cities="cities" /></div>
   </div>
 </template>
 
@@ -24,12 +24,11 @@ export default {
       cities: []
     }
   },
-  mounted() {
+  created() {
     axios
-      .get("http://localhost:8080/city/top10")
+      .get("http://localhost:8080/public/top10")
       .then((response) => (
-        console.log(response),
-        this.cities = response));
+        this.cities = response.data));
   },
 };
 </script>

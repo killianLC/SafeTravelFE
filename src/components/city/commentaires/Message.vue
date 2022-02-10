@@ -1,5 +1,6 @@
 <template>
   <Card class="bg-primary">
+    <template #title><Rating class="ml-auto" modelValue="2" :stars="5" :cancel="false" disabled/></template>
     <template #content>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
       consequuntur error repudiandae numquam deserunt quisquam repellat libero
@@ -19,6 +20,7 @@
 import Card from "primevue/card";
 import Avatar from "primevue/avatar";
 import Tag from "primevue/tag";
+import Rating from "primevue/rating";
 
 export default {
   name: "Message",
@@ -26,6 +28,7 @@ export default {
     Card,
     Avatar,
     Tag,
+    Rating
   },
 };
 </script>
@@ -34,5 +37,9 @@ export default {
 .p-card :deep(.p-card-footer) {
   display: flex;
   justify-content: space-between;
+}
+
+.p-card :deep(.pi-star-fill) {
+  color: black !important;
 }
 </style>
