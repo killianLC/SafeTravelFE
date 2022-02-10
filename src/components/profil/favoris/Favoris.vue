@@ -41,11 +41,7 @@ export default {
     }
   },
   created() {
-    axios.get('http://localhost:8080/comment/user/1', {
-      headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5b2FubmJvdWdhdWx0QGdtYWlsLmNvbSIsImlhdCI6MTY0NDQxNjQ3NSwiZXhwIjoxNjQ0NDQ2NDc1fQ.kMJtdp4vMR6XOrjtcHZJv5K8lO27sB-qCKcL-7p0zgyUK3Uej1un0uRqOoTz2nUuCZ6zNZEbDyEIYL5IAWWn3Q'
-      }
-    })
+    axios.get('http://localhost:8080/comment/user/1')
     .then((response) => {
       // handle success
       this.cities = response.data;

@@ -50,6 +50,7 @@ export default {
             {
               label: "Deconnexion",
               icon: "pi pi-sign-out",
+              to: "/logout",
             },
           ],
         },

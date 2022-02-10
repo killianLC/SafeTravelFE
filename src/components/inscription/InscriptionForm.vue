@@ -3,7 +3,8 @@
     <div class="field col-12 md:col-12">
       <InputText
         class="inputfield w-full"
-        id="prenom"
+        id="firstname"
+        v-model="user.firstname"
         type="text"
         placeholder="Prénom"
       />
@@ -12,7 +13,8 @@
     <div class="field col-12 md:col-12">
       <InputText
         class="inputfield w-full"
-        id="nom"
+        id="lastname"
+        v-model="user.lastname"
         type="text"
         placeholder="Nom"
       />
@@ -22,6 +24,7 @@
       <InputText
         class="inputfield w-full"
         id="email"
+        v-model="user.email"
         type="email"
         placeholder="Email"
       />
@@ -30,7 +33,8 @@
     <div class="field col-12 md:col-12">
       <InputText
         class="inputfield w-full"
-        id="email"
+        id="password"
+        v-model="user.password"
         type="password"
         placeholder="Mot de passe"
       />
@@ -39,18 +43,20 @@
     <div class="field col-12 md:col-12">
       <InputText
         class="inputfield w-full"
-        id="email"
+        id="passwordConfirm"
+        v-model="user.passwordConfirm"
         type="password"
         placeholder="Confirmer le mot de passe"
       />
     </div>
-    <Button icon="pi pi-check" label="Enregistrer" class="m-auto" />
+    <Button icon="pi pi-check" v-on:click="register()" label="Enregistrer" class="m-auto" />
   </div>
 </template>
 
 <script>
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import AuthService from '@/services/AuthService.ts'
 
 export default {
   name: "InscriptionForm",
@@ -58,6 +64,27 @@ export default {
     Button,
     InputText,
   },
+  data() {
+    return {
+      user: {
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        passwordConfirm: ""
+      }
+    }
+  },
+  methods: {
+    register() {
+      // Vérifs à faire
+      if(this.user.email == "" || this.user.password == "") {
+        console.log("A username and password must be present");
+      } else {
+        AuthService.register(this.user);
+      }
+    }
+  }  
 };
 </script>
 
