@@ -31,22 +31,27 @@
     </div>
 
     <div class="field col-12 md:col-12">
-      <InputText
-        class="inputfield w-full"
+      <Password
         id="password"
         v-model="user.password"
         type="password"
         placeholder="Mot de passe"
+        promptLabel=""
+        weakLabel="Vo"
+        mediumLabel=""
+        strongLabel=""
+        toggleMask="true"
       />
     </div>
 
     <div class="field col-12 md:col-12">
-      <InputText
+      <Password
         class="inputfield w-full"
         id="passwordConfirm"
         v-model="user.passwordConfirm"
         type="password"
         placeholder="Confirmer le mot de passe"
+        toggle-mask
       />
     </div>
     <Button icon="pi pi-check" v-on:click="register()" label="Enregistrer" class="m-auto" />
@@ -56,6 +61,7 @@
 <script>
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import Password from "primevue/password";
 import AuthService from '@/services/AuthService.ts'
 
 export default {
@@ -63,6 +69,7 @@ export default {
   components: {
     Button,
     InputText,
+    Password
   },
   data() {
     return {
