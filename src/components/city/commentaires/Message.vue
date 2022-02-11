@@ -1,17 +1,27 @@
 <template>
   <Card class="bg-primary">
-    <template #title><Rating class="ml-auto" modelValue="2" :stars="5" :cancel="false" disabled/></template>
+    <template #title
+      ><Rating
+        class="ml-auto"
+        :modelValue="comment.rating"
+        :stars="5"
+        :cancel="false"
+        disabled
+    /></template>
     <template #content>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
-      consequuntur error repudiandae numquam deserunt quisquam repellat libero
-      asperiores earum nam nobis, culpa ratione quam perferendis esse,
-      cupiditate neque quas!
+      {{ comment.description }}
     </template>
     <template #footer>
       <span class="flex align-items-center">
-        <Avatar icon="pi pi-user" shape="circle" />&nbsp; Patrick
+        <Avatar icon="pi pi-user" shape="circle" />&nbsp;
+        {{ comment.user.firstname }} {{ comment.user.lastname }}
       </span>
-      <Tag value="07/01/2022" icon="pi pi-calendar" rounded class="bg-gray-900 text-primary"></Tag>
+      <Tag
+        :value="fomartedDate"
+        icon="pi pi-calendar"
+        rounded
+        class="bg-gray-900 text-primary"
+      ></Tag>
     </template>
   </Card>
 </template>
@@ -28,7 +38,16 @@ export default {
     Card,
     Avatar,
     Tag,
-    Rating
+    Rating,
+  },
+  props: {
+    comment: Object,
+  },
+  computed: {
+    fomartedDate() {
+      const date = new Date(this.comment.date);
+      return date.toLocaleDateString("fr-FR");
+    },
   },
 };
 </script>
@@ -41,5 +60,9 @@ export default {
 
 .p-card :deep(.pi-star-fill) {
   color: black !important;
+}
+
+.p-card :deep(.p-card-content) {
+  padding: 0;
 }
 </style>

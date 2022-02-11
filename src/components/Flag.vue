@@ -1,12 +1,12 @@
 <template>
-  <img :src="image" class="w-auto h-1rem mr-2" />
+  <img :src="'https://flagcdn.com/'+country+'.svg'" class="w-auto h-1rem mr-2" />
 </template>
 
 <script>
 export default {
   name: "Flag",
   props: {
-    image: String,
+    country: String,
   },
 };
 </script>

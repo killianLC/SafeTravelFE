@@ -1,19 +1,26 @@
 <template>
   <Card>
     <template #title
-      ><i class="pi pi-comments align-self-center"/>&nbsp;Liste des commentaires&nbsp;
+      ><i class="pi pi-comments align-self-center" />&nbsp;Liste des
+      commentaires&nbsp;
       <AvatarGroup>
-        <Avatar label="P" shape="circle" />
-        <Avatar label="P" shape="circle" />
-        <Avatar label="P" shape="circle" />
-        <Avatar label="P" shape="circle" />
+        <Avatar
+          :label="getAvatar(comment.user)"
+          shape="circle"
+          v-for="comment in comments"
+          :key="comment.id"
+        />
       </AvatarGroup>
     </template>
     <template #content>
       <div class="grid">
-        <div class="col-12 md:col-6 lg:col-4"><Message /></div>
-        <div class="col-12 md:col-6 lg:col-4"><Message /></div>
-        <div class="col-12 md:col-6 lg:col-4"><Message /></div>
+        <div
+          class="col-12 md:col-6 lg:col-4"
+          v-for="comment in comments"
+          :key="comment.id"
+        >
+          <Message :comment="comment" />
+        </div>
       </div>
     </template>
   </Card>
@@ -32,6 +39,14 @@ export default {
     Message,
     Avatar,
     AvatarGroup,
+  },
+  props: {
+    comments: Array,
+  },
+  methods: {
+    getAvatar(user) {
+      return user.firstname[0].toUpperCase();
+    },
   },
 };
 </script>

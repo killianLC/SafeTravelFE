@@ -11,10 +11,7 @@
       <ul class="list-none">
         <li>
           <i class="pi pi-map-marker" /> : France
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg"
-            class="w-auto h-1rem"
-          />
+          <Flag :country="city.country" />
         </li>
         <li><i class="pi pi-box" /> : {{ city.superficie }}</li>
         <li><i class="pi pi-users" /> : {{ city.population }} habitants</li>
@@ -31,11 +28,13 @@
 <script>
 import Card from "primevue/card";
 import Button from "primevue/button";
+import Flag from '../../Flag.vue';
 export default {
   name: "BasicInformation",
   components: {
     Card,
     Button,
+    Flag,
   },
   props: {
     city: Object,
