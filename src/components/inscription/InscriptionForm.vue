@@ -160,7 +160,6 @@ export default {
       this.user.email = "";
       this.user.password = "";
       this.user.passwordConfirm = "";
-      this.accept = null;
       this.submitted = false;
     },
     async register() {

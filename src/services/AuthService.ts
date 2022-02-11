@@ -18,6 +18,9 @@ class AuthService {
             }
             isLogged = true;
         })
+        .catch(() => {
+            isLogged = false;
+        })
 
         return isLogged;
     }
