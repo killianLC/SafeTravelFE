@@ -93,7 +93,6 @@ axios.interceptors.response.use(function (response) {
         //do something
         break;
       case 401:
-        alert("session expired");
         break;
       case 403:
         router.replace({

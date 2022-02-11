@@ -33,7 +33,10 @@ class AuthService {
         .then(() => {
             isRegister = true;
         })
-
+        .catch(() => {
+            isRegister = false;
+        })
+        
         return isRegister
     }
 

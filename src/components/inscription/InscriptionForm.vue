@@ -9,9 +9,10 @@
           v-model="user.firstname"
           type="text"
           placeholder="Prénom"
-          required="true"
-          requiredMessage="Le champ ne doit pas être vide."
         />
+        <small v-if="v$.user.firstname.$invalid && submitted" class="p-error"
+          >Un prénom est obligatoire!</small
+        >
       </div>
 
       <div class="field col-12 md:col-12">
@@ -23,6 +24,9 @@
           type="text"
           placeholder="Nom"
         />
+        <small v-if="v$.user.lastname.$invalid && submitted" class="p-error"
+          >Un nom est obligatoire!</small
+        >
       </div>
 
       <div class="field col-12 md:col-12">
@@ -34,6 +38,9 @@
           type="email"
           placeholder="Email"
         />
+        <small v-if="v$.user.email.$invalid && submitted" class="p-error"
+          >Un email valide est obligatoire!</small
+        >
       </div>
 
       <div class="field col-12 md:col-12">
@@ -49,12 +56,17 @@
           mediumLabel="Votre mot de passe est bientôt sécurisé !"
           strongLabel="Votre mot de passe est sécurisé !"
         />
+        <small v-if="v$.user.password.$invalid && submitted" class="p-error"
+          >Un mot de passe est obligatoire!</small
+        >
       </div>
 
       <div class="field col-12 md:col-12">
         <Password
           class="inputfield w-full"
-          :class="{ 'p-invalid': v$.user.passwordConfirm.$invalid && submitted }"
+          :class="{
+            'p-invalid': v$.user.passwordConfirm.$invalid && submitted,
+          }"
           id="passwordConfirm"
           v-model="user.passwordConfirm"
           type="password"
@@ -64,6 +76,11 @@
           mediumLabel="Votre mot de passe est bientôt sécurisé !"
           strongLabel="Votre mot de passe est sécurisé !"
         />
+        <small
+          v-if="v$.user.passwordConfirm.$invalid && submitted"
+          class="p-error"
+          >Les mots de passe ne correspondent pas!</small
+        >
       </div>
       <Button
         type="submit"
@@ -82,7 +99,7 @@ import Password from "primevue/password";
 import AuthService from "@/services/AuthService.ts";
 
 import useVuelidate from "@vuelidate/core";
-import { required, email, sameAs   } from "@vuelidate/validators";
+import { required, email, sameAs } from "@vuelidate/validators";
 
 export default {
   name: "InscriptionForm",
@@ -130,20 +147,12 @@ export default {
   methods: {
     handleSubmit(isFormValid) {
       this.submitted = true;
-      console.log(!this.v$.user.passwordConfirm.sameAsPassword);
       if (!isFormValid) {
         return;
       }
 
-      this.toggleDialog();
-    },
-    toggleDialog() {
-      this.showMessage = !this.showMessage;
-
-      if (!this.showMessage) {
-        this.register();
-        this.resetForm();
-      }
+      this.register();
+      this.resetForm();
     },
     resetForm() {
       this.user.firstname = "";
@@ -157,7 +166,17 @@ export default {
     async register() {
       const isRegister = await AuthService.register(this.user);
       if (isRegister) {
-        this.$router.push({ name: "home" });
+        this.$toast.add({
+          severity: "success",
+          detail: "Inscription réussi! Vous pouvez maintenant vous connecter.",
+          life: 3000,
+        });
+      } else {
+        this.$toast.add({
+          severity: "error",
+          detail: "Erreur lors de l'inscription!",
+          life: 3000,
+        });        
       }
     },
   },
