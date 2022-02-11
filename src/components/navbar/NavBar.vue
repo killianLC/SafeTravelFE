@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     isLogged() {
-      return sessionStorage.getItem('user');
+      return this.$store.state.isLogged
     },
   },
 };

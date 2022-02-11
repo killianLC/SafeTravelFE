@@ -10,6 +10,7 @@ export default {
         logout() {
             AuthService.logout();
             this.$router.push({name: "home"});
+            this.$store.commit('setIsLogged', false);
         }
     }  
 };

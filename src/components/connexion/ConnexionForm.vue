@@ -55,7 +55,8 @@ export default {
       } else {
         const isLogged = await AuthService.login(this.user);
         if(isLogged) { 
-          this.$router.push({name:"home"}); 
+          this.$router.push({name:"home"});
+          this.$store.commit('setIsLogged', true);
         } 
       }
     },

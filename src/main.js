@@ -116,12 +116,12 @@ axios.interceptors.response.use(function (response) {
 const store = createStore({
   state () {
     return {
-      user: null
+      isLogged: false
     }
   },
   mutations: {
-    setUser (state, user) {
-      state.user = user;
+    setIsLogged (state, isLogged) {
+      state.isLogged = isLogged;
     }
   }
 })
