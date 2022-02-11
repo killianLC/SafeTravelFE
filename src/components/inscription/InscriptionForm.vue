@@ -1,77 +1,97 @@
 <template>
-  <div class="formgrid grid">
-    <div class="field col-12 md:col-12">
-      <InputText
-        class="inputfield w-full"
-        id="firstname"
-        v-model="user.firstname"
-        type="text"
-        placeholder="Prénom"
-      />
-    </div>
+  <form @submit.prevent="handleSubmit(!v$.$invalid)">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-12">
+        <InputText
+          class="inputfield w-full"
+          :class="{ 'p-invalid': v$.user.firstname.$invalid && submitted }"
+          id="firstname"
+          v-model="user.firstname"
+          type="text"
+          placeholder="Prénom"
+          required="true"
+          requiredMessage="Le champ ne doit pas être vide."
+        />
+      </div>
 
-    <div class="field col-12 md:col-12">
-      <InputText
-        class="inputfield w-full"
-        id="lastname"
-        v-model="user.lastname"
-        type="text"
-        placeholder="Nom"
-      />
-    </div>
+      <div class="field col-12 md:col-12">
+        <InputText
+          class="inputfield w-full"
+          :class="{ 'p-invalid': v$.user.lastname.$invalid && submitted }"
+          id="lastname"
+          v-model="user.lastname"
+          type="text"
+          placeholder="Nom"
+        />
+      </div>
 
-    <div class="field col-12 md:col-12">
-      <InputText
-        class="inputfield w-full"
-        id="email"
-        v-model="user.email"
-        type="email"
-        placeholder="Email"
-      />
-    </div>
+      <div class="field col-12 md:col-12">
+        <InputText
+          class="inputfield w-full"
+          :class="{ 'p-invalid': v$.user.email.$invalid && submitted }"
+          id="email"
+          v-model="user.email"
+          type="email"
+          placeholder="Email"
+        />
+      </div>
 
-    <div class="field col-12 md:col-12">
-      <Password
-      class="inputfield w-full"
-        id="password"
-        v-model="user.password"
-        type="password"
-        placeholder="Mot de passe"
-        promptLabel=""
-        weakLabel="Vo"
-        mediumLabel=""
-        strongLabel=""
-        toggleMask="true"
-      />
-    </div>
+      <div class="field col-12 md:col-12">
+        <Password
+          class="inputfield w-full"
+          :class="{ 'p-invalid': v$.user.password.$invalid && submitted }"
+          id="password"
+          v-model="user.password"
+          type="password"
+          placeholder="Mot de passe"
+          promptLabel="Entrer votre mot de passe."
+          weakLabel="Votre mot de passe n'est pas sécurisé !"
+          mediumLabel="Votre mot de passe est bientôt sécurisé !"
+          strongLabel="Votre mot de passe est sécurisé !"
+        />
+      </div>
 
-    <div class="field col-12 md:col-12">
-      <Password
-        class="inputfield w-full"
-        id="passwordConfirm"
-        v-model="user.passwordConfirm"
-        type="password"
-        placeholder="Confirmer le mot de passe"
-        toggle-mask
+      <div class="field col-12 md:col-12">
+        <Password
+          class="inputfield w-full"
+          :class="{ 'p-invalid': v$.user.passwordConfirm.$invalid && submitted }"
+          id="passwordConfirm"
+          v-model="user.passwordConfirm"
+          type="password"
+          placeholder="Confirmer le mot de passe"
+          promptLabel="Entrer votre mot de passe."
+          weakLabel="Votre mot de passe n'est pas sécurisé !"
+          mediumLabel="Votre mot de passe est bientôt sécurisé !"
+          strongLabel="Votre mot de passe est sécurisé !"
+        />
+      </div>
+      <Button
+        type="submit"
+        icon="pi pi-check"
+        label="Enregistrer"
+        class="m-auto"
       />
     </div>
-    <Button icon="pi pi-check" v-on:click="register()" label="Enregistrer" class="m-auto" />
-  </div>
+  </form>
 </template>
 
 <script>
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Password from "primevue/password";
-import AuthService from '@/services/AuthService.ts'
+import AuthService from "@/services/AuthService.ts";
+
+import useVuelidate from "@vuelidate/core";
+import { required, email, sameAs   } from "@vuelidate/validators";
 
 export default {
   name: "InscriptionForm",
   components: {
     Button,
     InputText,
-    Password
+    Password,
   },
+  setup: () => ({ v$: useVuelidate() }),
   data() {
     return {
       user: {
@@ -79,29 +99,74 @@ export default {
         lastname: "",
         email: "",
         password: "",
-        passwordConfirm: ""
-      }
-    }
+        passwordConfirm: "",
+      },
+      submitted: false,
+    };
+  },
+  validations() {
+    return {
+      user: {
+        firstname: {
+          required,
+        },
+        lastname: {
+          required,
+        },
+        email: {
+          required,
+          email,
+        },
+        password: {
+          required,
+        },
+        passwordConfirm: {
+          required,
+          sameAsPassword: sameAs(this.user.password),
+        },
+      },
+    };
   },
   methods: {
-    async register() {
-      // Vérifs à faire
-      if(this.user.email == "" || this.user.password == "") {
-        console.log("A username and password must be present");
-      } else {
-        const isRegister = await AuthService.register(this.user);
-        if(isRegister) { 
-          this.$router.push({name:"home"}); 
-        } 
+    handleSubmit(isFormValid) {
+      this.submitted = true;
+      console.log(!this.v$.user.passwordConfirm.sameAsPassword);
+      if (!isFormValid) {
+        return;
       }
-    }
-  }  
+
+      this.toggleDialog();
+    },
+    toggleDialog() {
+      this.showMessage = !this.showMessage;
+
+      if (!this.showMessage) {
+        this.register();
+        this.resetForm();
+      }
+    },
+    resetForm() {
+      this.user.firstname = "";
+      this.user.lastname = "";
+      this.user.email = "";
+      this.user.password = "";
+      this.user.passwordConfirm = "";
+      this.accept = null;
+      this.submitted = false;
+    },
+    async register() {
+      const isRegister = await AuthService.register(this.user);
+      if (isRegister) {
+        this.$router.push({ name: "home" });
+      }
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.formgrid :deep(.p-password-input){
+.formgrid :deep(.p-password-input) {
   width: 100%;
 }
 </style>
