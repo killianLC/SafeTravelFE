@@ -93,6 +93,11 @@ axios.interceptors.response.use(function (response) {
         //do something
         break;
       case 401:
+        sessionStorage.clear();
+        router.replace({
+          path: "/login",
+          query: { redirect: router.currentRoute.fullPath }
+        });        
         break;
       case 403:
         router.replace({
@@ -101,7 +106,6 @@ axios.interceptors.response.use(function (response) {
         });
         break;
       case 404:
-        alert('page not exist');
         break;
       case 502:
         break;

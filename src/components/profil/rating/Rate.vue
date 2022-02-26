@@ -7,7 +7,7 @@
       </div>
     </template>
     <template #content>
-      <Rating v-model="rate" :stars="5" :cancel="false" />
+      <Rating v-model="rate" :stars="5" :cancel="false" :readonly="true" />
     </template>
   </Card>
 </template>

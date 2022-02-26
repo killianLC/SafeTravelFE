@@ -11,7 +11,7 @@ class AuthService {
         })
         .then(response => {
             if(response.data) {
-                window.sessionStorage.setItem("JWT_token", response.data.accessToken);
+                window.sessionStorage.setItem("JWT_token", response.data.token);
 
                 var user = { id: response.data.id, firstname: response.data.firstname, lastname: response.data.lastname,  email: response.data.email, roles: response.data.roles }
                 window.sessionStorage.setItem("user", JSON.stringify(user));
