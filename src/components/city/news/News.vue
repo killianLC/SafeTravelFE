@@ -5,8 +5,8 @@
       <img src="./Exemple.png" class="w-full" />
     </template>
     <template #footer>
-      <a href="" class="no-underline">
-        <Button label="Voir plus sur Google Actualitées" icon="pi pi-google" />
+      <a class="no-underline">
+        <Button @click=openGoogleNews label="Voir plus sur Google Actualitées" icon="pi pi-google" />
       </a>
       <a href=""></a>
     </template>
@@ -33,6 +33,7 @@ export default {
     name: String,
   },
   created() {
+    this.google_news_url = "https://news.google.com/search?q=" + this.name;
     const RSS_URL =
       "https://news.google.com/rss/search?q=" + this.name + "&hl=fr";
 
@@ -50,6 +51,11 @@ export default {
       .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
       .then((data) => console.log(data));
     console.log(this.articles);
+  },
+  methods: {
+    openGoogleNews() {
+      window.open("https://news.google.com/search?q=" + this.name);
+    },
   },
 };
 </script>
