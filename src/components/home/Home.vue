@@ -27,8 +27,7 @@ export default {
   created() {
     axios
       .get("http://localhost:8080/public/top10")
-      .then((response) => (
-        this.cities = response.data));
+      .then((response) => this.cities = response.data);
   },
 };
 </script>

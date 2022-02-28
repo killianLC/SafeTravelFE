@@ -7,10 +7,10 @@
       <div class="grid">
         <div
           class="col-6"
-          v-for="city in cities"
-          :key="city.name"
+          v-for="comment in comments"
+          :key="comment"
         >
-          <Rate :city="city" />
+          <Rate :comment="comment" />
         </div>
       </div>
     </template>
@@ -22,6 +22,7 @@
 <script>
 import Card from "primevue/card";
 import Rate from "./Rate.vue";
+import axios from "axios";
 
 export default {
   name: "Ratings",
@@ -31,39 +32,13 @@ export default {
   },
   data() {
     return {
-      cities: [
-        {
-          name: "Paris",
-          rate: 4.2,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        },
-        {
-          name: "Barcelone",
-          rate: 3.6,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg",
-        },
-        {
-          name: "Rome",
-          rate: 4.5,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg?",
-        },
-        {
-          name: "Berlin",
-          rate: 1.4,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg",
-        },
-        {
-          name: "Stockholm",
-          rate: 3.6,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Sweden.svg",
-        },
-        {
-          name: "Lyon",
-          rate: 5,
-          flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        },
-      ],
+      comments: [],
     };
+  },
+  created() {
+    axios
+      .get("http://localhost:8080/comments/user/3")
+      .then((response) => this.comments = response.data);
   },
 };
 </script>

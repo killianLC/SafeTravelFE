@@ -2,12 +2,12 @@
   <Card class="border-3 border-primary">
     <template #title>
       <div>
-        {{ city.name }}
-        <Flag :image="city.flag" />
+        {{ comment.city.name }}
+        <Flag :image="comment.city.flag" />
       </div>
     </template>
     <template #content>
-      <Rating v-model="rate" :stars="5" :cancel="false" :readonly="true" />
+      <Rating v-model="rating" :stars="5" :cancel="false" :readonly="true" />
     </template>
   </Card>
 </template>
@@ -26,14 +26,14 @@ export default {
   },
   data: function () {
     return {
-      rate: Number,
+      rating: Number,
     };
   },
   created() {
-    this.rate = this.city.rate;
+    this.rating = this.comment.rating;
   },
   props: {
-    city: Object,
+    comment: Object,
   },
 };
 </script>
