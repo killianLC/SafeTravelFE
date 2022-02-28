@@ -21,6 +21,7 @@ import Logout from './components/logout/Logout.vue';
 import Profil from './components/profil/Profil.vue';
 import TravelDetails from './components/travel/travelDetails/TravelDetails.vue';
 import Travels from './components/travel/Travels.vue';
+import TravelCreate from './components/travel/TravelCreate.vue';
 
 const routes = [
   {
@@ -57,6 +58,11 @@ const routes = [
     path: '/travel/:id',
     component: TravelDetails,
     name: 'travelDetails'
+  },
+  {
+    path: '/travelCreate',
+    component: TravelCreate,
+    name: 'TravelCreate'
   },
   {
     path: '/logout',
