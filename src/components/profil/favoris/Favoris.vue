@@ -26,7 +26,6 @@
 import Card from "primevue/card";
 import Button from "primevue/button";
 import City from "./City.vue";
-const axios = require('axios');
 
 export default {
   name: "Favoris",
@@ -39,19 +38,6 @@ export default {
     return {
       cities: [],
     }
-  },
-  created() {
-    axios.get('http://localhost:8080/comment/user/1')
-    .then((response) => {
-      // handle success
-      this.cities = response.data;
-      console.log(response);
-
-    })
-    .catch((error) => {
-      // handle error
-      console.log(error);
-    })
   },
 };
 </script>

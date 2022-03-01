@@ -1,5 +1,5 @@
 <template>
-  <img :src="'https://flagcdn.com/'+country+'.svg'" class="w-auto h-1rem mr-2" />
+  <img :src="'https://flagcdn.com/'+'FR'+'.svg'" class="w-auto h-1rem mr-2" />
 </template>
 
 <script>

@@ -39,7 +39,7 @@
       </div>
     </template>
     <template #footer
-      ><Button icon="pi pi-check" label="Créer votre voyage" />
+      ><Button icon="pi pi-check" label="Créer votre voyage" @click="createTravel" />
     </template>
   </Card>
 </template>
@@ -53,7 +53,7 @@ import Textarea from "primevue/textarea";
 import Divider from "primevue/divider";
 import Listbox from "primevue/listbox";
 import Flag from "../../components/Flag.vue";
-import axios from "axios";
+//import axios from "axios";
 
 export default {
   name: "TravelCreate",
@@ -96,6 +96,8 @@ export default {
         steps: this.steps,
         participants: [],
       };
+      console.log(travel);
+      /*
       axios
         .post("http://localhost:8080/travels", travel)
         .then((response) =>
@@ -103,7 +105,7 @@ export default {
             name: "travelDetails",
             params: { id: response.data.id },
           })
-        );
+        );*/
     },
   },
 };

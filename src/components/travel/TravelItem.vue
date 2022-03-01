@@ -4,23 +4,23 @@
       <div class="flex justify-content-between">
         <div>
           <router-link
-            :to="{ name: 'city', params: { name: travel.origin } }"
+            :to="{ name: 'city', params: { name: this.firstStep.city.name } }"
             class="no-underline text-dark"
           >
             <Flag :image="travel.flagOrigin" />
-            {{ travel.origin }}
+            {{ this.firstStep.city.name }}
           </router-link>
           &nbsp;<i class="pi pi-caret-right" />&nbsp;
           <router-link
-            :to="{ name: 'city', params: { name: travel.destination } }"
+            :to="{ name: 'city', params: { name: this.lastStep.city.name } }"
             class="no-underline text-dark"
           >
             <Flag :image="travel.flagDestination" />
-            {{ travel.destination }}
+            {{ this.lastStep.city.name }}
           </router-link>
         </div>
         <Tag
-          :value="travel.date"
+          :value="this.firstStep.date+' 🢂 '+this.lastStep.date"
           icon="pi pi-calendar"
           rounded
           class="bg-gray-900 text-primary"
@@ -29,7 +29,7 @@
     </template>
     <template #content>
       <span class="text-xl font-bold"
-        >{{ travel.numberParticipants }}
+        >{{ travel.participants.length }}
         <i class="pi pi-users" /> participants</span
       >
     </template>
@@ -51,7 +51,7 @@
 import Card from "primevue/card";
 import Tag from "primevue/tag";
 import Button from "primevue/button";
-import Flag from "../Flag.vue"
+import Flag from "../Flag.vue";
 
 export default {
   name: "TravelItem",
@@ -59,10 +59,18 @@ export default {
     Card,
     Tag,
     Button,
-    Flag
+    Flag,
   },
   props: {
     travel: Object,
+  },
+  computed: {
+    firstStep() {
+      return this.travel.steps[0];
+    },
+    lastStep() {
+      return this.travel.steps[this.travel.steps.length - 1];
+    },
   },
 };
 </script>

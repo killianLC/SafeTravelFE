@@ -36,8 +36,9 @@ export default {
     };
   },
   created() {
+    let id = JSON.parse(sessionStorage.getItem("user")).id;
     axios
-      .get("http://localhost:8080/comments/user/3")
+      .get("http://localhost:8080/comments/user/"+id)
       .then((response) => this.comments = response.data);
   },
 };

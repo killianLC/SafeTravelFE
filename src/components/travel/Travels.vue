@@ -13,6 +13,23 @@
             >
               <TravelItem :travel="travel" />
             </div>
+            <div class="col-12 md:col-6">
+              <Card class="bg-primary">
+                <template #title>&ensp;</template>
+                <template #content>
+                  <router-link to="TravelCreate" class="no-underline">
+                    <Button
+                      icon="pi pi-plus"
+                      label="Créer un nouveau voyage"
+                      class="
+                        text-primary
+                        bg-dark
+                        p-button-rounded
+                      " /></router-link
+                ></template>
+                <template #footer>&ensp;</template>
+              </Card>
+            </div>
           </div>
         </template>
         <template #footer> </template>
@@ -25,6 +42,8 @@
 import Card from "primevue/card";
 import TravelItem from "./TravelItem.vue";
 import Breadcrumb from "primevue/breadcrumb";
+import Button from "primevue/button";
+import axios from "axios";
 
 export default {
   name: "Travels",
@@ -32,47 +51,20 @@ export default {
     Card,
     TravelItem,
     Breadcrumb,
+    Button,
   },
   data() {
     return {
-      travels: [
-        {
-          id: 1,
-          origin: "Paris",
-          flagOrigin:
-            "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-          destination: "New-York",
-          flagDestination:
-            "https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg",
-          numberParticipants: "3",
-          date: "12/12/2020",
-        },
-        {
-          id: 2,
-          origin: "Brest",
-          flagOrigin:
-            "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-          destination: "Nantes",
-          flagDestination:
-            "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-          numberParticipants: "1",
-          date: "30/04/2022",
-        },
-        {
-          id: 3,
-          origin: "Londres",
-          flagOrigin:
-            "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg",
-          destination: "Berlin",
-          flagDestination:
-            "https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg",
-          numberParticipants: "6",
-          date: "21/06/2021",
-        },
-      ],
+      travels: [],
       home: { icon: "pi pi-home", to: "/" },
       items: [{ label: "Mes voyages", to: "/travels" }],
     };
+  },
+  created() {
+    let id = JSON.parse(sessionStorage.getItem("user")).id;
+    axios
+      .get("http://localhost:8080/trips/user/" + id)
+      .then((response) => (this.travels = response.data));
   },
 };
 </script>
