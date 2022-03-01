@@ -58,7 +58,7 @@ export default {
         this.$toast.add({
           severity: "error",
           summary: "Erreur",
-          detail: "La ville " + this.cityInput + " n'exsite pas",
+          detail: "La ville " + this.$route.params.name + " n'exsite pas",
           life: 3000,
         });
         this.$router.push({name: "home"});

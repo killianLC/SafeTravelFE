@@ -12,8 +12,8 @@
         <template #option="slotProps">
           <div class="flex justify-content-between">
             <div class="flex align-items-center min-w-100">
-              <Flag :image="slotProps.option.flag" class="mr-2" />
-              <span>{{ slotProps.option.city }}</span>
+              <Flag class="mr-2" />
+              <span>{{ slotProps.option.city.name }}</span>
             </div>
             <Calendar
               v-model="slotProps.option.date"
@@ -89,24 +89,34 @@ export default {
   },
   methods: {
     addStep() {
-      axios
-        .get("http://localhost:8080/cities/" + this.cityInput)
-        .then(() => {
-          this.steps.push({
-            city: {
-              name: this.cityInput,
-            },
-            date: this.dateInput,
+      if (this.cityInput && this.dateInput) {
+        if (this.cityInput.name) this.cityInput = this.cityInput.name;
+        axios
+          .get("http://localhost:8080/cities/" + this.cityInput)
+          .then(() => {
+            this.steps.push({
+              city: {
+                name: this.cityInput,
+              },
+              date: this.dateInput,
+            });
+          })
+          .catch(() => {
+            this.$toast.add({
+              severity: "error",
+              summary: "Erreur",
+              detail: "La ville " + this.cityInput + " n'exsite pas",
+              life: 3000,
+            });
           });
-        })
-        .catch(() => {
-          this.$toast.add({
-            severity: "error",
-            summary: "Erreur",
-            detail: "La ville " + this.cityInput + " n'exsite pas",
-            life: 3000,
-          });
+      } else {
+        this.$toast.add({
+          severity: "error",
+          summary: "Erreur",
+          detail: "Renseignez une ville et une date",
+          life: 3000,
         });
+      }
     },
     removeStep(name) {
       this.steps.splice(
