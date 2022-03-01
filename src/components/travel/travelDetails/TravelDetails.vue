@@ -16,6 +16,7 @@ import Participants from "./Participants.vue";
 import StepsTravel from "./Edit.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import PresentationTravel from "./PresentationTravel.vue";
+import axios from "axios";
 
 export default {
   name: "TravelDetails",
@@ -27,46 +28,15 @@ export default {
   },
   data() {
     return {
-      travel: {
-        description:
-          "Voyage avec toute la mif pour fêter le Master 2 autour d'une bonne galette des rois",
-        steps: [
-          {
-            name: "Paris",
-            flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-            date: "04/06/2021",
-          },
-          {
-            name: "Nantes",
-            flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-            date: "14/06/2021",
-          },
-          {
-            name: "Brest",
-            flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-            date: "22/06/2021",
-          },
-        ],
-        participants: [
-          {
-            name: "John Doe",
-            isAccept: false
-          },
-          {
-            name: "Jean Doe",
-            isAccept: false
-          },
-          {
-            name: "Pierre Doe",
-            isAccept: true
-          },
-        ],
-
-        date: "12/12/2020",
-      },
-      home: { icon: "pi pi-home", to: "/" },
-      items: [{ label: "Mes voyages", to: "/travels" }, {label: "Mon voyage", to:this.$route}],
+      travel: {},
     };
+  },
+  created() {
+    let id = JSON.parse(sessionStorage.getItem("user")).id;
+    axios.get("http://localhost:8080/trips/" + id).then((response) => {
+      this.travels = response.data;
+      console.log(response.data);
+    });
   },
 };
 </script>

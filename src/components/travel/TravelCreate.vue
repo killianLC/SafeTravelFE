@@ -29,7 +29,12 @@
         </template>
       </Listbox>
       <div class="p-inputgroup mt-4">
-        <InputText placeholder="Ville" v-model="cityInput" />
+        <AutoComplete
+          v-model="cityInput"
+          :suggestions="cities"
+          placeholder="Ville"
+          field="name"
+        />
         <Calendar
           v-model="dateInput"
           placeholder="date"
@@ -39,7 +44,11 @@
       </div>
     </template>
     <template #footer
-      ><Button icon="pi pi-check" label="Créer votre voyage" @click="createTravel" />
+      ><Button
+        icon="pi pi-check"
+        label="Créer votre voyage"
+        @click="createTravel"
+      />
     </template>
   </Card>
 </template>
@@ -47,7 +56,7 @@
 <script>
 import Card from "primevue/card";
 import Button from "primevue/button";
-import InputText from "primevue/inputtext";
+import AutoComplete from "primevue/autocomplete";
 import Calendar from "primevue/calendar";
 import Textarea from "primevue/textarea";
 import Divider from "primevue/divider";
@@ -60,15 +69,16 @@ export default {
   components: {
     Card,
     Button,
-    InputText,
     Calendar,
     Textarea,
     Divider,
     Listbox,
     Flag,
+    AutoComplete,
   },
   data: function () {
     return {
+      cities: [],
       steps: [],
       cityInput: "",
       dateInput: "",
@@ -77,11 +87,24 @@ export default {
   },
   methods: {
     addStep() {
-      this.steps.push({
-        city: this.cityInput,
-        flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        date: this.dateInput,
-      });
+      axios
+        .get("http://localhost:8080/cities/" + this.cityInput)
+        .then(() => {
+          this.steps.push({
+            city: {
+              name: this.cityInput,
+            },
+            date: this.dateInput,
+          });
+        })
+        .catch(() => {
+          this.$toast.add({
+            severity: "error",
+            summary: "Erreur",
+            detail: "La ville " + this.cityInput + " n'exsite pas",
+            life: 3000,
+          });
+        });
     },
     removeStep(name) {
       this.steps.splice(
@@ -92,21 +115,22 @@ export default {
     createTravel() {
       let travel = {
         description: this.description,
-        organisateur: JSON.parse(sessionStorage.getItem("user")).id,
+        organisateurUid: JSON.parse(sessionStorage.getItem("user")).id,
         steps: this.steps,
         participants: [],
       };
-      console.log(travel);
-      
-      axios
-        .post("http://localhost:8080/trips", travel)
-        .then((response) =>
-          this.$router.push({
-            name: "travelDetails",
-            params: { id: response.data.id },
-          })
-        );
+      axios.post("http://localhost:8080/trips", travel).then((response) =>
+        this.$router.push({
+          name: "travelDetails",
+          params: { id: response.data.id },
+        })
+      );
     },
+  },
+  created() {
+    axios
+      .get("http://localhost:8080/cities")
+      .then((response) => (this.cities = response.data));
   },
 };
 </script>

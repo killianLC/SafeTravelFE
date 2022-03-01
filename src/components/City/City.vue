@@ -11,7 +11,7 @@
     <div class="col-12 md:col-6 lg:col-4"><Pictures :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Health :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
-    
+
     <div class="col-12 md:col-12">
       <Commentaire :comments="city.comments" />
     </div>
@@ -28,6 +28,7 @@ import Pictures from "./pictures/Pictures.vue";
 import Covid from "./covid/Covid.vue";
 import Weather from "./weather/Weather.vue";
 import Health from "../city/health/Health.vue";
+import axios from "axios";
 
 export default {
   name: "City",
@@ -48,45 +49,20 @@ export default {
     };
   },
   created() {
-    this.city = {
-      id: 1,
-      globalNote: 3.5,
-      name: this.$route.params.name,
-      country: "fr",
-      comments: [
-        {
-          id: 1,
-          description: "On enlève les bouchons sur la rocade et c'est ok.",
-          date: "2022-02-01",
-          rating: 3,
-          user: {
-            id: 1,
-            firstname: "yoann",
-            lastname: "yoann",
-          },
-        },
-      ],
-      notes: [
-        {
-          id: 2,
-          note: 4.1,
-          date: "2022-02-08",
-          criterion: {
-            id: 2,
-            name: "Météo",
-          },
-        },
-        {
-          id: 3,
-          note: 3.5,
-          date: "2022-02-10",
-          criterion: {
-            id: 1,
-            name: "Air",
-          },
-        },
-      ],
-    };
+    axios
+      .get("http://localhost:8080/cities/" + this.$route.params.name)
+      .then((response) => {
+        this.city = response.data;
+      })
+      .catch(() => {
+        this.$toast.add({
+          severity: "error",
+          summary: "Erreur",
+          detail: "La ville " + this.cityInput + " n'exsite pas",
+          life: 3000,
+        });
+        this.$router.push({name: "home"});
+      });
   },
 };
 </script>
