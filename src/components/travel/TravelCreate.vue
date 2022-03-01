@@ -53,7 +53,7 @@ import Textarea from "primevue/textarea";
 import Divider from "primevue/divider";
 import Listbox from "primevue/listbox";
 import Flag from "../../components/Flag.vue";
-//import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "TravelCreate",
@@ -97,15 +97,15 @@ export default {
         participants: [],
       };
       console.log(travel);
-      /*
+      
       axios
-        .post("http://localhost:8080/travels", travel)
+        .post("http://localhost:8080/trips", travel)
         .then((response) =>
           this.$router.push({
             name: "travelDetails",
             params: { id: response.data.id },
           })
-        );*/
+        );
     },
   },
 };
