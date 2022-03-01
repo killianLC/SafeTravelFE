@@ -6,7 +6,11 @@
     </template>
     <template #footer>
       <a class="no-underline">
-        <Button @click=openGoogleNews label="Voir plus sur Google Actualitées" icon="pi pi-google" />
+        <Button
+          @click="openGoogleNews"
+          label="Voir plus sur Google Actualitées"
+          icon="pi pi-google"
+        />
       </a>
     </template>
   </Card>
@@ -32,23 +36,26 @@ export default {
     name: String,
   },
   created() {
-    const RSS_URL =
-      "https://news.google.com/rss/search?q=" + this.name + "&hl=fr";
-
     axios
-      .get(RSS_URL, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-        proxy: {
-          host: "104.236.174.88",
-          port: 3128,
-        },
-      })
-      .then((response) => response.text())
-      .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
-      .then((data) => console.log(data));
-    console.log(this.articles);
+      .get("http://localhost:8080/data_api/flux_rss/Plérin")
+      .then((response) => {
+        this.articles = response.data;
+        //console.log(response.data);
+        console.log(parseXmlToJson(response.data));
+
+        function parseXmlToJson(xml) {
+          const json = {};
+          for (const res of xml.matchAll(
+            /(?:<(\w*)(?:\s[^>]*)*>)((?:(?!<\1).)*)(?:<\/\1>)|<(\w*)(?:\s*)*\/>/gm
+          )) {
+            const key = res[1] || res[3];
+            const value = res[2] && parseXmlToJson(res[2]);
+            json[key] =
+              (value && Object.keys(value).length ? value : res[2]) || null;
+          }
+          return json;
+        }
+      });
   },
   methods: {
     openGoogleNews() {

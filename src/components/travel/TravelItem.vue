@@ -4,6 +4,7 @@
       <div class="flex justify-content-between">
         <div>
           <router-link
+            v-if="this.firstStep"
             :to="{ name: 'city', params: { name: this.firstStep.city.name } }"
             class="no-underline text-dark"
           >
@@ -12,6 +13,7 @@
           </router-link>
           &nbsp;<i class="pi pi-caret-right" />&nbsp;
           <router-link
+            v-if="this.lastStep"
             :to="{ name: 'city', params: { name: this.lastStep.city.name } }"
             class="no-underline text-dark"
           >
@@ -20,6 +22,7 @@
           </router-link>
         </div>
         <Tag
+          v-if="this.firstStep && this.lastStep"
           :value="this.firstStep.date+' 🢂 '+this.lastStep.date"
           icon="pi pi-calendar"
           rounded

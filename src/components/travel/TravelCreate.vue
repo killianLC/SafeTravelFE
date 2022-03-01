@@ -31,8 +31,9 @@
       <div class="p-inputgroup mt-4">
         <AutoComplete
           v-model="cityInput"
-          :suggestions="cities"
+          :suggestions="filteredCities"
           placeholder="Ville"
+          @complete="searchCity($event)"
           field="name"
         />
         <Calendar
@@ -83,6 +84,7 @@ export default {
       cityInput: "",
       dateInput: "",
       description: "",
+      filteredCities: null,
     };
   },
   methods: {
@@ -125,6 +127,19 @@ export default {
           params: { id: response.data.id },
         })
       );
+    },
+    searchCity(event) {
+      setTimeout(() => {
+        if (!event.query.trim().length) {
+          this.filteredCities = [...this.cities];
+        } else {
+          this.filteredCities = this.cities.filter((city) => {
+            return city.name
+              .toLowerCase()
+              .startsWith(event.query.toLowerCase());
+          });
+        }
+      }, 250);
     },
   },
   created() {
