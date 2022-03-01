@@ -31,7 +31,8 @@ export default {
   },
   methods: {
     search() {
-      this.$router.push({ name: "city", params: { name: this.value } });
+      if(this.value.name)this.$router.push({ name: "city", params: { name: this.value.name } });
+      else this.$router.push({ name: "city", params: { name: this.value } });
     },
     searchCity(event) {
       setTimeout(() => {
