@@ -9,8 +9,8 @@
       />
     </template>
     <template #footer>
-      <a href="" class="no-underline">
-        <Button label="Consulter sur Google Maps" icon="pi pi-directions" />
+      <a class="no-underline">
+        <Button @click=openGoogleMaps label="Consulter sur Google Maps" icon="pi pi-directions" />
       </a>
     </template>
   </Card>
@@ -23,6 +23,14 @@ import Button from "primevue/button";
 export default {
   name: "Carte",
   components: { Image, Card, Button },
+  props: {
+    name: String,
+  },
+  methods: {
+    openGoogleMaps() {
+      window.open("https://www.google.fr/maps/place/" + this.name);
+    },
+  },
 };
 </script>
 

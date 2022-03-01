@@ -8,7 +8,6 @@
       <a class="no-underline">
         <Button @click=openGoogleNews label="Voir plus sur Google Actualitées" icon="pi pi-google" />
       </a>
-      <a href=""></a>
     </template>
   </Card>
 </template>
@@ -33,7 +32,6 @@ export default {
     name: String,
   },
   created() {
-    this.google_news_url = "https://news.google.com/search?q=" + this.name;
     const RSS_URL =
       "https://news.google.com/rss/search?q=" + this.name + "&hl=fr";
 

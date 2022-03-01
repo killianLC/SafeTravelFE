@@ -3,13 +3,15 @@
     <div class="col-12 md:col-6 lg:col-4">
       <BasicInformation :city="city" />
     </div>
+
     <div class="col-12 md:col-6 lg:col-4"><Covid :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><GlobalRating :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4"><Carte :city="city" /></div>
+    <div class="col-12 md:col-6 lg:col-4"><Carte :name="city.name" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Weather :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Pictures :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Health :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
+    
     <div class="col-12 md:col-12">
       <Commentaire :comments="city.comments" />
     </div>
