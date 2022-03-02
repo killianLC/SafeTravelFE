@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-12 md:col-6 lg:col-4"><Covid :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4"><GlobalRating :city="city" /></div>
+    <div class="col-12 md:col-6 lg:col-4" v-if="city.average"><GlobalRating :note="city.average" /></div>
     <div class="col-12 md:col-6 lg:col-4" v-if="city.imageMap">
       <Carte :imageMap="city.imageMap" />
     </div>

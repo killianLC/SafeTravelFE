@@ -5,7 +5,7 @@
     </template>
     <template #content>
       <div class="flex justify-content-center">
-        <img v-if="weather.humidity > 80" src="./pictures/rain.png" />
+        <img v-if="weather.humidity > 69" src="./pictures/rain.png" />
         <img v-else-if="weather.clouds > 80" src="./pictures/clouds.png" />
         <img v-else src="./pictures/sun.png" />
         <span class="flex align-items-center">

@@ -3,7 +3,7 @@
     <template #title><i class="pi pi-bookmark" /> Note global</template>
     <template #content>
       <ProgressSpinner strokeWidth="5" fill="#1d1e27" animationDuration="1s" />
-      <span class="fadeinleft score bg-dark">{{ city.average }}/5</span>
+      <span class="fadeinleft score bg-dark">{{ note }}/5</span>
     </template>
   </Card>
 </template>
@@ -11,6 +11,7 @@
 <script>
 import Card from "primevue/card";
 import ProgressSpinner from "primevue/progressspinner";
+import { integer } from "@vuelidate/validators";
 
 export default {
   name: "BasicInformation",
@@ -19,7 +20,7 @@ export default {
     ProgressSpinner,
   },
   props: {
-    city: Object,
+    note: integer,
   },
 };
 </script>
