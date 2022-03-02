@@ -2,13 +2,23 @@
   <Card>
     <template #title><i class="pi pi-sun" /> Météo</template>
     <template #content v-if="this.city.meteo">
-      <div v-for="weather in this.city.meteo.daily" :key="weather">
-        <WeatherItem :weather="weather" />
+      <div class="grid overflow-x-hidden overflow-y-auto">
+        <div
+          v-for="weather in this.city.meteo.daily"
+          :key="weather"
+          class="col-6"
+        >
+          <WeatherItem :weather="weather" />
+        </div>
       </div>
     </template>
     <template #footer>
       <a class="no-underline">
-        <Button @click=openGoogleMeteo label="Voir plus sur Google Météo" icon="pi pi-google" />
+        <Button
+          @click="openGoogleMeteo"
+          label="Voir plus sur Google Météo"
+          icon="pi pi-google"
+        />
       </a>
     </template>
   </Card>
@@ -24,7 +34,7 @@ export default {
   components: {
     Card,
     Button,
-    WeatherItem
+    WeatherItem,
   },
   props: {
     city: Object,
@@ -39,4 +49,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.p-card:deep(.grid) {
+  max-height: 360px;
+}
 </style>

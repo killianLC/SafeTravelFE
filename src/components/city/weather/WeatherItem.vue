@@ -1,12 +1,19 @@
 <template>
-    <Card>
-        <template #header>
-            <img src="./pictures/sun.png">
-        </template>
-        <template #title>
-            Advanced Card
-        </template>
-    </Card>
+  <Card class="bg-primary">
+    <template #title>
+      {{ new Date(weather.dt * 1000).toLocaleDateString() }}
+    </template>
+    <template #content>
+      <div class="flex justify-content-center">
+        <img v-if="weather.humidity > 80" src="./pictures/rain.png" />
+        <img v-else-if="weather.clouds > 80" src="./pictures/clouds.png" />
+        <img v-else src="./pictures/sun.png" />
+        <span class="flex align-items-center">
+          {{ toCelsus(weather.temp.day) }}°C
+        </span>
+      </div>
+    </template>
+  </Card>
 </template>
 
 <script>
@@ -19,18 +26,26 @@ export default {
   },
   props: {
     weather: Object,
-  },  
-  data() {
-    return {
-      city: Object,
-    };
   },
-  created() { 
-  }
+  methods: {
+    toCelsus(fahrenheit) {
+      return Math.round(fahrenheit - 273.15);
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+img {
+  max-height: 50px;
+  max-width: 50px;
+}
+.p-card :deep(.p-card-title) {
+  text-align: center;
+}
+.p-card :deep(.p-card-content) {
+  padding: 0;
+}
 </style>
 
