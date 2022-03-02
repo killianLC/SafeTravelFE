@@ -7,7 +7,7 @@
         class="p-button-secondary p-button-text"
     /></router-link>
     <div v-if="isLogged">
-      <Button type="button" label="Yoann" @click="toggle" />
+      <Button type="button" :label="this.username" @click="toggle" />
       <Menu ref="menu" :model="items" :popup="true" />
     </div>
     <div v-else>
@@ -53,6 +53,7 @@ export default {
           to: "/logout",
         },
       ],
+      username: JSON.parse(sessionStorage.getItem("user")).firstname
     };
   },
   methods: {
