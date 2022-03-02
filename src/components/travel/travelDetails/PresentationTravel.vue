@@ -4,17 +4,17 @@
       <div class="flex justify-content-between">
         <div class="text-dark">
           <i class="pi pi-ticket" />&nbsp;
-          <Flag :image="travel.steps[0].flag" />
-          {{ travel.steps[0].name }}
+          <Flag />
+          {{ firstStep.city.name }}
           &nbsp;<i class="pi pi-caret-right" />&nbsp;
           {{ travel.steps.length - 2 }} etapes &nbsp;
           <i class="pi pi-caret-right" />&nbsp;
-          <Flag :image="lastStep.flag" />
-          {{ lastStep.name }}
+          <Flag />
+          {{ lastStep.city.name }}
         </div>
         <div>
           <Tag
-            :value="travel.steps[0].date"
+            :value="firstStep.date"
             icon="pi pi-calendar"
             rounded
             class="bg-gray-900 text-primary"
@@ -49,8 +49,8 @@
             <template #content="slotProps">
               <div class="step">
                 <div>
-                  <i class="pi pi-building" /> {{ slotProps.item.name }}
-                  <Flag :image="travel.steps[0].flag" />
+                  <i class="pi pi-building" /> {{ slotProps.item.city.name }}
+                  <Flag />
                 </div>
                 {{ slotProps.item.date }}
               </div>
@@ -65,7 +65,11 @@
         label="Supprimer le voyage"
         class="p-button-danger w-full"
     />-->
-      <Button label="Rejoindre ce voyage" class="btn-join-travel"
+      <Button
+        label="Rejoindre ce voyage"
+        class="btn-join-travel"
+        @click="joinTravel"
+        v-if="!isParticipant"
         >Rejoindre ce voyage<i class="pi pi-send"
       /></Button>
     </template>
@@ -81,6 +85,7 @@ import Divider from "primevue/divider";
 import Avatar from "primevue/avatar";
 import AvatarGroup from "primevue/avatargroup";
 import Flag from "../../Flag.vue";
+import axios from "axios";
 
 export default {
   name: "PresentationTravel",
@@ -92,14 +97,38 @@ export default {
     Divider,
     Avatar,
     AvatarGroup,
-    Flag
+    Flag,
   },
   props: {
     travel: Object,
+    isParticipant: Boolean,
+  },
+  methods: {
+    joinTrip() {
+      axios
+        .post("http://localhost:8080/participants", {
+          tripId: this.travel.id,
+          userId: JSON.parse(sessionStorage.getItem("user")).id,
+        })
+        .then(() => {
+          this.$toast.add({
+            severity: "success",
+            summary: "Bienvenue",
+            detail: "Vous avez demandé à rejoindre le voyage",
+            life: 3000,
+          });
+        });
+    },
   },
   computed: {
+    firstStep() {
+      if (this.travel.steps) return this.travel.steps[0];
+      else return { city: { name: "..." }, date: "" };
+    },
     lastStep() {
-      return this.travel.steps[this.travel.steps.length - 1];
+      if (this.travel.steps)
+        return this.travel.steps[this.travel.steps.length - 1];
+      else return { city: { name: "..." }, date: "" };
     },
   },
 };

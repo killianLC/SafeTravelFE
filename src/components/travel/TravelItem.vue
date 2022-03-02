@@ -8,7 +8,7 @@
             :to="{ name: 'city', params: { name: this.firstStep.city.name } }"
             class="no-underline text-dark"
           >
-            <Flag :image="travel.flagOrigin" />
+            <Flag />
             {{ this.firstStep.city.name }}
           </router-link>
           &nbsp;<i class="pi pi-caret-right" />&nbsp;
@@ -17,13 +17,13 @@
             :to="{ name: 'city', params: { name: this.lastStep.city.name } }"
             class="no-underline text-dark"
           >
-            <Flag :image="travel.flagDestination" />
+            <Flag />
             {{ this.lastStep.city.name }}
           </router-link>
         </div>
         <Tag
           v-if="this.firstStep && this.lastStep"
-          :value="this.firstStep.date+' 🢂 '+this.lastStep.date"
+          :value="this.firstStep.date + ' 🢂 ' + this.lastStep.date"
           icon="pi pi-calendar"
           rounded
           class="bg-gray-900 text-primary"
@@ -69,10 +69,13 @@ export default {
   },
   computed: {
     firstStep() {
-      return this.travel.steps[0];
+      if (this.travel.steps)return this.travel.steps[0];
+      else return { city: { name: "..." }, date: "" };
     },
     lastStep() {
-      return this.travel.steps[this.travel.steps.length - 1];
+      if (this.travel.steps)
+        return this.travel.steps[this.travel.steps.length - 1];
+      else return { city: { name: "..." }, date: "" };
     },
   },
 };

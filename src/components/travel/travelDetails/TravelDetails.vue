@@ -1,11 +1,13 @@
 <template>
-  <div class="grid">
+  <div class="grid" v-if="travel">
     <div class="col-12">
       <Breadcrumb :home="home" :model="items" />
     </div>
-    <div class="col-12 md:col-12"><PresentationTravel :travel="travel" /></div>
-    <div class="col-12 md:col-8"><StepsTravel :travel="travel" /></div>
-    <div class="col-12 md:col-4">
+    <div class="col-12 md:col-12"><PresentationTravel :travel="travel" :isParticipant="isParticipant" /></div>
+    <div class="col-12 md:col-8" v-if="isOrganizer">
+      <StepsTravel :travel="travel" />
+    </div>
+    <div class="col-12 md:col-4" v-if="isOrganizer">
       <Participants :participants="travel.participants" />
     </div>
   </div>
@@ -28,14 +30,30 @@ export default {
   },
   data() {
     return {
-      travel: {},
+      travel: null,
+      isOrganizer: false,
+      isParticipant: true
     };
   },
   created() {
-    axios.get("http://localhost:8080/trips/" + this.$route.params.id).then((response) => {
-      //this.travels = response.data;
-      console.log(response.data);
-    });
+    axios
+      .get("http://localhost:8080/trips/" + this.$route.params.id)
+      .then((response) => {
+        this.travel = response.data;
+        this.isOrganizer =
+          JSON.parse(sessionStorage.getItem("user")).id ===
+          this.travel.organisateur.id;
+
+        axios
+          .get(
+            "http://localhost:8080/trips/isParticipant/" + this.$route.params.id
+          )
+          .then(() => {
+            this.isParticipant = false;
+          }).catch(() => {
+            this.isParticipant = true;
+          });
+      });
   },
 };
 </script>

@@ -8,12 +8,16 @@
       </span>
       <Divider />
       Etapes
-      <Listbox :options="steps" :multiple="true" emptyMessage="Aucune étape n'est enregistrée.">
+      <Listbox
+        :options="steps"
+        :multiple="true"
+        emptyMessage="Aucune étape n'est enregistrée."
+      >
         <template #option="slotProps">
           <div class="flex justify-content-between">
             <div class="flex align-items-center min-w-100">
-              <Flag :image="slotProps.option.flag" class="mr-2"/>
-              <span>{{ slotProps.option.name }}</span>
+              <Flag class="mr-2" />
+              <span>{{ slotProps.option.city.name }}</span>
             </div>
             <Calendar
               v-model="slotProps.option.date"
@@ -23,13 +27,19 @@
             <Button
               icon="pi pi-trash"
               class="p-button-rounded p-button-danger"
-              @click="removeStep(slotProps.option.name)"
+              @click="removeStep(slotProps.option.city.name)"
             />
           </div>
         </template>
       </Listbox>
       <div class="p-inputgroup mt-4">
-        <InputText placeholder="Ville" v-model="cityInput" />
+        <AutoComplete
+          v-model="cityInput"
+          :suggestions="filteredCities"
+          placeholder="Ville"
+          @complete="searchCity($event)"
+          field="name"
+        />
         <Calendar
           v-model="dateInput"
           placeholder="date"
@@ -38,26 +48,29 @@
         <Button icon="pi pi-plus" label="Ajouter" @click="addStep" />
       </div>
     </template>
-    <template #footer> </template>
+    <template #footer
+      ><Button icon="pi pi-plus" label="Modifier le voyage" @click="updateTrip"
+    /></template>
   </Card>
 </template>
 
 <script>
 import Card from "primevue/card";
 import Button from "primevue/button";
-import InputText from "primevue/inputtext";
+import AutoComplete from "primevue/autocomplete";
 import Calendar from "primevue/calendar";
 import Textarea from "primevue/textarea";
 import Divider from "primevue/divider";
 import Listbox from "primevue/listbox";
-import Flag from '../../Flag.vue';
+import Flag from "../../Flag.vue";
+import axios from "axios";
 
 export default {
   name: "Edit",
   components: {
     Card,
     Button,
-    InputText,
+    AutoComplete,
     Calendar,
     Textarea,
     Divider,
@@ -67,6 +80,9 @@ export default {
   created() {
     this.steps = this.travel.steps;
     this.description = this.travel.description;
+    axios
+      .get("http://localhost:8080/cities")
+      .then((response) => (this.cities = response.data));
   },
   props: {
     travel: Object,
@@ -77,20 +93,64 @@ export default {
       cityInput: "",
       dateInput: "",
       description: "",
+      filteredCities: null,
+      cities: [],
     };
   },
   methods: {
+    searchCity(event) {
+      setTimeout(() => {
+        if (!event.query.trim().length) {
+          this.filteredCities = [...this.cities];
+        } else {
+          this.filteredCities = this.cities.filter((city) => {
+            return city.name
+              .toLowerCase()
+              .startsWith(event.query.toLowerCase());
+          });
+        }
+      }, 250);
+    },
     addStep() {
-      this.steps.push({
-        name: this.cityInput,
-        flag: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg",
-        date: this.dateInput,
-      });
+      if (this.cityInput && this.dateInput) {
+        if (this.cityInput.name) this.cityInput = this.cityInput.name;
+        axios
+          .get("http://localhost:8080/cities/" + this.cityInput)
+          .then(() => {
+            this.steps.push({
+              cityName: this.cityInput,
+              date: this.dateInput,
+            });
+          })
+          .catch(() => {
+            this.$toast.add({
+              severity: "error",
+              summary: "Erreur",
+              detail: "La ville " + this.cityInput + " n'exsite pas",
+              life: 3000,
+            });
+          });
+      } else {
+        this.$toast.add({
+          severity: "error",
+          summary: "Erreur",
+          detail: "Renseignez une ville et une date",
+          life: 3000,
+        });
+      }
     },
     removeStep(name) {
       this.steps.splice(
         this.steps.indexOf(this.steps.find((step) => step.name === name)),
         1
+      );
+    },
+    updateTrip() {
+      axios.post("http://localhost:8080/trips", this.travel).then((response) =>
+        this.$router.push({
+          name: "travelDetails",
+          params: { id: parseInt(response.data) },
+        })
       );
     },
   },
