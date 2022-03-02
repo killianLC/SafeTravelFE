@@ -84,6 +84,12 @@ export default {
           .then((response) => {
             this.city.meteo = response.data;
           });
+
+        axios
+          .get("http://localhost:8080/data_api/city_info/" + this.$route.params.name)
+          .then((response) => {
+            this.city.population = response.data[0].population;
+          });          
       });
   },
 };

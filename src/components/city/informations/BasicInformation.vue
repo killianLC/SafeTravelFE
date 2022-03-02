@@ -10,11 +10,9 @@
     <template #content>
       <ul class="list-none">
         <li>
-          <i class="pi pi-map-marker" /> : France
-          <Flag :country="city.country" />
+          <i class="pi pi-map-marker" /> : <Flag :country="city.country" /> France
         </li>
-        <li><i class="pi pi-box" /> : {{ city.superficie }}</li>
-        <li><i class="pi pi-users" /> : {{ city.population }} habitants</li>
+        <li><i class="pi pi-users" /> : {{ city.population }}</li>
       </ul>
     </template>
     <template #footer>
@@ -29,6 +27,7 @@
 import Card from "primevue/card";
 import Button from "primevue/button";
 import Flag from '../../Flag.vue';
+
 export default {
   name: "BasicInformation",
   components: {
