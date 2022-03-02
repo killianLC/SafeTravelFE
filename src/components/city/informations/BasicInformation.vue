@@ -16,8 +16,8 @@
       </ul>
     </template>
     <template #footer>
-      <a href="" class="no-underline">
-        <Button label="Consulter sur Google" icon="pi pi-google" />
+      <a class="no-underline">
+        <Button @click="openGoogle" label="Consulter sur Google" icon="pi pi-google" />
       </a>
     </template>
   </Card>
@@ -37,6 +37,11 @@ export default {
   },
   props: {
     city: Object,
+  },
+  methods: {
+    openGoogle() {
+      window.open("https://www.google.fr/search?q=" + this.city.name);
+    },
   },
 };
 </script>
