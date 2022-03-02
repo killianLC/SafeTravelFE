@@ -2,29 +2,28 @@
   <Card>
     <template #title><i class="pi pi-images" /> Photos</template>
     <template #content>
-      <Galleria
-        :value="images"
-        :responsiveOptions="responsiveOptions"
-      >
+      <Galleria :value="images" :responsiveOptions="responsiveOptions">
         <template #item="slotProps">
           <img
-            :src="slotProps.item.itemImageSrc"
-            :alt="slotProps.item.alt"
-            style="width: 100%; display: block"
+            :src="slotProps.item.urls.small"
+            style="width: auto; display: block; max-height:260px;"
           />
         </template>
         <template #thumbnail="slotProps">
           <img
-            :src="slotProps.item.itemImageSrc"
-            :alt="slotProps.item.alt"
-            style="width: 100%; display: block"
+            :src="slotProps.item.urls.small"
+            style="width: auto; display: block; max-height:45px;"
           />
         </template>
       </Galleria>
     </template>
     <template #footer>
       <a class="no-underline">
-        <Button @click="openGoogleImage" label="Voir plus sur Google Image" icon="pi pi-google" />
+        <Button
+          @click="openGoogleImage"
+          label="Voir plus sur Google Image"
+          icon="pi pi-google"
+        />
       </a>
     </template>
   </Card>
@@ -34,6 +33,7 @@
 import Card from "primevue/card";
 import Button from "primevue/button";
 import Galleria from "primevue/galleria";
+import axios from "axios";
 
 export default {
   name: "Pictures",
@@ -47,41 +47,20 @@ export default {
   },
   data() {
     return {
-      images: [
-        {
-          itemImageSrc:
-            "https://upload.wikimedia.org/wikipedia/commons/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg",
-          thumbnailImageSrc: "demo/images/galleria/galleria1s.jpg",
-          alt: "Description for Image 1",
-          title: "Title 1",
-        },
-        {
-          itemImageSrc:
-            "https://www.campusfrance.org/sites/default/files/paris_0.jpg",
-          thumbnailImageSrc: "demo/images/galleria/galleria1s.jpg",
-          alt: "Description for Image 1",
-          title: "Title 1",
-        },
-        {
-          itemImageSrc:
-            "https://www.sortiraparis.com/images/58/83517/705222-.jpg",
-          thumbnailImageSrc: "demo/images/galleria/galleria1s.jpg",
-          alt: "Description for Image 1",
-          title: "Title 1",
-        },
-        {
-          itemImageSrc: "https://www.paris.fr/images/meta/parisfr.jpg",
-          thumbnailImageSrc: "demo/images/galleria/galleria1s.jpg",
-          alt: "Description for Image 1",
-          title: "Title 1",
-        },
-      ],
+      images: [],
     };
   },
   methods: {
     openGoogleImage() {
       window.open("https://news.google.com/search?q=" + this.name);
     },
+  },
+  created() {
+    axios
+      .get("https://api.unsplash.com/search/photos?client_id=IT50F-lGv_Kgd-iDnWfcPw__Kpl2S4-tEaVrMLXPGRQ&order_by=popular&query=" + this.name)
+      .then((response) => {
+        this.images = response.data.results;
+      });
   },
 };
 </script>

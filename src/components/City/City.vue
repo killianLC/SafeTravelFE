@@ -6,9 +6,9 @@
 
     <div class="col-12 md:col-6 lg:col-4"><Covid :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><GlobalRating :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4"><Carte :imgMap="imgMap" /></div>
+    <div class="col-12 md:col-6 lg:col-4"><Carte :imgMap="city.imgMap" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Weather :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4"><Pictures :name="city.name" /></div>
+    <div class="col-12 md:col-6 lg:col-4" v-if="false"><Pictures :name="city.name" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Health :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
 
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      city: Object,
+      city: { name:this.$route.params.name},
       imgMap: "",
     };
   },
@@ -72,7 +72,7 @@ export default {
 
         let lat = this.city.data_api.lat;
         let lon = this.city.data_api.lon;
-        this.imgMap =
+        this.city.imgMap =
           "https://static-maps.yandex.ru/1.x/?lang=fr-FR&ll=" +
           lon +
           "," +
