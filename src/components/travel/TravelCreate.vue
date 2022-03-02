@@ -8,7 +8,7 @@
       </span>
       <Divider />
       Etapes
-      <Listbox :options="steps" :multiple="true">
+      <Listbox :options="steps" :multiple="true" emptyMessage="Aucune étape n'est enregistrée.">
         <template #option="slotProps">
           <div class="flex justify-content-between">
             <div class="flex align-items-center min-w-100">
