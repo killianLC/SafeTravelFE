@@ -63,6 +63,21 @@ export default {
         });
         this.$router.push({name: "home"});
       });
+
+    axios
+      .get("http://localhost:8080/data_api/city/" + this.$route.params.name)
+      .then((response) => {
+        this.city.data_api = response.data[0]; 
+
+        let lat = this.city.data_api.lat;
+        let lon = this.city.data_api.lon;
+
+        axios
+          .get("http://localhost:8080/data_api/meteo/" + lat + "/" + lon)
+          .then((response) => {
+            this.city.meteo = response.data; 
+          })        
+      })    
   },
 };
 </script>

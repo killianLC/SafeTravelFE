@@ -2,11 +2,13 @@
   <Card>
     <template #title><i class="pi pi-sun" /> Météo</template>
     <template #content>
-      <img class="w-full" src="./Exemple.png" />
+      <div v-for="weather in this.city.meteo.daily" :key="weather">
+        <WeatherItem :weather="weather" />
+      </div>
     </template>
     <template #footer>
-      <a href="" class="no-underline">
-        <Button label="Voir plus sur Google Météo" icon="pi pi-google" />
+      <a class="no-underline">
+        <Button @click=openGoogleMeteo label="Voir plus sur Google Météo" icon="pi pi-google" />
       </a>
     </template>
   </Card>
@@ -21,6 +23,14 @@ export default {
   components: {
     Card,
     Button,
+  },
+  props: {
+    city: Object,
+  },
+  methods: {
+    openGoogleMeteo() {
+      window.open("https://www.google.com/search?q=météo+" + this.city.name);
+    },
   },
 };
 </script>
