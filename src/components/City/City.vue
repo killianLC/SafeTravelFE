@@ -89,7 +89,13 @@ export default {
           .get("http://localhost:8080/data_api/city_info/" + this.$route.params.name)
           .then((response) => {
             this.city.population = response.data[0].population;
-          });          
+          });
+          
+        axios
+          .get("http://localhost:8080/cities/average/" + this.$route.params.name)
+          .then((response) => {
+            this.city.average = response.data.rating_average;
+          });            
       });
   },
 };
