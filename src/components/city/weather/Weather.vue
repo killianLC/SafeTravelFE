@@ -17,12 +17,14 @@
 <script>
 import Card from "primevue/card";
 import Button from "primevue/button";
+import WeatherItem from "./WeatherItem.vue";
 
 export default {
   name: "Weather",
   components: {
     Card,
     Button,
+    WeatherItem
   },
   props: {
     city: Object,

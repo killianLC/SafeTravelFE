@@ -1,7 +1,16 @@
 <template>
+    <Card>
+        <template #header>
+            <img src="./pictures/sun.png">
+        </template>
+        <template #title>
+            Advanced Card
+        </template>
+    </Card>
 </template>
 
 <script>
+import Card from "primevue/card";
 
 export default {
   name: "WeatherItem",
@@ -10,7 +19,14 @@ export default {
   },
   props: {
     weather: Object,
+  },  
+  data() {
+    return {
+      city: Object,
+    };
   },
+  created() { 
+  }
 };
 </script>
 
