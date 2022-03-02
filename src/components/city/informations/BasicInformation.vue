@@ -12,7 +12,7 @@
         <li>
           <i class="pi pi-map-marker" /> : <Flag :country="city.country" /> France
         </li>
-        <li><i class="pi pi-users" /> : {{ city.population }}</li>
+        <li><i class="pi pi-users" /> : {{ city.population }} habitants</li>
       </ul>
     </template>
     <template #footer>
