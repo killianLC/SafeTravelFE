@@ -13,7 +13,7 @@
           <div class="flex justify-content-between">
             <div class="flex align-items-center min-w-100">
               <Flag class="mr-2" />
-              <span>{{ slotProps.option.city.name }}</span>
+              <span>{{ slotProps.option.cityName }}</span>
             </div>
             <Calendar
               v-model="slotProps.option.date"
@@ -23,7 +23,7 @@
             <Button
               icon="pi pi-trash"
               class="p-button-rounded p-button-danger"
-              @click="removeStep(slotProps.option.city)"
+              @click="removeStep(slotProps.option.cityName)"
             />
           </div>
         </template>
@@ -95,9 +95,7 @@ export default {
           .get("http://localhost:8080/cities/" + this.cityInput)
           .then(() => {
             this.steps.push({
-              city: {
-                name: this.cityInput,
-              },
+              cityName: this.cityInput,
               date: this.dateInput,
             });
           })
@@ -127,7 +125,7 @@ export default {
     createTravel() {
       let travel = {
         description: this.description,
-        organisateurUid: JSON.parse(sessionStorage.getItem("user")).id,
+        organisateurId: JSON.parse(sessionStorage.getItem("user")).id,
         steps: this.steps,
         participants: [],
       };
