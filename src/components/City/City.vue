@@ -1,7 +1,7 @@
 <template>
   <div class="grid">
     <div class="col-12 md:col-6 lg:col-4">
-      <BasicInformation :city="city" />
+      <BasicInformation v-if="city.id" :city="city" />
     </div>
 
     <div class="col-12 md:col-6 lg:col-4"><Covid :city="city" /></div>

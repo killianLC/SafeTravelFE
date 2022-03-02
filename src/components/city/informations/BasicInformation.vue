@@ -3,8 +3,9 @@
     <template #title>
       <div><i class="pi pi-building" /> {{ city.name }}</div>
       <Button
-        icon="pi pi-heart-fill"
-        class="p-button-rounded text-gray-900 p-button-outlined btn-fav"
+        :icon="isFavCity?'pi pi-heart-fill':'pi pi-heart'"
+        class="p-button-rounded text-primary p-button-outlined btn-fav"
+        @click="addRemoveCityFav(city)"
       />
     </template>
     <template #content>
@@ -27,6 +28,7 @@
 import Card from "primevue/card";
 import Button from "primevue/button";
 import Flag from '../../Flag.vue';
+import axios from "axios";
 
 export default {
   name: "BasicInformation",
@@ -38,10 +40,31 @@ export default {
   props: {
     city: Object,
   },
+  data: function () {
+    return {
+      isFavCity: false
+    };
+  },
+  mounted() {
+    this.isFavorite()
+  },
   methods: {
     openGoogle() {
       window.open("https://www.google.fr/search?q=" + this.city.name);
     },
+    addRemoveCityFav(){
+      if(!this.isFavCity){
+        axios.post("http://localhost:8080/cities/favoris/"+this.city.id).then(() => this.isFavCity = true);
+      } else {
+        axios.post("http://localhost:8080/cities/favoris/delete/"+this.city.id).then(() => this.isFavCity = false);
+      }
+    },
+    isFavorite(){
+       axios.get("http://localhost:8080/cities/favoris/isFav/"+this.city.id).then((res) => {
+         this.isFavCity = res.data
+         console.log(res.data)
+       });
+    }
   },
 };
 </script>
