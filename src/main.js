@@ -96,25 +96,8 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
   if (error.response.status) {
     switch (error.response.status) {
-      case 400:
-        //do something
-        break;
       case 401:
-        sessionStorage.clear();
-        router.replace({
-          path: "/login",
-          query: { redirect: router.currentRoute.fullPath }
-        });        
-        break;
-      case 403:
-        router.replace({
-          path: "/login",
-          query: { redirect: router.currentRoute.fullPath }
-        });
-        break;
-      case 404:
-        break;
-      case 502:
+        sessionStorage.clear();      
         break;
     }
     return Promise.reject(error.response);
