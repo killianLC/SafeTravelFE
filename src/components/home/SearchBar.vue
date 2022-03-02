@@ -50,7 +50,7 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:8080/cities")
+      .get("http://localhost:8080/public/cities")
       .then((response) => (this.cities = response.data));
   },
 };
