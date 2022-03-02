@@ -32,9 +32,8 @@ export default {
     };
   },
   created() {
-    let id = JSON.parse(sessionStorage.getItem("user")).id;
-    axios.get("http://localhost:8080/trips/" + id).then((response) => {
-      this.travels = response.data;
+    axios.get("http://localhost:8080/trips/" + this.$route.params.id).then((response) => {
+      //this.travels = response.data;
       console.log(response.data);
     });
   },

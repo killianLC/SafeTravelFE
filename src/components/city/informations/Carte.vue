@@ -2,7 +2,7 @@
   <Card>
     <template #title><i class="pi pi-map" /> Carte</template>
     <template #content>
-      <Image imageClass="max-w-full border-1 border-dark" :src="imgMap" alt="Image Text" />
+      <Image imageClass="max-w-full border-1 border-dark" :src="imageMap" alt="Image Text" />
     </template>
     <template #footer>
       <a class="no-underline">
@@ -25,7 +25,7 @@ export default {
   name: "Carte",
   components: { Image, Card, Button },
   props: {
-    imgMap: String,
+    imageMap: String,
   },
   data() {
     return {};

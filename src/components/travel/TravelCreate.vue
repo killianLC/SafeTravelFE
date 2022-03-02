@@ -8,7 +8,11 @@
       </span>
       <Divider />
       Etapes
-      <Listbox :options="steps" :multiple="true" emptyMessage="Aucune étape n'est enregistrée.">
+      <Listbox
+        :options="steps"
+        :multiple="true"
+        emptyMessage="Aucune étape n'est enregistrée."
+      >
         <template #option="slotProps">
           <div class="flex justify-content-between">
             <div class="flex align-items-center min-w-100">
@@ -127,12 +131,11 @@ export default {
         description: this.description,
         organisateurId: JSON.parse(sessionStorage.getItem("user")).id,
         steps: this.steps,
-        participants: [],
       };
       axios.post("http://localhost:8080/trips", travel).then((response) =>
         this.$router.push({
           name: "travelDetails",
-          params: { id: response.data.id },
+          params: { id: parseInt(response.data) },
         })
       );
     },

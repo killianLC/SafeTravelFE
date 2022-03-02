@@ -6,9 +6,13 @@
 
     <div class="col-12 md:col-6 lg:col-4"><Covid :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><GlobalRating :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4"><Carte :imgMap="city.imgMap" /></div>
+    <div class="col-12 md:col-6 lg:col-4" v-if="city.imageMap">
+      <Carte :imageMap="city.imageMap" />
+    </div>
     <div class="col-12 md:col-6 lg:col-4"><Weather :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4" v-if="false"><Pictures :name="city.name" /></div>
+    <div class="col-12 md:col-6 lg:col-4" v-if="false">
+      <Pictures :name="city.name" />
+    </div>
     <div class="col-12 md:col-6 lg:col-4"><Health :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
 
@@ -45,8 +49,7 @@ export default {
   },
   data() {
     return {
-      city: { name:this.$route.params.name},
-      imgMap: "",
+      city: { name: this.$route.params.name, imageMap: "test" },
     };
   },
   created() {
@@ -54,6 +57,44 @@ export default {
       .get("http://localhost:8080/cities/" + this.$route.params.name)
       .then((response) => {
         this.city = response.data;
+        axios
+          .get("http://localhost:8080/data_api/city/" + this.$route.params.name)
+          .then((response) => {
+            this.city.data_api = response.data[0];
+
+            let lat = this.city.data_api.lat;
+            let lon = this.city.data_api.lon;
+            this.city.imageMap =
+              "https://static-maps.yandex.ru/1.x/?lang=fr-FR&ll=" +
+              lon +
+              "," +
+              lat +
+              "&z=13&l=map&size=600,450";
+
+            axios
+              .get("http://localhost:8080/data_api/meteo/" + lat + "/" + lon)
+              .then((response) => {
+                this.city.meteo = response.data;
+              });
+
+            axios
+              .get(
+                "http://localhost:8080/data_api/city_info/" +
+                  this.$route.params.name
+              )
+              .then((response) => {
+                this.city.population = response.data[0].population;
+              });
+
+            axios
+              .get(
+                "http://localhost:8080/cities/average/" +
+                  this.$route.params.name
+              )
+              .then((response) => {
+                this.city.average = response.data.rating_average;
+              });
+          });
       })
       .catch(() => {
         this.$toast.add({
@@ -63,39 +104,6 @@ export default {
           life: 3000,
         });
         this.$router.push({ name: "home" });
-      });
-
-    axios
-      .get("http://localhost:8080/data_api/city/" + this.$route.params.name)
-      .then((response) => {
-        this.city.data_api = response.data[0];
-
-        let lat = this.city.data_api.lat;
-        let lon = this.city.data_api.lon;
-        this.city.imgMap =
-          "https://static-maps.yandex.ru/1.x/?lang=fr-FR&ll=" +
-          lon +
-          "," +
-          lat +
-          "&z=13&l=map&size=600,450";
-
-        axios
-          .get("http://localhost:8080/data_api/meteo/" + lat + "/" + lon)
-          .then((response) => {
-            this.city.meteo = response.data;
-          });
-
-        axios
-          .get("http://localhost:8080/data_api/city_info/" + this.$route.params.name)
-          .then((response) => {
-            this.city.population = response.data[0].population;
-          });
-          
-        axios
-          .get("http://localhost:8080/cities/average/" + this.$route.params.name)
-          .then((response) => {
-            this.city.average = response.data.rating_average;
-          });            
       });
   },
 };
