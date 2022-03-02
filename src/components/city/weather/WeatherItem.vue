@@ -12,6 +12,9 @@
           {{ toCelsus(weather.temp.day) }}°C
         </span>
       </div>
+      <span class="flex justify-content-center">
+        Taux d'humidité : {{ weather.humidity }}%
+      </span>
     </template>
   </Card>
 </template>
