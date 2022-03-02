@@ -2,7 +2,7 @@
   <Card class="bg-primary">
     <template #title>
       <div>
-        <i class="pi pi-heart-fill" />&nbsp;{{ city.cityDto.name }}
+        <i class="pi pi-heart-fill" />&nbsp;{{ city.name }}
         <Flag :image="city.flag" />
       </div>
       <Button
@@ -18,7 +18,7 @@
     </template>
     <template #footer>
       <router-link
-        :to="{ name: 'city', params: { name: city.cityDto.name } }"
+        :to="{ name: 'city', params: { name: city.name } }"
         class="no-underline"
       >
         <Button
@@ -35,6 +35,7 @@
 import Card from "primevue/card";
 import Button from "primevue/button";
 import Flag from "../../Flag";
+import axios from "axios";
 
 export default {
   name: "City",
@@ -48,8 +49,13 @@ export default {
   },
   methods: {
     deleteFav() {
-      console.log('delete')
+      axios.post("http://localhost:8080/cities/favoris/delete/"+this.city.id).then(() => this.isFavCity = false);
+      this.emitDeleteCityFromCities()
     },
+
+    emitDeleteCityFromCities(city){
+      this.$emit('detele-city-event',{cityDeleted: city})
+    }
   },
 };
 </script>

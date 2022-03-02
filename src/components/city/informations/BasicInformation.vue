@@ -4,7 +4,7 @@
       <div><i class="pi pi-building" /> {{ city.name }}</div>
       <Button
         :icon="isFavCity?'pi pi-heart-fill':'pi pi-heart'"
-        class="p-button-rounded text-primary p-button-outlined btn-fav"
+        class="p-button-rounded text-danger-900 p-button-outlined btn-fav"
         @click="addRemoveCityFav(city)"
       />
     </template>

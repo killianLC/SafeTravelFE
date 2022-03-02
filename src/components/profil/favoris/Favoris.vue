@@ -8,9 +8,9 @@
         <div
           class="col-12 md:col-12 lg:col-6"
           v-for="city in cities"
-          :key="city.cityDto.name"
+          :key="city.name"
         >
-          <City :city="city" />
+          <City @detele-city-event="deleteCityFromCities" v-if="city.id" :city="city" />
         </div>
       </div>
     </template>
@@ -22,10 +22,11 @@
   </Card>
 </template>
 
-<script type="">
+<script>
 import Card from "primevue/card";
 import Button from "primevue/button";
 import City from "./City.vue";
+import axios from "axios";
 
 export default {
   name: "Favoris",
@@ -34,11 +35,28 @@ export default {
     Button,
     City,
   },
+  mounted() {
+    this.getAllCitiesFavories()
+  },
   data() {
     return {
       cities: [],
     }
   },
+  methods:{
+    getAllCitiesFavories(){
+      axios.get("http://localhost:8080/users/"+JSON.parse(sessionStorage.getItem("user")).id).then((user) => {
+        if(user.data.citiesFavoris){
+          user.data.citiesFavoris.forEach((c) => this.cities.push(c));
+        }
+        console.log(user.data.citiesFavoris)
+      });
+    },
+    deleteCityFromCities(cityDeleted){
+      let i = this.cities.indexOf(cityDeleted);
+      this.cities.splice(i,1);
+    }
+  }
 };
 </script>
 
