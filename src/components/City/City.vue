@@ -8,7 +8,7 @@
     <div class="col-12 md:col-6 lg:col-4"><GlobalRating :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Carte :name="city.name" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Weather :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4"><Pictures :city="city" /></div>
+    <div class="col-12 md:col-6 lg:col-4"><Pictures :name="city.name" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Health :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
 
@@ -58,7 +58,7 @@ export default {
         this.$toast.add({
           severity: "error",
           summary: "Erreur",
-          detail: "La ville " + this.$route.params.name + " n'exsite pas",
+          detail: "La ville " + this.$route.params.name + " n'existe pas",
           life: 3000,
         });
         this.$router.push({name: "home"});

@@ -83,6 +83,7 @@ axios.interceptors.request.use(function (config) {
   const token = sessionStorage.getItem("JWT_token");
   if (token) {
     config.headers.common["Authorization"] = "Bearer " + token;
+    config.headers.common["UtilisateurId"] =  JSON.parse(sessionStorage.getItem("user")).id;
   }
   return config;
 }, function (error) {

@@ -23,8 +23,8 @@
       </Galleria>
     </template>
     <template #footer>
-      <a href="" class="no-underline">
-        <Button label="Voir plus sur Google Image" icon="pi pi-google" />
+      <a class="no-underline">
+        <Button @click="openGoogleImage" label="Voir plus sur Google Image" icon="pi pi-google" />
       </a>
     </template>
   </Card>
@@ -43,7 +43,7 @@ export default {
     Galleria,
   },
   props: {
-    city: Object,
+    name: String,
   },
   data() {
     return {
@@ -77,6 +77,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    openGoogleImage() {
+      window.open("https://news.google.com/search?q=" + this.name);
+    },
   },
 };
 </script>
