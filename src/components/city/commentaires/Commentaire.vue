@@ -7,7 +7,7 @@
         <Avatar
           :label="getAvatar(comment.user)"
           shape="circle"
-          v-for="comment in comments"
+          v-for="comment in city.comments"
           :key="comment.id"
         />
       </AvatarGroup>
@@ -16,10 +16,13 @@
       <div class="grid">
         <div
           class="col-12 md:col-6 lg:col-4"
-          v-for="comment in comments"
+          v-for="comment in city.comments"
           :key="comment.id"
         >
           <Message :comment="comment" />
+        </div>
+        <div class="col-12 md:col-6 lg:col-4">
+          <CommentaireForm :city="city" />
         </div>
       </div>
     </template>
@@ -31,6 +34,7 @@ import Card from "primevue/card";
 import Message from "./Message.vue";
 import Avatar from "primevue/avatar";
 import AvatarGroup from "primevue/avatargroup";
+import CommentaireForm from "./CommentaireForm.vue";
 
 export default {
   name: "Commentaire",
@@ -39,9 +43,10 @@ export default {
     Message,
     Avatar,
     AvatarGroup,
+    CommentaireForm,
   },
   props: {
-    comments: Array,
+    city: Object,
   },
   methods: {
     getAvatar(user) {

@@ -13,7 +13,7 @@
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
 
     <div class="col-12 md:col-12">
-      <Commentaire :comments="city.comments" />
+      <Commentaire :city="city" />
     </div>
   </div>
 </template>

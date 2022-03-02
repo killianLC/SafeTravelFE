@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template #title><i class="pi pi-sun" /> Météo</template>
-    <template #content>
+    <template #content v-if="this.city.meteo">
       <div v-for="weather in this.city.meteo.daily" :key="weather">
         <WeatherItem :weather="weather" />
       </div>
