@@ -40,7 +40,7 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:8080/data_api/flux_rss/Plérin")
+      .get("http://localhost:8080/data_api/flux_rss/" + this.name)
       .then((response) => {
         var json = JSON.parse(
           convert.xml2json(response.data, { compact: true, spaces: 4 })
