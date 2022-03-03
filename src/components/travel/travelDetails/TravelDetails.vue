@@ -11,7 +11,7 @@
       />
     </div>
     <div class="col-12 md:col-8" v-if="isOrganizer">
-      <StepsTravel :travel="travel" />
+      <Edit :travel="travel" @emit-update-desc="updateDescription" />
     </div>
     <div class="col-12 md:col-4" v-if="isOrganizer">
       <Participants :travel="travel" />
@@ -21,7 +21,7 @@
 
 <script>
 import Participants from "./Participants.vue";
-import StepsTravel from "./Edit.vue";
+import Edit from "./Edit.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import PresentationTravel from "./PresentationTravel.vue";
 import axios from "axios";
@@ -30,7 +30,7 @@ export default {
   name: "TravelDetails",
   components: {
     Participants,
-    StepsTravel,
+    Edit,
     Breadcrumb,
     PresentationTravel,
   },
@@ -40,7 +40,7 @@ export default {
       isOrganizer: false,
       isParticipant: true,
       home: { icon: "pi pi-home", to: "/" },
-      items: [{ label: "Mes voyages", to: "/travels" },{ label: "Voyage" }],
+      items: [{ label: "Mes voyages", to: "/travels" }, { label: "Voyage" }],
     };
   },
   created() {
@@ -63,6 +63,18 @@ export default {
             this.isParticipant = true;
           });
       });
+  },
+  methods: {
+    updateDescription(payload) {
+      axios
+        .post(
+          "http://localhost:8080/trips/" + this.travel.id + "/description",
+          {
+            description: payload.description,
+          }
+        )
+        .then(() => (this.travel.description = payload.description));
+    },
   },
 };
 </script>

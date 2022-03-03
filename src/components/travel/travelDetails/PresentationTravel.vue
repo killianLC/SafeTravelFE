@@ -7,8 +7,10 @@
           <Flag />
           {{ firstStep.city.name }}
           &nbsp;<i class="pi pi-caret-right" />&nbsp;
-          {{ travel.steps.length - 2 }} etapes &nbsp;
-          <i class="pi pi-caret-right" />&nbsp;
+          <span v-if="travel.steps.length > 2">
+            {{ travel.steps.length - 2 }} etapes &nbsp;
+            <i class="pi pi-caret-right" />&nbsp;</span
+          >
           <Flag />
           {{ lastStep.city.name }}
         </div>

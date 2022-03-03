@@ -117,19 +117,21 @@ export default {
         axios
           .get("http://localhost:8080/cities/" + this.cityInput)
           .then(() => {
-            axios.post("http://localhost:8080/trips/"+this.travel.id+"/step/create", {
-              date: this.dateInput, cityName:this.cityInput
-            }).then(() => {
-              this.steps.push({
-                date: this.dateInput,
-                city: {
-                  name: this.cityInput,
-                },
+            axios
+              .post(
+                "http://localhost:8080/trips/" +
+                  this.travel.id +
+                  "/step/create",
+                {
+                  date: this.dateInput,
+                  cityName: this.cityInput,
+                }
+              )
+              .then((reponse) => {
+                this.steps.push(reponse.data);
+                this.cityInput = "";
+                this.dateInput = "";
               });
-              this.cityInput = "";
-              this.dateInput = "";
-            });
-
           })
           .catch(() => {
             this.$toast.add({
@@ -149,14 +151,16 @@ export default {
       }
     },
     removeStep(step) {
-      console.log(step);
       axios
-        .post("http://localhost:8080/trips/"+this.travel.id+"/step/delete/"+step.id)
+        .post(
+          "http://localhost:8080/trips/" +
+            this.travel.id +
+            "/step/delete/" +
+            step.id
+        )
         .then(() => {
           this.steps.splice(
-            this.steps.indexOf(
-              this.steps.find((item) => item.name === step.city.name)
-            ),
+            this.steps.indexOf(this.steps.find((item) => item.id == step.id)),
             1
           );
           this.$toast.add({
@@ -167,12 +171,14 @@ export default {
         });
     },
     updateDescription() {
-      axios.post("http://localhost:8080/trips", this.travel).then((response) =>
-        this.$router.push({
-          name: "travelDetails",
-          params: { id: parseInt(response.data) },
-        })
-      );
+      this.$emit("emit-update-desc", {
+        description: this.description,
+      });
+      this.$toast.add({
+        severity: "success",
+        summary: "Description modifiée",
+        life: 3000,
+      });
     },
   },
 };
