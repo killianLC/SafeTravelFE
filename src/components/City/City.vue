@@ -30,6 +30,7 @@ import GlobalRating from "./rating/GlobalRating.vue";
 import News from "./news/News.vue";
 import Pictures from "./pictures/Pictures.vue";
 import Weather from "./weather/Weather.vue";
+import LineChart from "./statistique/LineChart.vue";
 import axios from "axios";
 
 export default {
@@ -42,6 +43,7 @@ export default {
     News,
     Pictures,
     Weather,
+    LineChart,
   },
   data() {
     return {

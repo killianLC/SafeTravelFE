@@ -1,7 +1,9 @@
 <template>
   <Card>
-    <h5>Basic</h5>
+    
+    <template #content>
     <Chart type="line" :data="basicData" :options="basicOptions" />
+    </template>
   </Card>
 </template>
 <script>
