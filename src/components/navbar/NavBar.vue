@@ -7,7 +7,7 @@
         class="p-button-secondary p-button-text"
     /></router-link>
     <div v-if="this.$store.state.isLogged">
-      <Button type="button" :label="this.username" @click="toggle" />
+      <Button type="button" :label="this.$store.state.username" @click="toggle" />
       <Menu ref="menu" :model="items" :popup="true" />
     </div>
     <div v-else>

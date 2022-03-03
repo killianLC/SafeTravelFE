@@ -89,13 +89,14 @@ export default {
     },
     async login() {
       const isLogged = await AuthService.login(this.user);
-      if(isLogged) {
+      if(isLogged.value) {
         this.$toast.add({
           severity: "success",
           detail: "Connexion réussi!",
           life: 3000,
         });        
         this.$router.push({name:"home"});
+        this.$store.commit('setUsername', isLogged.name);
         this.$store.commit('setIsLogged', true);
       } else {
         this.$toast.add({
