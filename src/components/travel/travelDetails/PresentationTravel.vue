@@ -36,9 +36,9 @@
           <Divider />
           <AvatarGroup>
             <Avatar
-              v-for="user in travel.participants"
-              :label="user.name[0]"
-              :key="user.name"
+              v-for="participant in travel.participants"
+              :label="participant.user.firstname[0]"
+              :key="participant.user"
               shape="circle"
             />
             {{ travel.participants.length }} participants
@@ -68,8 +68,8 @@
       <Button
         label="Rejoindre ce voyage"
         class="btn-join-travel"
-        @click="joinTravel"
-        v-if="!isParticipant"
+        @click="joinTrip"
+        v-if="!isParticipant && !requestSend"
         >Rejoindre ce voyage<i class="pi pi-send"
       /></Button>
     </template>
@@ -103,6 +103,11 @@ export default {
     travel: Object,
     isParticipant: Boolean,
   },
+  data() {
+    return {
+      requestSend: false,
+    };
+  },
   methods: {
     joinTrip() {
       axios
@@ -117,6 +122,7 @@ export default {
             detail: "Vous avez demandé à rejoindre le voyage",
             life: 3000,
           });
+          this.requestSend = true;
         });
     },
   },

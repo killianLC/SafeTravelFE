@@ -1,36 +1,42 @@
 <template>
   <Card>
     <template #title>
-      {{ participants.length }} <i class="pi pi-users" /> participants
+      {{ travel.participants.length }} <i class="pi pi-users" /> participants
     </template>
     <template #content>
       <Listbox
-        v-model="selectedCity"
-        :options="participants"
-        optionLabel="name"
+        :options="travel.participants"
+        optionLabel="user.firstname"
         :filter="true"
       >
         <template #option="slotProps">
           <div class="flex justify-content-between">
             <div class="flex align-items-center">
-              <i v-if="slotProps.option.isAccept" class="pi pi-user"></i>
+              <i v-if="slotProps.option.statut" class="pi pi-user"></i>
               <i v-else class="pi pi-envelope"></i>
-              <span class="ml-2">{{ slotProps.option.name }}</span>
+              <span class="ml-2">{{
+                slotProps.option.user.firstname +
+                " " +
+                slotProps.option.user.lastname
+              }}</span>
             </div>
-            <div v-if="slotProps.option.isAccept">
+            <div v-if="slotProps.option.statut">
               <Button
                 icon="pi pi-times"
                 class="p-button-rounded p-button-danger"
+                @click="refuse(slotProps.option.id)"
               />
             </div>
             <div v-else>
               <Button
                 icon="pi pi-thumbs-up"
                 class="p-button-rounded p-button-primary mr-2"
+                @click="accept(slotProps.option.id)"
               />
               <Button
                 icon="pi pi-thumbs-down"
                 class="p-button-rounded p-button-danger"
+                @click="refuse(slotProps.option.id)"
               />
             </div>
           </div>
@@ -51,6 +57,7 @@ import Card from "primevue/card";
 import Listbox from "primevue/listbox";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import axios from "axios";
 
 export default {
   name: "Participants",
@@ -61,17 +68,21 @@ export default {
     InputText,
   },
   props: {
-    participants: Array,
+    travel: Object,
   },
   data: function () {
     return {
       selectedCity: null,
+      participants: [],
     };
   },
   computed: {
     currentUrl() {
       return location.href;
     },
+  },
+  created() {
+    this.participants = this.travel.participants;
   },
   methods: {
     copyToClipboard() {
@@ -90,6 +101,42 @@ export default {
         detail: "Vous pouvez le partager avec vos amis",
         life: 3000,
       });
+    },
+    accept(id) {
+      axios
+        .post("http://localhost:8080/participants/accept", {
+          tripId: this.travel.id,
+          participantId: id,
+        })
+        .then(() => {
+          const index = this.participants.findIndex(
+            (participant) => participant.id === id
+          );
+          this.participants[index].statut = true;
+          this.$toast.add({
+            severity: "success",
+            detail: "Vous avez accepté la demande",
+            life: 3000,
+          });
+        });
+    },
+    refuse(id) {
+      axios
+        .post("http://localhost:8080/participants/delete", {
+          tripId: this.travel.id,
+          participantId: id,
+        })
+        .then(() => {
+          const index = this.participants.findIndex(
+            (participant) => participant.id === id
+          );
+          this.participants = this.participants.splice(index,1);
+          this.$toast.add({
+            severity: "error",
+            summary: "Vous avez refusé la demande",
+            life: 3000,
+          });
+        });
     },
   },
 };

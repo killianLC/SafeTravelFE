@@ -8,7 +8,7 @@
       <StepsTravel :travel="travel" />
     </div>
     <div class="col-12 md:col-4" v-if="isOrganizer">
-      <Participants :participants="travel.participants" />
+      <Participants :travel="travel" />
     </div>
   </div>
 </template>
