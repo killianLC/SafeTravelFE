@@ -7,11 +7,13 @@
         <template #title>
           <div class="title">
             <span> <i class="pi pi-car" />&nbsp;Mes voyages </span>
-            <Button
-              icon="pi pi-plus"
-              label="Créer un nouveau voyage"
-              class="p-button-rounded"
-            />
+            <router-link to="TravelCreate" class="no-underline">
+              <Button
+                icon="pi pi-plus"
+                label="Créer un nouveau voyage"
+                class="p-button-rounded"
+              />
+            </router-link>
           </div>
         </template>
         <template #content>
