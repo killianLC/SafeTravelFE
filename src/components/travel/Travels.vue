@@ -1,12 +1,12 @@
 <template>
   <div class="grid">
     <div class="col-12"><Breadcrumb :home="home" :model="items" /></div>
-    <div class="col-12">
+    <ProgressSpinner v-if="travelsLoading" />
+    <div class="col-12" v-if="!travelsLoading">
       <Card>
         <template #title> <i class="pi pi-car" />&nbsp;Mes voyages </template>
         <template #content>
           <div class="grid">
-            <ProgressSpinner v-if="travelsLoading" />
             <div
               class="col-12 md:col-6"
               v-for="travel in travels"
