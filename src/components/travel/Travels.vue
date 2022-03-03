@@ -6,6 +6,7 @@
         <template #title> <i class="pi pi-car" />&nbsp;Mes voyages </template>
         <template #content>
           <div class="grid">
+            <ProgressSpinner v-if="travelsLoading" />
             <div
               class="col-12 md:col-6"
               v-for="travel in travels"
@@ -44,6 +45,7 @@ import Card from "primevue/card";
 import TravelItem from "./TravelItem.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import Button from "primevue/button";
+import ProgressSpinner from 'primevue/progressspinner';
 import axios from "axios";
 
 export default {
@@ -53,18 +55,23 @@ export default {
     TravelItem,
     Breadcrumb,
     Button,
+    ProgressSpinner
   },
   data() {
     return {
       travels: [],
       home: { icon: "pi pi-home", to: "/" },
       items: [{ label: "Mes voyages", to: "/travels" }],
+      travelsLoading: true
     };
   },
   created() {
     axios
       .get("http://localhost:8080/trips/user/")
-      .then((response) => (this.travels = response.data));
+      .then((response) => {
+        this.travels = response.data
+        this.travelsLoading = false
+        });
   },
 };
 </script>
