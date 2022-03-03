@@ -35,7 +35,7 @@
           </div>
         </template>
       </Listbox>
-      <div class="p-inputgroup mt-4">
+      <div class="p-inputgroup">
         <AutoComplete
           v-model="cityInput"
           :suggestions="filteredCities"
@@ -50,6 +50,12 @@
         />
         <Button icon="pi pi-plus" label="Ajouter" @click="addStep" />
       </div>
+      <Button
+        icon="pi pi-trash"
+        class="p-button-danger w-full mt-5"
+        label="Supprimer le voyage"
+        @click="deleteTrip"
+      />
     </template>
   </Card>
 </template>
@@ -179,6 +185,20 @@ export default {
         summary: "Description modifiée",
         life: 3000,
       });
+    },
+    deleteTrip() {
+      axios
+        .post("http://localhost:8080/trips/delete/" + this.travel.id)
+        .then(() => {
+          this.$toast.add({
+            severity: "success",
+            summary: "Voyage supprimé",
+            life: 3000,
+          });
+          this.$router.push({
+            name: "travels",
+          });
+        });
     },
   },
 };

@@ -32,8 +32,10 @@
     </template>
     <template #content>
       <span class="text-xl font-bold"
-        >{{ nbAcceptUser }}
-        <i class="pi pi-users" /> participants</span
+        >{{ nbAcceptUser }} <i class="pi pi-users" /> participants
+      </span> | 
+      <span class="text-xl font-bold"
+        >{{ nbRequest }} <i class="pi pi-bell" /> demandes</span
       >
     </template>
     <template #footer>
