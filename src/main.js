@@ -111,15 +111,16 @@ const store = createStore({
   state () {
     return {
       isLogged: false,
-      username: ""
+      user: JSON.parse(sessionStorage.getItem("user"))
     }
   },
   mutations: {
     setIsLogged (state, isLogged) {
       state.isLogged = isLogged;
-    },
-    setUsername (state, name) {
-      state.username = name;
+      if(!isLogged)state.user = null;
+      else{
+        state.user = JSON.parse(sessionStorage.getItem("user"));
+      }
     }
   }
 })

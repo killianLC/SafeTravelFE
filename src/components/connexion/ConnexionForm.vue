@@ -4,25 +4,29 @@
       <div class="field col-12 md:col-12">
         <InputText
           class="inputfield w-full"
-          :class="{ 'p-invalid': v$.user.email.$invalid && submitted }"        
+          :class="{ 'p-invalid': v$.user.email.$invalid && submitted }"
           id="email"
           v-model="user.email"
           type="email"
           placeholder="Email"
         />
-        <small v-if="v$.user.email.$invalid && submitted" class="p-error">Veuillez entrer un email.</small>
+        <small v-if="v$.user.email.$invalid && submitted" class="p-error"
+          >Veuillez entrer un email.</small
+        >
       </div>
 
       <div class="field col-12 md:col-12">
         <InputText
           class="inputfield w-full"
-          :class="{ 'p-invalid': v$.user.password.$invalid && submitted }"  
+          :class="{ 'p-invalid': v$.user.password.$invalid && submitted }"
           id="password"
           v-model="user.password"
           type="password"
           placeholder="Mot de passe"
         />
-        <small v-if="v$.user.password.$invalid && submitted" class="p-error">Veuillez entrer un mot de passe.</small>
+        <small v-if="v$.user.password.$invalid && submitted" class="p-error"
+          >Veuillez entrer un mot de passe.</small
+        >
       </div>
       <Button
         icon="pi pi-check"
@@ -89,15 +93,17 @@ export default {
     },
     async login() {
       const isLogged = await AuthService.login(this.user);
-      if(isLogged.value) {
+      if (isLogged.value) {
         this.$toast.add({
           severity: "success",
           summary: "Connexion réussie",
           life: 3000,
         });
-        this.$store.commit('setUsername', isLogged.name);
-        this.$store.commit('setIsLogged', true);
-        location.reload();
+        this.$store.commit("setUsername", isLogged.name);
+        this.$store.commit("setIsLogged", true);
+        this.$router.push({
+          name: "home",
+        });
       } else {
         this.$toast.add({
           severity: "error",

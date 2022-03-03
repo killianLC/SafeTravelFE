@@ -6,8 +6,8 @@
         icon="pi pi-briefcase"
         class="p-button-secondary p-button-text"
     /></router-link>
-    <div v-if="this.user">
-      <Button id="connected" type="button" :label="this.user.firstname" @click="toggle" />
+    <div v-if="this.$store.state.user">
+      <Button id="connected" type="button" :label="this.$store.state.user.firstname" @click="toggle" />
       <Menu ref="menu" :model="items" :popup="true" />
     </div>
     <div v-else>
@@ -53,7 +53,6 @@ export default {
           to: "/logout",
         },
       ],
-      user: JSON.parse(sessionStorage.getItem("user")),
     };
   },
   methods: {

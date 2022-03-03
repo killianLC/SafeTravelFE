@@ -75,9 +75,9 @@ export default {
   data() {
     return {
       user: {
-        firstname: "",
-        lastname: "",
-        email: JSON.parse(sessionStorage.getItem("user")).email,
+        firstname: this.$store.state.user.firstname,
+        lastname: this.$store.state.user.lastname,
+        email: this.$store.state.user.email,
       },
       submitted: false,
     };
