@@ -69,9 +69,13 @@ export default {
   },
   methods: {
     isOwner() {
-      let idUser = JSON.parse(sessionStorage.getItem("user")).id;
-      console.log(this.comment.user.id === idUser);
-      if(this.comment.user.id === idUser) { return true; } else { return false; }
+      if(sessionStorage.getItem("user")) {
+        let idUser = JSON.parse(sessionStorage.getItem("user")).id;
+        if(this.comment.user.id === idUser) { return true; } else { return false; }
+      } else {
+        return false;
+      }
+
     },
     updateComment() {
       // TODO OUVRIR MODAL ?

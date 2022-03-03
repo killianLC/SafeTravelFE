@@ -3,6 +3,7 @@
     <template #title>
       <div><i class="pi pi-building" /> {{ city.name }}</div>
       <Button
+        v-if="this.$store.state.isLogged"
         :icon="isFavCity ? 'pi pi-heart-fill' : 'pi pi-heart'"
         class="p-button-rounded text-danger-900 p-button-outlined btn-fav"
         @click="addRemoveCityFav(city)"
@@ -87,11 +88,13 @@ export default {
       }
     },
     isFavorite() {
-      axios
-        .get("http://localhost:8080/cities/favoris/isFav/" + this.city.id)
-        .then((res) => {
-          this.isFavCity = res.data;
-        });
+      if(sessionStorage.getItem("user")) {
+        axios
+          .get("http://localhost:8080/cities/favoris/isFav/" + this.city.id)
+          .then((res) => {
+            this.isFavCity = res.data;
+          });
+      }
     },
   },
 };

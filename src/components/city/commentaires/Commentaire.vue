@@ -85,8 +85,12 @@ export default {
   },
   computed: {
     haveComment(){
-      let id = JSON.parse(sessionStorage.getItem("user")).id;
-      return this.comments.find(comment => comment.user.id == id);
+      if(sessionStorage.getItem("user")) {
+        let id = JSON.parse(sessionStorage.getItem("user")).id;
+        return this.comments.find(comment => comment.user.id == id);
+      } else {
+        return true;
+      }
     }
   }
 };

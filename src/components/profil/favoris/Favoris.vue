@@ -49,7 +49,6 @@ export default {
         if(user.data.citiesFavoris){
           user.data.citiesFavoris.forEach((c) => this.cities.push(c));
         }
-        console.log(user.data.citiesFavoris)
       });
     },
     deleteCityFromCities(cityDeleted){
