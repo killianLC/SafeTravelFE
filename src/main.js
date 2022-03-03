@@ -127,7 +127,7 @@ const store = createStore({
 const app = createApp(App);
 
 app.use(router);
-app.use(store)
+app.use(store);
 app.use(PrimeVue);
 app.use(ToastService);
 app.use(ConfirmationService);

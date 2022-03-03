@@ -14,6 +14,7 @@
       <Pictures :name="city.name" />
     </div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
+    <div class="col-12 md:col-6 lg:col-8"><LineChart/></div>
 
     <div class="col-12 md:col-12"> 
       <Commentaire :city="city" :v-if="city.comments?.length > 0"/>
