@@ -53,8 +53,14 @@ export default {
           to: "/logout",
         },
       ],
-      username: JSON.parse(sessionStorage.getItem("user")).firstname
+      username: "",
     };
+  },
+  created() {
+    const user = sessionStorage.getItem("user");
+    if (user) {
+      this.username = JSON.parse(sessionStorage.getItem("user")).firstname;
+    }
   },
   methods: {
     toggle(event) {
