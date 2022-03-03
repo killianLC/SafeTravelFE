@@ -75,9 +75,14 @@ export default {
       } else {
         axios
           .post("http://localhost:8080/comments", comment)
-          .then(() => location.reload());
+          .then((response) => this.emmitAddComment(response.data));
       }
     },
+    emmitAddComment(comment) {
+      this.$emit('emit-add-comment',{
+        commentAdded: comment
+      })
+    }
   },
 };
 </script>

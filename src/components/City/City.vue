@@ -16,8 +16,8 @@
     <div class="col-12 md:col-6 lg:col-4"><Health :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
 
-    <div class="col-12 md:col-12">
-      <Commentaire :city="city" />
+    <div class="col-12 md:col-12"> 
+      <Commentaire :city="city" :v-if="city.comments?.length > 0"/>
     </div>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      city: { name: this.$route.params.name, imageMap: "test" },
+      city: { name: this.$route.params.name, comments:[], imageMap: "" },
     };
   },
   created() {

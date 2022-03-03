@@ -7,22 +7,22 @@
         <Avatar
           :label="getAvatar(comment.user)"
           shape="circle"
-          v-for="comment in city.comments"
+          v-for="comment in comments"
           :key="comment.id"
         />
       </AvatarGroup>
     </template>
     <template #content>
       <div class="grid">
-        <div
+        <div         
           class="col-12 md:col-6 lg:col-4"
-          v-for="comment in city.comments"
+          v-for="comment in comments"
           :key="comment.id"
         >
           <Message :comment="comment" />
         </div>
         <div class="col-12 md:col-6 lg:col-4">
-          <CommentaireForm :city="city" />
+          <CommentaireForm :city="city" @emit-add-comment="receiptComment" />
         </div>
       </div>
     </template>
@@ -45,6 +45,11 @@ export default {
     AvatarGroup,
     CommentaireForm,
   },
+  data() {
+    return {
+      comments: this.city.comments,
+    }
+  },
   props: {
     city: Object,
   },
@@ -52,6 +57,9 @@ export default {
     getAvatar(user) {
       return user.firstname[0].toUpperCase();
     },
+    receiptComment(comment) {
+      this.comments.push(comment);  
+    }
   },
 };
 </script>
