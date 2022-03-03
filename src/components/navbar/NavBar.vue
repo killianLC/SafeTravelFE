@@ -69,7 +69,8 @@ export default {
   },
   computed: {
     isLogged() {
-      return this.$store.state.isLogged;
+      if(JSON.parse(sessionStorage.getItem("user")))return true;
+      else return false;
     },
   },
 };

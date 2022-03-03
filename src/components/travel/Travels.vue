@@ -64,7 +64,7 @@ export default {
   created() {
     let id = JSON.parse(sessionStorage.getItem("user")).id;
     axios
-      .get("http://localhost:8080/trips/user/" + id)
+      .get("http://localhost:8080/trips/user/")
       .then((response) => (this.travels = response.data));
   },
 };

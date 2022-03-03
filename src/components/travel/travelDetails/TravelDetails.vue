@@ -3,7 +3,7 @@
     <div class="col-12">
       <Breadcrumb :home="home" :model="items" />
     </div>
-    <div class="col-12 md:col-12"><PresentationTravel :travel="travel" :isParticipant="isParticipant" /></div>
+    <div class="col-12 md:col-12"><PresentationTravel :travel="travel" :isParticipant="isParticipant" :isOrganizer="isOrganizer"  /></div>
     <div class="col-12 md:col-8" v-if="isOrganizer">
       <StepsTravel :travel="travel" />
     </div>

@@ -35,13 +35,14 @@
           {{ travel.description }}
           <Divider />
           <AvatarGroup>
-            <Avatar
-              v-for="participant in travel.participants"
-              :label="participant.user.firstname[0]"
-              :key="participant.user"
-              shape="circle"
-            />
-            {{ travel.participants.length }} participants
+            <div v-for="participant in travel.participants" :key="participant">
+              <Avatar
+                v-if="participant.statut"
+                :label="participant.user.firstname[0]"
+                shape="circle"
+              />
+            </div>
+            {{ nbAcceptUser }} participants | {{ nbRequest }} demandes
           </AvatarGroup>
         </div>
         <div class="col-12 lg:col-8">
@@ -69,8 +70,15 @@
         label="Rejoindre ce voyage"
         class="btn-join-travel"
         @click="joinTrip"
-        v-if="!isParticipant && !requestSend"
+        v-if="!isOrganizer && !isParticipant && !requestSend"
         >Rejoindre ce voyage<i class="pi pi-send"
+      /></Button>
+      <Button
+        label="Demande envoyée"
+        class="btn-join-travel"
+        v-if="requestSend"
+        disabled
+        >Demande envoyée<i class="pi pi-send"
       /></Button>
     </template>
   </Card>
@@ -101,6 +109,7 @@ export default {
   },
   props: {
     travel: Object,
+    isOrganizer: Boolean,
     isParticipant: Boolean,
   },
   data() {
@@ -135,6 +144,16 @@ export default {
       if (this.travel.steps)
         return this.travel.steps[this.travel.steps.length - 1];
       else return { city: { name: "..." }, date: "" };
+    },
+    nbAcceptUser() {
+      return this.travel.participants.filter(
+        (participant) => participant.statut
+      ).length;
+    },
+    nbRequest() {
+      return this.travel.participants.filter(
+        (participant) => participant.statut == false
+      ).length;
     },
   },
 };
