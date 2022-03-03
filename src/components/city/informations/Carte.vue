@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     openGoogleMaps() {
-      window.open("https://www.google.fr/maps/place/" + this.name);
+      window.open("https://www.google.fr/maps/place/" + this.$route.params.name);
     },
   },
 };
