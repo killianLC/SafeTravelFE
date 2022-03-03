@@ -19,7 +19,7 @@
           v-for="comment in comments"
           :key="comment.id"
         >
-          <Message :comment="comment" />
+          <Message :comment="comment" @emit-remove-comment="removeComment"/>
         </div>
         <div class="col-12 md:col-6 lg:col-4">
           <CommentaireForm
@@ -68,10 +68,19 @@ export default {
       return user.firstname[0].toUpperCase();
     },
     sendComment(payload) {
-      console.log(payload.comment);
       axios
         .post("http://localhost:8080/comments", payload.comment)
-        .then(this.comments.push(payload.comment));
+        .then((response) => {
+          payload.comment.id = response.data.id;
+          this.comments.push(payload.comment);
+        });
+    },
+    removeComment(comment) {
+      for (var i = this.comments.length - 1; i >= 0; i--) {
+        if (this.comments[i] === comment) {
+          this.comments.splice(i, 1);
+        }
+      }
     },
   },
   computed: {

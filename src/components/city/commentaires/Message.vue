@@ -1,13 +1,28 @@
 <template>
   <Card class="bg-primary">
-    <template #title
-      ><Rating
+    <template #title>
+      <Rating
         class="ml-auto"
         :modelValue="comment.rating"
         :stars="5"
         :cancel="false"
         disabled
-    /></template>
+      />
+
+      <Button
+        v-if="this.isOwner()"
+        @click="updateComment"
+        icon="pi pi-pencil"
+        class="p-button-rounded p-button-outlined"
+      />
+
+      <Button
+        v-if="this.isOwner()"
+        @click="deleteComment"
+        icon="pi pi-times"
+        class="p-button-rounded p-button-outlined"
+      />
+    </template>
     <template #content>
       {{ comment.description }}
     </template>
@@ -31,6 +46,8 @@ import Card from "primevue/card";
 import Avatar from "primevue/avatar";
 import Tag from "primevue/tag";
 import Rating from "primevue/rating";
+import Button from "primevue/button";
+import axios from "axios";
 
 export default {
   name: "Message",
@@ -39,6 +56,7 @@ export default {
     Avatar,
     Tag,
     Rating,
+    Button
   },
   props: {
     comment: Object,
@@ -47,6 +65,21 @@ export default {
     fomartedDate() {
       const date = new Date(this.comment.date);
       return date.toLocaleDateString("fr-FR");
+    },
+  },
+  methods: {
+    isOwner() {
+      let idUser = JSON.parse(sessionStorage.getItem("user")).id;
+      console.log(this.comment.user.id === idUser);
+      if(this.comment.user.id === idUser) { return true; } else { return false; }
+    },
+    updateComment() {
+      // TODO OUVRIR MODAL ?
+    },
+    deleteComment() {
+      axios.post("http://localhost:8080/comments/" + this.comment.id).then(() => {
+        this.$emit("emit-remove-comment", this.comment);       
+      });
     },
   },
 };
@@ -64,5 +97,9 @@ export default {
 
 .p-card :deep(.p-card-content) {
   padding: 0;
+}
+
+.p-button.p-button-outlined {
+    color: #000000;
 }
 </style>
