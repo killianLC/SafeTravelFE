@@ -94,10 +94,10 @@ export default {
           severity: "success",
           summary: "Connexion réussie",
           life: 3000,
-        });        
-        this.$router.push({name:"home"});
+        });
         this.$store.commit('setUsername', isLogged.name);
         this.$store.commit('setIsLogged', true);
+        location.reload();
       } else {
         this.$toast.add({
           severity: "error",

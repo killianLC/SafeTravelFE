@@ -7,7 +7,7 @@
         class="p-button-secondary p-button-text"
     /></router-link>
     <div v-if="this.user">
-      <Button type="button" :label="this.user.firstname" @click="toggle" />
+      <Button id="connected" type="button" :label="this.user.firstname" @click="toggle" />
       <Menu ref="menu" :model="items" :popup="true" />
     </div>
     <div v-else>

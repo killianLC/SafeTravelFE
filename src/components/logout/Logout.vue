@@ -11,6 +11,7 @@ export default {
             AuthService.logout();
             this.$router.push({name: "home"});
             this.$store.commit('setIsLogged', false);
+            if(document.getElementById("connected"))location.reload();
         }
     }  
 };

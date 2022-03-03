@@ -19,12 +19,18 @@ export default {
     Card,
     ConnexionForm,
   },
+  created() {
+    if (sessionStorage.getItem("user"))
+      this.$router.push({
+        name: "home",
+      });
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.p-card{
+.p-card {
   max-width: 600px;
 }
 </style>
