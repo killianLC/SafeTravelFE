@@ -3,7 +3,7 @@
     <template #title>
       <div><i class="pi pi-building" /> {{ city.name }}</div>
       <Button
-        v-if="this.$store.state.isLogged"
+        v-if="logged"
         :icon="isFavCity ? 'pi pi-heart-fill' : 'pi pi-heart'"
         class="p-button-rounded text-danger-900 p-button-outlined btn-fav"
         @click="addRemoveCityFav(city)"
@@ -53,6 +53,7 @@ export default {
   data: function () {
     return {
       isFavCity: false,
+      logged: JSON.parse(sessionStorage.getItem("user"))
     };
   },
   mounted() {

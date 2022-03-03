@@ -6,8 +6,8 @@
         icon="pi pi-briefcase"
         class="p-button-secondary p-button-text"
     /></router-link>
-    <div v-if="this.$store.state.isLogged">
-      <Button type="button" :label="this.$store.state.username" @click="toggle" />
+    <div v-if="this.user">
+      <Button type="button" :label="this.user.firstname" @click="toggle" />
       <Menu ref="menu" :model="items" :popup="true" />
     </div>
     <div v-else>
@@ -53,14 +53,8 @@ export default {
           to: "/logout",
         },
       ],
-      username: "",
+      user: JSON.parse(sessionStorage.getItem("user")),
     };
-  },
-  created() {
-    const user = sessionStorage.getItem("user");
-    if (user) {
-      this.username = JSON.parse(sessionStorage.getItem("user")).firstname;
-    }
   },
   methods: {
     toggle(event) {
@@ -72,7 +66,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.navbar{
+.navbar {
   background-color: #f5f5f5;
   padding: 0.5rem;
 }

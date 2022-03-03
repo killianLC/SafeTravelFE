@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <template #title> Modifier les étapes du voyages </template>
+    <template #title> Modifier le voyage </template>
     <template #content>
       <span class="p-float-label mt-2">
         <Textarea v-model="description" class="w-full" rows="3" cols="30" />

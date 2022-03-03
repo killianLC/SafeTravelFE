@@ -32,6 +32,12 @@ export default {
       items: [{ label: "Mon profil", to: "/profil" }],
     };
   },
+  created() {
+    if (!sessionStorage.getItem("user"))
+      this.$router.push({
+        name: "connexion",
+      });
+  },
 };
 </script>
 

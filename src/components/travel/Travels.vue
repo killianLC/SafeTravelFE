@@ -4,7 +4,16 @@
     <ProgressSpinner v-if="travelsLoading" />
     <div class="col-12" v-if="!travelsLoading">
       <Card>
-        <template #title> <i class="pi pi-car" />&nbsp;Mes voyages </template>
+        <template #title>
+          <div class="title">
+            <span> <i class="pi pi-car" />&nbsp;Mes voyages </span>
+            <Button
+              icon="pi pi-plus"
+              label="Créer un nouveau voyage"
+              class="p-button-rounded"
+            />
+          </div>
+        </template>
         <template #content>
           <div class="grid">
             <div
@@ -14,27 +23,8 @@
             >
               <TravelItem :travel="travel" />
             </div>
-            <div class="col-12 md:col-6">
-              <Card class="bg-primary">
-                <template #title>&ensp;</template>
-                <template #content>
-                  <router-link to="TravelCreate" class="no-underline">
-                    <Button
-                      icon="pi pi-plus"
-                      label="Créer un nouveau voyage"
-                      class="
-                        text-primary
-                        bg-dark
-                        w-full
-                        p-button-rounded
-                      " /></router-link
-                ></template>
-                <template #footer>&ensp;</template>
-              </Card>
-            </div>
           </div>
         </template>
-        <template #footer> </template>
       </Card>
     </div>
   </div>
@@ -66,6 +56,11 @@ export default {
     };
   },
   created() {
+    if (!sessionStorage.getItem("user"))
+      this.$router.push({
+        name: "connexion",
+      });
+
     axios.get("http://localhost:8080/trips/user/").then((response) => {
       this.travels = response.data;
       this.travelsLoading = false;
@@ -76,5 +71,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.title {
+  display: flex;
+  justify-content: space-between;
+}
 </style>
 

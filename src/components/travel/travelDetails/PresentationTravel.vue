@@ -54,7 +54,7 @@
             <div v-for="participant in travel.participants" :key="participant">
               <Avatar
                 v-if="participant.statut"
-                :label="participant.user.firstname[0]"
+                :label="participant.user.firstname[0].toUpperCase()"
                 shape="circle"
               />
             </div>
