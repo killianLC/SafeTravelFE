@@ -1,5 +1,5 @@
 <template>
-  <Card class="bg-primary mt-2">
+  <Card class="bg-primary">
     <template #title>Poster votre commentaire</template>
     <template #content>
       <div class="formgrid grid">
@@ -79,5 +79,10 @@ export default {
 }
 .p-card :deep(.pi-star-fill) {
   color: white !important;
+}
+
+.p-card{
+  margin: 2rem auto;
+  max-width: 800px;
 }
 </style>
