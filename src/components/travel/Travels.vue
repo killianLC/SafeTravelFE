@@ -63,9 +63,26 @@ export default {
         name: "connexion",
       });
 
-    axios.get("http://localhost:8080/trips/user/").then((response) => {
-      this.travels = response.data;
-      this.travelsLoading = false;
+    axios.get("http://localhost:8080/trips/user").then((response) => {
+      this.travels =response.data;
+      axios
+        .get(
+          "http://localhost:8080/participants/user/" +
+            this.$store.state.user.id +
+            "/trips"
+        )
+        .then((response) => {
+          response.data.forEach((element, idx, array) => {
+            axios
+              .get("http://localhost:8080/trips/" + element.id)
+              .then((response) => {
+                this.travels.push(response.data);
+                if (idx == array.length - 1) {
+                  this.travelsLoading = false;
+                }
+              });
+          });
+        });
     });
   },
 };

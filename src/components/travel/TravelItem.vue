@@ -1,5 +1,5 @@
 <template>
-  <Card class="bg-primary">
+  <Card :class="[isOrganizer ? 'bg-primary' : '','border-1']">
     <template #title>
       <div class="flex justify-content-between">
         <div>
@@ -33,7 +33,8 @@
     <template #content>
       <span class="text-xl font-bold"
         >{{ nbAcceptUser }} <i class="pi pi-users" /> participants
-      </span> | 
+      </span>
+      |
       <span class="text-xl font-bold"
         >{{ nbRequest }} <i class="pi pi-bell" /> demandes</span
       >
@@ -45,7 +46,7 @@
       >
         <Button
           icon="pi pi-eye"
-          label="Consulter"
+          :label="isOrganizer ? 'Consulter / Modifier' : 'Consulter'"
           class="text-primary bg-dark w-full p-button-rounded"
       /></router-link>
     </template>
@@ -88,6 +89,9 @@ export default {
       return this.travel.participants.filter(
         (participant) => participant.statut == false
       ).length;
+    },
+    isOrganizer() {
+      return this.$store.state.user.id == this.travel.organisateur.id;
     },
   },
 };

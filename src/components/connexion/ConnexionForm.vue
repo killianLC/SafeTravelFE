@@ -99,7 +99,6 @@ export default {
           summary: "Connexion réussie",
           life: 3000,
         });
-        this.$store.commit("setUsername", isLogged.name);
         this.$store.commit("setIsLogged", true);
         this.$router.push({
           name: "home",
