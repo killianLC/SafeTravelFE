@@ -1,26 +1,18 @@
 <template>
   <Card class="bg-primary">
     <template #title>
+      <Button
+        v-if="this.isOwner()"
+        @click="updateComment"
+        icon="pi pi-pencil"
+        class="p-button-rounded p-button-outlined p-button-secondary"
+      />
       <Rating
         class="ml-auto"
         :modelValue="comment.rating"
         :stars="5"
         :cancel="false"
         disabled
-      />
-
-      <Button
-        v-if="this.isOwner()"
-        @click="updateComment"
-        icon="pi pi-pencil"
-        class="p-button-rounded p-button-outlined"
-      />
-
-      <Button
-        v-if="this.isOwner()"
-        @click="deleteComment"
-        icon="pi pi-times"
-        class="p-button-rounded p-button-outlined"
       />
     </template>
     <template #content>
@@ -47,7 +39,6 @@ import Avatar from "primevue/avatar";
 import Tag from "primevue/tag";
 import Rating from "primevue/rating";
 import Button from "primevue/button";
-import axios from "axios";
 
 export default {
   name: "Message",
@@ -56,7 +47,7 @@ export default {
     Avatar,
     Tag,
     Rating,
-    Button
+    Button,
   },
   props: {
     comment: Object,
@@ -69,21 +60,19 @@ export default {
   },
   methods: {
     isOwner() {
-      if(sessionStorage.getItem("user")) {
+      if (sessionStorage.getItem("user")) {
         let idUser = JSON.parse(sessionStorage.getItem("user")).id;
-        if(this.comment.user.id === idUser) { return true; } else { return false; }
+        if (this.comment.user.id === idUser) {
+          return true;
+        } else {
+          return false;
+        }
       } else {
         return false;
       }
-
     },
     updateComment() {
-      // TODO OUVRIR MODAL ?
-    },
-    deleteComment() {
-      axios.post("http://localhost:8080/comments/" + this.comment.id).then(() => {
-        this.$emit("emit-remove-comment", this.comment);       
-      });
+      this.$emit("emit-edit-comment", this.comment);
     },
   },
 };
@@ -104,6 +93,6 @@ export default {
 }
 
 .p-button.p-button-outlined {
-    color: #000000;
+  color: #000000;
 }
 </style>
