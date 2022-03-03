@@ -14,6 +14,7 @@
           <i class="pi pi-map-marker" /> : <Flag :country="city.country" /> France
         </li>
         <li><i class="pi pi-users" /> : {{ city.population }} habitants</li>
+        <li><i class="pi pi-compass" /> : Région {{ city.region }} - Département {{ city.departement }}</li>
       </ul>
     </template>
     <template #footer>
@@ -62,7 +63,6 @@ export default {
     isFavorite(){
        axios.get("http://localhost:8080/cities/favoris/isFav/"+this.city.id).then((res) => {
          this.isFavCity = res.data
-         console.log(res.data)
        });
     }
   },

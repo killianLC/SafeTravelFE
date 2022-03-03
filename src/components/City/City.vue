@@ -84,6 +84,8 @@ export default {
               )
               .then((response) => {
                 this.city.population = response.data[0].population;
+                this.city.region = response.data[0].codeRegion;
+                this.city.departement = response.data[0].codeDepartement;
               });
 
             axios
