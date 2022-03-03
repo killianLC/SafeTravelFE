@@ -14,7 +14,7 @@
       <Pictures :name="city.name" />
     </div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
-    <div class="col-12 md:col-6 lg:col-8"><LineChart/></div>
+    <div class="col-12 md:col-6 lg:col-8"><LineChart :x-option="dateDataSets" y-axe-name="Notes attribués" :data-set-rating="dataSetsRating" :data-set-meteo="dataSetsMeteo" x-axe-name="Date des dernières notes" /></div>
 
     <div class="col-12 md:col-12"> 
       <Commentaire :city="city" :v-if="city.comments?.length > 0"/>
@@ -48,9 +48,36 @@ export default {
   data() {
     return {
       city: { name: this.$route.params.name, comments:[], imageMap: "" },
+      dataSetsMeteo:[],
+      dataSetsRating:[],
+      dateDataSets:[]
     };
   },
+  methods:{
+    getCriterias(){
+      axios
+          .get("http://localhost:8080/public/city/" + this.$route.params.name+"/notes")
+          .then((response) => {
+            if(response.data.meteo?.length > 6){
+              response.data.meteo.splice(response.data.meteo.length-7,response.data.meteo.length)
+                  .forEach((m) => this.dateDataSets.push(m.date));
+            }else{
+              response.data.meteo?.forEach((m) => this.dateDataSets.push(m.date));
+            }
+
+            response.data.meteo?.forEach((m) => {
+              this.dataSetsMeteo.push(m.note)
+            })
+
+            response.data.ratings?.forEach((r) => {
+              this.dataSetsRating.push(r.note)
+            })
+          })
+          .catch(()=>console.log("Criteria not found"))
+    }
+  },
   created() {
+    this.getCriterias(),
     axios
       .get("http://localhost:8080/public/city/" + this.$route.params.name)
       .then((response) => {

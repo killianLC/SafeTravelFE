@@ -1,6 +1,5 @@
 <template>
   <Card>
-    
     <template #content>
     <Chart type="line" :data="basicData" :options="basicOptions" />
     </template>
@@ -11,24 +10,45 @@ import Card from "primevue/card";
 import Chart from "primevue/chart";
 
 export default {
-
+    props:{
+      xAxeName:{
+        type: String,
+        required: true
+      },
+      yAxeName:{
+        type: String,
+        required: true
+      },
+      xOption: {
+        type: [],
+        required: true
+      },
+      dataSetRating: {
+        type: [],
+        required: true
+      },
+      dataSetMeteo: {
+        type: [],
+        required: true
+      },
+    },
   name: "LineChart",
   components:{Card,Chart},
   data() {
     return {
       basicData: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: this.xOption,
         datasets: [
           {
-            label: 'First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
+            label: 'Note utilisateur',
+            data: this.dataSetRating,
             fill: false,
             borderColor: '#42A5F5',
             tension: .4
           },
           {
-            label: 'Second Dataset',
-            data: [28, 48, 40, 19, 86, 27, 90],
+            label: 'Note météo',
+            data: this.dataSetMeteo,
             fill: false,
             borderColor: '#FFA726',
             tension: .4
