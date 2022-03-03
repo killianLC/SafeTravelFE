@@ -115,9 +115,7 @@ export default {
 
             axios
               .get(
-                "http://localhost:8080/public/city/average/" +
-                  this.$route.params.name
-              )
+                "http://localhost:8080/public/city/"+ this.$route.params.name + "/average/")
               .then((response) => {
                 response.data.rating_average = Math.round(response.data.rating_average * 100) / 100;
                 this.city.average = response.data.rating_average;
