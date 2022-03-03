@@ -167,7 +167,8 @@ export default {
       if (isRegister) {
         this.$toast.add({
           severity: "success",
-          detail: "Inscription réussi! Vous pouvez maintenant vous connecter.",
+          summary: "Inscription réussi",
+          detail: "Vous pouvez maintenant vous connecter.",
           life: 3000,
         });
       } else {

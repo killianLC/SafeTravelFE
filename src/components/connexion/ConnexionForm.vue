@@ -92,7 +92,7 @@ export default {
       if(isLogged.value) {
         this.$toast.add({
           severity: "success",
-          detail: "Connexion réussi!",
+          summary: "Connexion réussie",
           life: 3000,
         });        
         this.$router.push({name:"home"});
