@@ -39,11 +39,15 @@ export default {
       text: "",
       rating: 0,
       comments: [],
+      cityData: {}
     };
+  },
+  mounted() {
+    this.cityData = this.city
   },
   methods: {
     sendComment() {
-      this.comments = this.city.comments;
+      this.comments = this.cityData.comments;
 
       let idUser = JSON.parse(sessionStorage.getItem("user")).id;
       let comment = {
@@ -54,12 +58,12 @@ export default {
           id: idUser,
         },
         city: {
-          id: this.city.id,
+          id: this.cityData.id,
         },
       };
 
       let isFind = false
-      this.comments.forEach((comment) => {
+      this.comments?.forEach((comment) => {
         if(comment.user.id === idUser) {
           isFind = true;
         }
@@ -75,13 +79,11 @@ export default {
       } else {
         axios
           .post("http://localhost:8080/comments", comment)
-          .then((response) => this.emmitAddComment(response.data));
+          .then(() => this.emmitAddComment());
       }
     },
-    emmitAddComment(comment) {
-      this.$emit('emit-add-comment',{
-        commentAdded: comment
-      })
+    emmitAddComment() {
+      this.$emit('emit-add-comment')
     }
   },
 };
