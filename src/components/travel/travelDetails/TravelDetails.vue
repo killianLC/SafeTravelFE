@@ -62,6 +62,11 @@ export default {
           .catch(() => {
             this.isParticipant = true;
           });
+      })
+      .catch(() => {
+        this.$router.push({
+          name: "travels"
+        });
       });
   },
   methods: {

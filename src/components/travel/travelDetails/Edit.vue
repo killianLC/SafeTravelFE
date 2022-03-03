@@ -54,8 +54,9 @@
         icon="pi pi-trash"
         class="p-button-danger w-full mt-5"
         label="Supprimer le voyage"
-        @click="deleteTrip"
+        @click="showDialogDeleteTrip"
       />
+      <ConfirmDialog></ConfirmDialog>
     </template>
   </Card>
 </template>
@@ -70,6 +71,7 @@ import Divider from "primevue/divider";
 import Listbox from "primevue/listbox";
 import Flag from "../../Flag.vue";
 import axios from "axios";
+import ConfirmDialog from "primevue/confirmdialog";
 
 export default {
   name: "Edit",
@@ -82,6 +84,7 @@ export default {
     Divider,
     Listbox,
     Flag,
+    ConfirmDialog,
   },
   created() {
     this.steps = this.travel.steps;
@@ -186,19 +189,31 @@ export default {
         life: 3000,
       });
     },
-    deleteTrip() {
-      axios
-        .post("http://localhost:8080/trips/delete/" + this.travel.id)
-        .then(() => {
-          this.$toast.add({
-            severity: "success",
-            summary: "Voyage supprimé",
-            life: 3000,
-          });
-          this.$router.push({
-            name: "travels",
-          });
-        });
+    showDialogDeleteTrip() {
+      this.$confirm.require({
+        message: "Etes-vous sûr de vouloir supprimer ce voyage ?",
+        header: "Suppression voyage",
+        icon: "pi pi-exclamation-triangle",
+        acceptLabel : "Confirmer",
+        rejectLabel: "Annuler",
+        accept: () => {
+          axios
+            .post("http://localhost:8080/trips/delete/" + this.travel.id)
+            .then(() => {
+              this.$toast.add({
+                severity: "success",
+                summary: "Voyage supprimé",
+                life: 3000,
+              });
+              this.$router.push({
+                name: "travels",
+              });
+            });
+        },
+        reject: () => {
+          this.$confirm.close();
+        },
+      });
     },
   },
 };

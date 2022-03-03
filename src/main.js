@@ -5,6 +5,7 @@ import PrimeVue from 'primevue/config'
 import { createWebHashHistory, createRouter } from 'vue-router'
 import axios from 'axios';
 import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
 
 import 'primevue/resources/themes/saga-orange/theme.css'     //theme
 import 'primevue/resources/primevue.min.css'                 //core css
@@ -125,5 +126,6 @@ app.use(router);
 app.use(store)
 app.use(PrimeVue);
 app.use(ToastService);
+app.use(ConfirmationService);
 
 app.mount('#app');

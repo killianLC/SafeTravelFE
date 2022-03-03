@@ -3,19 +3,32 @@
     <template #title>
       <div class="flex justify-content-between">
         <div class="text-dark">
-          <i class="pi pi-ticket" />&nbsp;
-          <Flag />
-          {{ firstStep.city.name }}
-          &nbsp;<i class="pi pi-caret-right" />&nbsp;
-          <span v-if="travel.steps.length > 2">
-            {{ travel.steps.length - 2 }} etapes &nbsp;
-            <i class="pi pi-caret-right" />&nbsp;</span
+          <router-link
+            v-if="this.firstStep"
+            :to="{ name: 'city', params: { name: this.firstStep.city.name } }"
+            class="no-underline text-dark"
           >
-          <Flag />
-          {{ lastStep.city.name }}
+            <i class="pi pi-ticket" />&nbsp;
+            <Flag />
+            {{ firstStep.city.name }}
+          </router-link>
+          <router-link
+            v-if="this.lastStep"
+            :to="{ name: 'city', params: { name: this.lastStep.city.name } }"
+            class="no-underline text-dark"
+          >
+            &nbsp;<i class="pi pi-caret-right" />&nbsp;
+            <span v-if="travel.steps.length > 2">
+              {{ travel.steps.length - 2 }} etapes &nbsp;
+              <i class="pi pi-caret-right" />&nbsp;</span
+            >
+            <Flag />
+            {{ lastStep.city.name }}
+          </router-link>
         </div>
         <div>
           <Tag
+            v-if="this.firstStep"
             :value="firstStep.date"
             icon="pi pi-calendar"
             rounded
@@ -23,6 +36,7 @@
           ></Tag>
           &nbsp;<i class="pi pi-caret-right" />&nbsp;
           <Tag
+            v-if="this.lastStep"
             :value="lastStep.date"
             icon="pi pi-calendar"
             rounded
