@@ -59,7 +59,7 @@ export default {
     city: Object,
   },
   created() {
-    axios.get("http://localhost:8080/cities/" + this.city.name).then((res) => {
+    axios.get("http://localhost:8080/public/city/" + this.city.name).then((res) => {
       this.comments = res.data.comments;
     });
   },

@@ -49,7 +49,7 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:8080/cities/" + this.$route.params.name)
+      .get("http://localhost:8080/public/city/" + this.$route.params.name)
       .then((response) => {
         this.city = response.data;
         axios
@@ -85,7 +85,7 @@ export default {
 
             axios
               .get(
-                "http://localhost:8080/cities/average/" +
+                "http://localhost:8080/public/city/average/" +
                   this.$route.params.name
               )
               .then((response) => {
