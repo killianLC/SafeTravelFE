@@ -38,24 +38,45 @@ export default {
     return {
       text: "",
       rating: 0,
+      comments: [],
     };
   },
   methods: {
     sendComment() {
+      this.comments = this.city.comments;
+
+      let idUser = JSON.parse(sessionStorage.getItem("user")).id;
       let comment = {
         description: this.text,
         date: new Date(),
         rating: this.rating,
         user: {
-          id: JSON.parse(sessionStorage.getItem("user")).id,
+          id: idUser,
         },
         city: {
           id: this.city.id,
         },
       };
-      axios
-        .post("http://localhost:8080/comments", comment)
-        .then(() => location.reload());
+
+      let isFind = false
+      this.comments.forEach((comment) => {
+        if(comment.user.id === idUser) {
+          isFind = true;
+        }
+      });
+
+      if(isFind) {
+        this.$toast.add({
+          severity: "error",
+          summary: "Erreur",
+          detail: "Vous avez déjà posté un commentaire.",
+          life: 3000,
+        });        
+      } else {
+        axios
+          .post("http://localhost:8080/comments", comment)
+          .then(() => location.reload());
+      }
     },
   },
 };
