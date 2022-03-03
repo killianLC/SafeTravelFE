@@ -117,10 +117,19 @@ export default {
         axios
           .get("http://localhost:8080/cities/" + this.cityInput)
           .then(() => {
-            this.steps.push({
-              cityName: this.cityInput,
-              date: this.dateInput,
+            axios.post("http://localhost:8080/trips/"+this.travel.id+"/step/create", {
+              date: this.dateInput, cityName:this.cityInput
+            }).then(() => {
+              this.steps.push({
+                date: this.dateInput,
+                city: {
+                  name: this.cityInput,
+                },
+              });
+              this.cityInput = "";
+              this.dateInput = "";
             });
+
           })
           .catch(() => {
             this.$toast.add({
@@ -140,11 +149,9 @@ export default {
       }
     },
     removeStep(step) {
+      console.log(step);
       axios
-        .post("http://localhost:8080/trip/delete/step", {
-          stepId: step.id,
-          tripId: this.travel.id,
-        })
+        .post("http://localhost:8080/trips/"+this.travel.id+"/step/delete/"+step.id)
         .then(() => {
           this.steps.splice(
             this.steps.indexOf(

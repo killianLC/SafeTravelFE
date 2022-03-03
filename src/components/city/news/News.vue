@@ -2,7 +2,7 @@
   <Card>
     <template #title><i class="pi pi-book" /> Dernière news</template>
     <template #content>
-      <Article :article="article" v-for="article in articles" :key="article" />
+      <Article :article="article" v-for="article in articles.slice(0, 10)" :key="article" />
     </template>
     <template #footer>
       <a class="no-underline">

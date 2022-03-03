@@ -14,7 +14,7 @@
     </template>
     <template #content>
       <div class="grid">
-        <div         
+        <div
           class="col-12 md:col-6 lg:col-4"
           v-for="comment in comments"
           :key="comment.id"
@@ -22,7 +22,11 @@
           <Message :comment="comment" />
         </div>
         <div class="col-12 md:col-6 lg:col-4">
-          <CommentaireForm :city="cityData" @emit-add-comment="receiptComment" />
+          <CommentaireForm
+            v-if="!haveComment"
+            :city="city"
+            @emit-add-comment="sendComment"
+          />
         </div>
       </div>
     </template>
@@ -48,29 +52,34 @@ export default {
   },
   data() {
     return {
-      comments: this.city.comments,
-      cityData: {}
-    }
+      comments: [],
+    };
   },
-  props:{
-    city: Object
+  props: {
+    city: Object,
   },
-  mounted() {
-    this.cityData = this.city
+  created() {
+    axios.get("http://localhost:8080/cities/" + this.city.name).then((res) => {
+      this.comments = res.data.comments;
+    });
   },
   methods: {
     getAvatar(user) {
       return user.firstname[0].toUpperCase();
     },
-    receiptComment() {
+    sendComment(payload) {
+      console.log(payload.comment);
       axios
-          .get("http://localhost:8080/cities/"+this.city.name)
-          .then((res) => {
-            this.comments = res.data.comments
-            this.cityData = res.data
-          });
-    }
+        .post("http://localhost:8080/comments", payload.comment)
+        .then(this.comments.push(payload.comment));
+    },
   },
+  computed: {
+    haveComment(){
+      let id = JSON.parse(sessionStorage.getItem("user")).id;
+      return this.comments.find(comment => comment.user.id == id);
+    }
+  }
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

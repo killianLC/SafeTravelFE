@@ -1,18 +1,16 @@
 <template>
-  <div class="card">
-    <div class="formgrid grid">
-      <div class="field col-12">
-        <Rating v-model="rating" :stars="5" :cancel="false" />
-        <Textarea class="w-full" v-model="text" rows="5" cols="30" />
-      </div>
-      <div class="field col-12">
-        <Button
-          label="Envoyer"
-          icon="pi pi-send"
-          iconPos="right"
-          @click="sendComment"
-        />
-      </div>
+  <div class="formgrid grid">
+    <div class="field col-12">
+      <Rating v-model="rating" :stars="5" :cancel="false" />
+      <Textarea class="w-full" v-model="text" rows="5" cols="30" />
+    </div>
+    <div class="field col-12">
+      <Button
+        label="Envoyer"
+        icon="pi pi-send"
+        iconPos="right"
+        @click="emitEvent"
+      />
     </div>
   </div>
   <div class="w-full"></div>
@@ -22,7 +20,6 @@
 import Textarea from "primevue/textarea";
 import Button from "primevue/button";
 import Rating from "primevue/rating";
-import axios from "axios";
 
 export default {
   name: "CommentaireForm",
@@ -34,57 +31,27 @@ export default {
   props: {
     city: Object,
   },
+  emits: ["emit-add-comment"],
   data: function () {
     return {
       text: "",
       rating: 0,
-      comments: [],
-      cityData: {}
     };
   },
-  mounted() {
-    this.cityData = this.city
-  },
   methods: {
-    sendComment() {
-      this.comments = this.cityData.comments;
-
-      let idUser = JSON.parse(sessionStorage.getItem("user")).id;
-      let comment = {
-        description: this.text,
-        date: new Date(),
-        rating: this.rating,
-        user: {
-          id: idUser,
+    emitEvent() {
+      this.$emit("emit-add-comment", {
+        comment: {
+          description: this.text,
+          date: new Date(),
+          rating: this.rating,
+          user: JSON.parse(sessionStorage.getItem("user")),
+          city: {
+            id: this.city.id,
+          },
         },
-        city: {
-          id: this.cityData.id,
-        },
-      };
-
-      let isFind = false
-      this.comments?.forEach((comment) => {
-        if(comment.user.id === idUser) {
-          isFind = true;
-        }
       });
-
-      if(isFind) {
-        this.$toast.add({
-          severity: "error",
-          summary: "Erreur",
-          detail: "Vous avez déjà posté un commentaire.",
-          life: 3000,
-        });        
-      } else {
-        axios
-          .post("http://localhost:8080/comments", comment)
-          .then(() => this.emmitAddComment());
-      }
     },
-    emmitAddComment() {
-      this.$emit('emit-add-comment')
-    }
   },
 };
 </script>
