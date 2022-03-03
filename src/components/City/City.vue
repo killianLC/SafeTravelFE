@@ -4,16 +4,15 @@
       <BasicInformation v-if="city.id" :city="city" />
     </div>
 
-    <div class="col-12 md:col-6 lg:col-4"><Covid :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4" v-if="city.average"><GlobalRating :note="city.average" /></div>
     <div class="col-12 md:col-6 lg:col-4" v-if="city.imageMap">
       <Carte :imageMap="city.imageMap" />
     </div>
+
+    <div class="col-12 md:col-6 lg:col-4" v-if="city.average"><GlobalRating :note="city.average" /></div>
     <div class="col-12 md:col-6 lg:col-4"><Weather :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4" v-if="false">
       <Pictures :name="city.name" />
     </div>
-    <div class="col-12 md:col-6 lg:col-4"><Health :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
 
     <div class="col-12 md:col-12"> 
@@ -29,9 +28,7 @@ import Commentaire from "./commentaires/Commentaire.vue";
 import GlobalRating from "./rating/GlobalRating.vue";
 import News from "./news/News.vue";
 import Pictures from "./pictures/Pictures.vue";
-import Covid from "./covid/Covid.vue";
 import Weather from "./weather/Weather.vue";
-import Health from "../city/health/Health.vue";
 import axios from "axios";
 
 export default {
@@ -43,9 +40,7 @@ export default {
     GlobalRating,
     News,
     Pictures,
-    Covid,
     Weather,
-    Health,
   },
   data() {
     return {
