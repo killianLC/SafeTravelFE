@@ -30,7 +30,7 @@
             <Button
               icon="pi pi-trash"
               class="p-button-rounded p-button-danger"
-              @click="removeStep(slotProps.option.city.name)"
+              @click="removeStep(slotProps.option)"
             />
           </div>
         </template>
@@ -139,11 +139,25 @@ export default {
         });
       }
     },
-    removeStep(name) {
-      this.steps.splice(
-        this.steps.indexOf(this.steps.find((step) => step.name === name)),
-        1
-      );
+    removeStep(step) {
+      axios
+        .post("http://localhost:8080/trip/delete/step", {
+          stepId: step.id,
+          tripId: this.travel.id,
+        })
+        .then(() => {
+          this.steps.splice(
+            this.steps.indexOf(
+              this.steps.find((item) => item.name === step.city.name)
+            ),
+            1
+          );
+          this.$toast.add({
+            severity: "success",
+            summary: "Etape supprimée",
+            life: 3000,
+          });
+        });
     },
     updateDescription() {
       axios.post("http://localhost:8080/trips", this.travel).then((response) =>

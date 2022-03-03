@@ -49,10 +49,16 @@
           <Timeline :value="travel.steps" align="alternate">
             <template #content="slotProps">
               <div class="step">
-                <div>
+                <router-link
+                  :to="{
+                    name: 'city',
+                    params: { name: slotProps.item.city.name },
+                  }"
+                  class="no-underline text-dark"
+                >
                   <i class="pi pi-building" /> {{ slotProps.item.city.name }}
                   <Flag />
-                </div>
+                </router-link>
                 {{ slotProps.item.date }}
               </div>
             </template>
