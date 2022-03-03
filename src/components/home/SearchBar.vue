@@ -7,6 +7,7 @@
       @complete="searchCity($event)"
       field="name"
       @keyup.enter="search"
+      @item-select="search"
       v-model="value"
       placeholder="Rechercher votre ville"
     />
@@ -31,10 +32,24 @@ export default {
   },
   methods: {
     search() {
-      if(this.value.name)this.$router.push({ name: "city", params: { name: this.value.name } });
+      if (this.value.name)
+        this.$router.push({ name: "city", params: { name: this.value.name } });
       else this.$router.push({ name: "city", params: { name: this.value } });
     },
     searchCity(event) {
+      setTimeout(() => {
+        if (!event.query.trim().length) {
+          this.filteredCities = [...this.cities];
+        } else {
+          this.filteredCities = this.cities.filter((city) => {
+            return city.name
+              .toLowerCase()
+              .startsWith(event.query.toLowerCase());
+          });
+        }
+      }, 250);
+    },
+    goToCity(event) {
       setTimeout(() => {
         if (!event.query.trim().length) {
           this.filteredCities = [...this.cities];

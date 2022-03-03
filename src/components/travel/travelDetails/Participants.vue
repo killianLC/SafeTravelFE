@@ -8,6 +8,7 @@
         :options="travel.participants"
         optionLabel="user.firstname"
         :filter="true"
+        emptyMessage="Aucun participant"
       >
         <template #option="slotProps">
           <div class="flex justify-content-between">

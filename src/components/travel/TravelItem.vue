@@ -32,7 +32,7 @@
     </template>
     <template #content>
       <span class="text-xl font-bold"
-        >{{ travel.participants.length }}
+        >{{ nbAcceptUser }}
         <i class="pi pi-users" /> participants</span
       >
     </template>
@@ -69,13 +69,23 @@ export default {
   },
   computed: {
     firstStep() {
-      if (this.travel.steps)return this.travel.steps[0];
+      if (this.travel.steps) return this.travel.steps[0];
       else return { city: { name: "..." }, date: "" };
     },
     lastStep() {
       if (this.travel.steps)
         return this.travel.steps[this.travel.steps.length - 1];
       else return { city: { name: "..." }, date: "" };
+    },
+    nbAcceptUser() {
+      return this.travel.participants.filter(
+        (participant) => participant.statut
+      ).length;
+    },
+    nbRequest() {
+      return this.travel.participants.filter(
+        (participant) => participant.statut == false
+      ).length;
     },
   },
 };

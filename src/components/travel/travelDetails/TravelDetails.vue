@@ -3,7 +3,13 @@
     <div class="col-12">
       <Breadcrumb :home="home" :model="items" />
     </div>
-    <div class="col-12 md:col-12"><PresentationTravel :travel="travel" :isParticipant="isParticipant" :isOrganizer="isOrganizer"  /></div>
+    <div class="col-12 md:col-12">
+      <PresentationTravel
+        :travel="travel"
+        :isParticipant="isParticipant"
+        :isOrganizer="isOrganizer"
+      />
+    </div>
     <div class="col-12 md:col-8" v-if="isOrganizer">
       <StepsTravel :travel="travel" />
     </div>
@@ -32,7 +38,9 @@ export default {
     return {
       travel: null,
       isOrganizer: false,
-      isParticipant: true
+      isParticipant: true,
+      home: { icon: "pi pi-home", to: "/" },
+      items: [{ label: "Mes voyages", to: "/travels" },{ label: "Voyage" }],
     };
   },
   created() {
@@ -50,7 +58,8 @@ export default {
           )
           .then(() => {
             this.isParticipant = false;
-          }).catch(() => {
+          })
+          .catch(() => {
             this.isParticipant = true;
           });
       });

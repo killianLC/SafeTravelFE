@@ -6,6 +6,9 @@
         <Textarea v-model="description" class="w-full" rows="3" cols="30" />
         <label for="inputmask">Description</label>
       </span>
+      <div class="flex flex-row-reverse">
+        <Button label="Modifier la description" @click="updateDescription" />
+      </div>
       <Divider />
       Etapes
       <Listbox
@@ -48,9 +51,6 @@
         <Button icon="pi pi-plus" label="Ajouter" @click="addStep" />
       </div>
     </template>
-    <template #footer
-      ><Button icon="pi pi-plus" label="Modifier le voyage" @click="updateTrip"
-    /></template>
   </Card>
 </template>
 
@@ -145,7 +145,7 @@ export default {
         1
       );
     },
-    updateTrip() {
+    updateDescription() {
       axios.post("http://localhost:8080/trips", this.travel).then((response) =>
         this.$router.push({
           name: "travelDetails",
