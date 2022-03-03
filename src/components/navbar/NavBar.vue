@@ -6,7 +6,7 @@
         icon="pi pi-briefcase"
         class="p-button-secondary p-button-text"
     /></router-link>
-    <div v-if="isLogged">
+    <div v-if="this.$store.state.isLogged">
       <Button type="button" :label="this.username" @click="toggle" />
       <Menu ref="menu" :model="items" :popup="true" />
     </div>
@@ -65,12 +65,6 @@ export default {
   methods: {
     toggle(event) {
       this.$refs.menu.toggle(event);
-    },
-  },
-  computed: {
-    isLogged() {
-      if(JSON.parse(sessionStorage.getItem("user")))return true;
-      else return false;
     },
   },
 };
