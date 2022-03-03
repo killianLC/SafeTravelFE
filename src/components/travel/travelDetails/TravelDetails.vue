@@ -1,9 +1,11 @@
 <template>
-  <div class="grid" v-if="travel">
+  
+  <div class="grid">
     <div class="col-12">
       <Breadcrumb :home="home" :model="items" />
     </div>
-    <div class="col-12 md:col-12">
+    <ProgressSpinner v-if="travelsLoading" />
+    <div class="col-12 md:col-12" v-if="!travelsLoading">
       <PresentationTravel
         :travel="travel"
         :isParticipant="isParticipant"
@@ -24,6 +26,7 @@ import Participants from "./Participants.vue";
 import Edit from "./Edit.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import PresentationTravel from "./PresentationTravel.vue";
+import ProgressSpinner from "primevue/progressspinner";
 import axios from "axios";
 
 export default {
@@ -33,6 +36,7 @@ export default {
     Edit,
     Breadcrumb,
     PresentationTravel,
+    ProgressSpinner,
   },
   data() {
     return {
@@ -41,12 +45,14 @@ export default {
       isParticipant: true,
       home: { icon: "pi pi-home", to: "/" },
       items: [{ label: "Mes voyages", to: "/travels" }, { label: "Voyage" }],
+      travelsLoading: true,
     };
   },
   created() {
     axios
       .get("http://localhost:8080/trips/" + this.$route.params.id)
       .then((response) => {
+        this.travelsLoading = false;
         this.travel = response.data;
         this.isOrganizer =
           JSON.parse(sessionStorage.getItem("user")).id ===
@@ -65,7 +71,7 @@ export default {
       })
       .catch(() => {
         this.$router.push({
-          name: "travels"
+          name: "travels",
         });
       });
   },

@@ -45,7 +45,7 @@ import Card from "primevue/card";
 import TravelItem from "./TravelItem.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import Button from "primevue/button";
-import ProgressSpinner from 'primevue/progressspinner';
+import ProgressSpinner from "primevue/progressspinner";
 import axios from "axios";
 
 export default {
@@ -55,23 +55,21 @@ export default {
     TravelItem,
     Breadcrumb,
     Button,
-    ProgressSpinner
+    ProgressSpinner,
   },
   data() {
     return {
       travels: [],
       home: { icon: "pi pi-home", to: "/" },
       items: [{ label: "Mes voyages", to: "/travels" }],
-      travelsLoading: true
+      travelsLoading: true,
     };
   },
   created() {
-    axios
-      .get("http://localhost:8080/trips/user/")
-      .then((response) => {
-        this.travels = response.data
-        this.travelsLoading = false
-        });
+    axios.get("http://localhost:8080/trips/user/").then((response) => {
+      this.travels = response.data;
+      this.travelsLoading = false;
+    });
   },
 };
 </script>
