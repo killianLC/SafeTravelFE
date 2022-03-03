@@ -89,6 +89,7 @@ export default {
                   this.$route.params.name
               )
               .then((response) => {
+                response.data.rating_average = Math.round(response.data.rating_average * 100) / 100;
                 this.city.average = response.data.rating_average;
               });
           });
