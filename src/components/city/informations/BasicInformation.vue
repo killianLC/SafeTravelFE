@@ -121,4 +121,12 @@ export default {
 .list-none {
   margin: 0;
 }
+
+.p-card :deep(.list-none) {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
 </style>
