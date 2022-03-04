@@ -50,5 +50,9 @@ img {
 .p-card :deep(.p-card-content) {
   padding: 0;
 }
+
+.p-card :deep(.p-card-body) {
+  padding: 0.25rem;
+}
 </style>
 
