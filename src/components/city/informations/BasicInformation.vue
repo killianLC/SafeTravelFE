@@ -10,7 +10,8 @@
       />
     </template>
     <template #content>
-      <ul class="list-none min-size-card">
+      <div class="flex align-items-center justify-content-center min-size-card">
+      <ul class="list-none">
         <li>
           <i class="pi pi-map-marker" /> :
           <Flag :country="city.country" /> France
@@ -21,6 +22,7 @@
           {{ city.departement }}
         </li>
       </ul>
+      </div>
     </template>
     <template #footer>
       <a class="no-underline">
@@ -120,13 +122,6 @@ export default {
 
 .list-none {
   margin: 0;
-}
-
-.p-card :deep(.list-none) {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
   padding: 0;
 }
 </style>

@@ -62,12 +62,9 @@ export default {
           .get(
             "http://localhost:8080/trips/isParticipant/" + this.$route.params.id
           )
-          .then(() => {
-            this.isParticipant = false;
+          .then((reponse) => {
+            this.isParticipant = reponse.data;
           })
-          .catch(() => {
-            this.isParticipant = true;
-          });
       })
       .catch(() => {
         this.$router.push({

@@ -98,7 +98,7 @@
       <Button
         label="Demande envoyée"
         class="btn-join-travel"
-        v-if="requestSend"
+        v-if="requestSend || isParticipant && !isOrganizer"
         disabled
         >Demande envoyée<i class="pi pi-send"
       /></Button>
