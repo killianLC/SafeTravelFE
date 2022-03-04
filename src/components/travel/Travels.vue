@@ -27,6 +27,10 @@
             </div>
           </div>
         </template>
+        <template #footer>
+          Légendes : <span class="myTrips mr-2">Mes voyages</span>
+          <span class="myParticipations">Mes participations</span></template
+        >
       </Card>
     </div>
   </div>
@@ -64,7 +68,7 @@ export default {
       });
 
     axios.get("http://localhost:8080/trips/user").then((response) => {
-      this.travels =response.data;
+      this.travels = response.data;
       axios
         .get(
           "http://localhost:8080/participants/user/" +
@@ -93,6 +97,19 @@ export default {
 .title {
   display: flex;
   justify-content: space-between;
+}
+
+.myTrips {
+  background-color: var(--primary-color);
+  padding: 0.5rem;
+  border: 1px solid;
+  border-radius: 5%;
+}
+
+.myParticipations {
+  padding: 0.5rem;
+  border: 1px solid;
+  border-radius: 5%;
 }
 </style>
 
