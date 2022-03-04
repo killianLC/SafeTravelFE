@@ -65,13 +65,14 @@ export default {
               response.data.meteo?.forEach((m) => this.dateDataSets.push(m.date));
             }
 
-            response.data.meteo?.forEach((m) => {
-              this.dataSetsMeteo.push(m.note)
+            response.data.meteo?.forEach((m,index) => {
+              this.dataSetsMeteo[index] = response.data.meteo[index].note;
             })
-
-            response.data.ratings?.forEach((r) => {
-              this.dataSetsRating.push(r.note)
+            console.log(this.dataSetsMeteo)
+            response.data.ratings?.forEach((r,index) => {
+              this.dataSetsRating[index] = response.data.meteo[index].note;
             })
+            console.log(this.dataSetsRating)
           })
           .catch(()=>console.log("Criteria not found"))
     }
