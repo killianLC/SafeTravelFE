@@ -2,6 +2,7 @@
   <Card class="m-3 border-2 border-primary">
     <template #title><i class="pi pi-chart-bar" />&nbsp;Classement </template>
     <template #content>
+      <div v-if="cities.length !== 0">
       <Podium :cities="cities" class="mb-4" />
       <DataTable
         :value="cities"
@@ -30,6 +31,10 @@
           </template>
         </Column>
       </DataTable>
+      </div>
+      <h2 v-else class="text-center">
+        Aucun classement
+      </h2>
     </template>
   </Card>
 </template>

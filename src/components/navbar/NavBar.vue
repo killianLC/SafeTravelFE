@@ -12,10 +12,10 @@
     </div>
     <div v-else>
       <router-link to="/connexion" class="no-underline mr-2">
-        <Button type="button" label="connexion" />
+        <Button type="button" label="Connexion" />
       </router-link>
       <router-link to="/inscription" class="no-underline">
-        <Button type="button" label="inscription" />
+        <Button type="button" label="Inscription" />
       </router-link>
     </div>
   </div>
