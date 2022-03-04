@@ -50,6 +50,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .p-card:deep(.grid) {
-  max-height: 360px;
+  max-height: 310px;
+  margin: 0;
 }
 </style>

@@ -9,7 +9,7 @@
     </div>
 
     <div class="col-12 md:col-6 lg:col-4" v-if="city.average"><GlobalRating :note="city.average" /></div>
-    <div class="col-12 md:col-6 lg:col-4"><Weather :city="city" /></div>
+    <div class="col-12 md:col-6 lg:col-4" v-if="city.meteo"><Weather :city="city" /></div>
     <div class="col-12 md:col-6 lg:col-4" v-if="false">
       <Pictures :name="city.name" />
     </div>
@@ -68,11 +68,9 @@ export default {
             response.data.meteo?.forEach((m,index) => {
               this.dataSetsMeteo[index] = response.data.meteo[index].note;
             })
-            console.log(this.dataSetsMeteo)
             response.data.ratings?.forEach((r,index) => {
               this.dataSetsRating[index] = response.data.meteo[index].note;
             })
-            console.log(this.dataSetsRating)
           })
           .catch(()=>console.log("Criteria not found"))
     }
@@ -138,4 +136,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.grid :deep(.min-size-card) {  
+  min-height: 310px;
+}
 </style>

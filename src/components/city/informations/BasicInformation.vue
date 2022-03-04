@@ -10,7 +10,7 @@
       />
     </template>
     <template #content>
-      <ul class="list-none">
+      <ul class="list-none min-size-card">
         <li>
           <i class="pi pi-map-marker" /> :
           <Flag :country="city.country" /> France
@@ -53,7 +53,7 @@ export default {
   data: function () {
     return {
       isFavCity: false,
-      logged: JSON.parse(sessionStorage.getItem("user"))
+      logged: JSON.parse(sessionStorage.getItem("user")),
     };
   },
   mounted() {
@@ -89,7 +89,7 @@ export default {
       }
     },
     isFavorite() {
-      if(sessionStorage.getItem("user")) {
+      if (sessionStorage.getItem("user")) {
         axios
           .get("http://localhost:8080/cities/favoris/isFav/" + this.city.id)
           .then((res) => {
@@ -116,5 +116,9 @@ export default {
 .btn-fav {
   max-height: 32px;
   max-width: 32px;
+}
+
+.list-none {
+  margin: 0;
 }
 </style>

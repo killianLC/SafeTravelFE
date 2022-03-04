@@ -2,7 +2,13 @@
   <Card>
     <template #title><i class="pi pi-map" /> Carte</template>
     <template #content>
-      <Image imageClass="max-w-full border-1 border-dark" :src="imageMap" alt="Image Text" />
+      <div class="min-size-card">
+        <Image
+          imageClass="max-w-full border-1 border-dark"
+          :src="imageMap"
+          alt="Image Text"
+        />
+      </div>
     </template>
     <template #footer>
       <a class="no-underline">
@@ -32,7 +38,9 @@ export default {
   },
   methods: {
     openGoogleMaps() {
-      window.open("https://www.google.fr/maps/place/" + this.$route.params.name);
+      window.open(
+        "https://www.google.fr/maps/place/" + this.$route.params.name
+      );
     },
   },
 };
