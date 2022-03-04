@@ -115,10 +115,9 @@ export default {
 
             axios
               .get(
-                "http://localhost:8080/public/city/"+ this.$route.params.name + "/average/")
+                "http://localhost:8080/public/city/globalnote/"+ this.$route.params.name)
               .then((response) => {
-                response.data.rating_average = Math.round(response.data.rating_average * 100) / 100;
-                this.city.average = response.data.rating_average;
+                this.city.average = response.data;
               });
           });
       })
