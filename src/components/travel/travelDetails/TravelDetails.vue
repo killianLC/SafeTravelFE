@@ -14,7 +14,7 @@
     <div class="col-12 md:col-8" v-if="isOrganizer">
       <Edit :travel="travel" @emit-update-desc="updateDescription" />
     </div>
-    <div class="col-12 md:col-4" v-if="isOrganizer|| isParticipant.statut">
+    <div class="col-12 md:col-4" v-if="isOrganizer || isParticipant.statut">
       <Participants :travel="travel" :isOrganizer="isOrganizer" />
     </div>
   </div>
@@ -63,6 +63,11 @@ export default {
           )
           .then((reponse) => {
             this.isParticipant = reponse.data;
+            this.travel.participants.push({
+              id: 1,
+              statut: true,
+              user: this.travel.organisateur,
+            });
           })
           .catch(() => {
             this.isParticipant = false;

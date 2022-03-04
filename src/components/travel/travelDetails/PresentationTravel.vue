@@ -59,13 +59,15 @@
               v-show="participant.statut"
             />
             <Avatar
+              v-if="isOrganizer"
               :label="travel.organisateur.firstname[0].toUpperCase()"
               shape="circle"
             />
           </AvatarGroup>
-          <b>{{ nbAcceptUser + 1 }} personnes</b>
+          <b>{{ isOrganizer ? (nbAcceptUser + 1) : nbAcceptUser }} personnes</b>
           <span v-if="firstStep"
-            >&nbsp;partiront vers de nouvelles aventures le {{ firstStep.date }}</span
+            >&nbsp;partiront vers de nouvelles aventures le
+            {{ firstStep.date }}</span
           >
         </div>
         <div class="col-12 lg:col-8">
