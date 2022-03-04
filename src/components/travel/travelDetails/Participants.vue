@@ -21,24 +21,26 @@
                 slotProps.option.user.lastname
               }}</span>
             </div>
-            <div v-if="slotProps.option.statut">
-              <Button
-                icon="pi pi-times"
-                class="p-button-rounded p-button-danger"
-                @click="refuse(slotProps.option.id)"
-              />
-            </div>
-            <div v-else>
-              <Button
-                icon="pi pi-thumbs-up"
-                class="p-button-rounded p-button-primary mr-2"
-                @click="accept(slotProps.option.id)"
-              />
-              <Button
-                icon="pi pi-thumbs-down"
-                class="p-button-rounded p-button-danger"
-                @click="refuse(slotProps.option.id)"
-              />
+            <div v-if="isOrganizer">
+              <div v-if="slotProps.option.statut">
+                <Button
+                  icon="pi pi-times"
+                  class="p-button-rounded p-button-danger"
+                  @click="refuse(slotProps.option.id)"
+                />
+              </div>
+              <div v-else>
+                <Button
+                  icon="pi pi-thumbs-up"
+                  class="p-button-rounded p-button-primary mr-2"
+                  @click="accept(slotProps.option.id)"
+                />
+                <Button
+                  icon="pi pi-thumbs-down"
+                  class="p-button-rounded p-button-danger"
+                  @click="refuse(slotProps.option.id)"
+                />
+              </div>
             </div>
           </div>
         </template>
@@ -70,6 +72,7 @@ export default {
   },
   props: {
     travel: Object,
+    isOrganizer: Boolean,
   },
   data: function () {
     return {
@@ -131,7 +134,7 @@ export default {
           const index = this.participants.findIndex(
             (participant) => participant.id === id
           );
-          this.participants = this.participants.splice(index,1);
+          this.participants = this.participants.splice(index, 1);
           this.$toast.add({
             severity: "error",
             summary: "Vous avez refusé la demande",

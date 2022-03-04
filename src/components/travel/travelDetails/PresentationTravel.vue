@@ -51,15 +51,22 @@
           {{ travel.description }}
           <Divider />
           <AvatarGroup>
-            <div v-for="participant in travel.participants" :key="participant">
-              <Avatar
-                v-if="participant.statut"
-                :label="participant.user.firstname[0].toUpperCase()"
-                shape="circle"
-              />
-            </div>
-            {{ nbAcceptUser }} participants | {{ nbRequest }} demandes
+            <Avatar
+              :label="participant.user.firstname[0].toUpperCase()"
+              :key="participant"
+              v-for="participant in travel.participants"
+              shape="circle"
+              v-show="participant.statut"
+            />
+            <Avatar
+              :label="travel.organisateur.firstname[0].toUpperCase()"
+              shape="circle"
+            />
           </AvatarGroup>
+          <b>{{ nbAcceptUser + 1 }} personnes</b>
+          <span v-if="firstStep"
+            >&nbsp;partiront vers de nouvelles aventures le {{ firstStep.date }}</span
+          >
         </div>
         <div class="col-12 lg:col-8">
           <Timeline :value="travel.steps" align="alternate">
@@ -97,8 +104,10 @@
       /></Button>
       <Button
         label="Demande envoyée"
-        class="btn-join-travel"
-        v-if="requestSend || isParticipant && !isOrganizer"
+        class="btn-join-travel color-success"
+        v-else-if="
+          requestSend || (isParticipant && isParticipant.statut == false)
+        "
         disabled
         >Demande envoyée<i class="pi pi-send"
       /></Button>
@@ -226,6 +235,10 @@ export default {
   width: 100%;
   font-size: 1.4rem;
   font-weight: 500;
+}
+
+.color-success {
+  color: var(--green-500);
 }
 </style>
 

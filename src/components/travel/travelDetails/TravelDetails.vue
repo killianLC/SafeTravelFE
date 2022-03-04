@@ -1,5 +1,4 @@
 <template>
-  
   <div class="grid">
     <div class="col-12">
       <Breadcrumb :home="home" :model="items" />
@@ -15,8 +14,8 @@
     <div class="col-12 md:col-8" v-if="isOrganizer">
       <Edit :travel="travel" @emit-update-desc="updateDescription" />
     </div>
-    <div class="col-12 md:col-4" v-if="isOrganizer">
-      <Participants :travel="travel" />
+    <div class="col-12 md:col-4" v-if="isOrganizer|| isParticipant.statut">
+      <Participants :travel="travel" :isOrganizer="isOrganizer" />
     </div>
   </div>
 </template>
@@ -42,7 +41,7 @@ export default {
     return {
       travel: null,
       isOrganizer: false,
-      isParticipant: true,
+      isParticipant: false,
       home: { icon: "pi pi-home", to: "/" },
       items: [{ label: "Mes voyages", to: "/travels" }, { label: "Voyage" }],
       travelsLoading: true,
@@ -65,6 +64,9 @@ export default {
           .then((reponse) => {
             this.isParticipant = reponse.data;
           })
+          .catch(() => {
+            this.isParticipant = false;
+          });
       })
       .catch(() => {
         this.$router.push({
