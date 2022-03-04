@@ -28,7 +28,7 @@
           </div>
         </template>
         <template #footer>
-          Légendes : <span class="myTrips mr-2">Mes voyages</span>
+          Légende : <span class="myTrips mr-2">Mes voyages</span>
           <span class="myParticipations">Mes participations</span></template
         >
       </Card>
@@ -76,16 +76,20 @@ export default {
             "/trips"
         )
         .then((response) => {
-          response.data.forEach((element, idx, array) => {
-            axios
-              .get("http://localhost:8080/trips/" + element.id)
-              .then((response) => {
-                this.travels.push(response.data);
-                if (idx == array.length - 1) {
-                  this.travelsLoading = false;
-                }
-              });
-          });
+          if (response.data.length > 0) {
+            response.data.forEach((element, idx, array) => {
+              axios
+                .get("http://localhost:8080/trips/" + element.id)
+                .then((response) => {
+                  this.travels.push(response.data);
+                  if (idx == array.length - 1) {
+                    this.travelsLoading = false;
+                  }
+                });
+            });
+          } else {
+            this.travelsLoading = false;
+          }
         });
     });
   },
