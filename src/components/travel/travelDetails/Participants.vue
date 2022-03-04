@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template #title>
-      {{ travel.participants.length }} <i class="pi pi-users" /> participants
+      {{ nbAcceptUser }} <i class="pi pi-users" /> participants
     </template>
     <template #content>
       <Listbox
@@ -83,6 +83,11 @@ export default {
   computed: {
     currentUrl() {
       return location.href;
+    },
+    nbAcceptUser() {
+      return this.travel.participants.filter(
+        (participant) => participant.statut
+      ).length;
     },
   },
   created() {
