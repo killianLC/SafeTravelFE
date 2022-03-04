@@ -5,6 +5,7 @@
       <ProgressSpinner strokeWidth="5" fill="#1d1e27" animationDuration="1s" />
       <span class="fadeinleft score bg-dark">{{ note }}/5</span>
     </template>
+    <template #foooter> </template>
   </Card>
 </template>
 
@@ -43,6 +44,7 @@ export default {
 .p-card :deep(.p-card-content) {
   display: grid;
   justify-content: center;
+  min-height: 400px;
 }
 
 .p-progress-spinner {

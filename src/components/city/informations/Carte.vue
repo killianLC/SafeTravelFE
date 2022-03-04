@@ -2,13 +2,11 @@
   <Card>
     <template #title><i class="pi pi-map" /> Carte</template>
     <template #content>
-      <div class="min-size-card">
         <Image
-          imageClass="max-w-full border-1 border-dark"
+          imageClass="max-w-full border-1 border-dark min-size-card"
           :src="imageMap"
           alt="Image Text"
         />
-      </div>
     </template>
     <template #footer>
       <a class="no-underline">
@@ -48,4 +46,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.p-image :deep(img){
+  max-height: 310px;
+}
 </style>
