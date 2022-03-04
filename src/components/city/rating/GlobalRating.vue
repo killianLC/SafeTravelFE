@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <template #title><i class="pi pi-bookmark" /> Note global</template>
+    <template #title><i class="pi pi-bookmark" /> Note globale</template>
     <template #content>
       <ProgressSpinner strokeWidth="5" fill="#1d1e27" animationDuration="1s" />
       <span class="fadeinleft score bg-dark">{{ note }}/5</span>
