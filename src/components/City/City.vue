@@ -58,6 +58,7 @@ export default {
       axios
           .get("http://localhost:8080/public/city/" + this.$route.params.name+"/notes")
           .then((response) => {
+            console.log(response);
             if(response.data.meteo?.length > 6){
               response.data.meteo.splice(response.data.meteo.length-7,response.data.meteo.length)
                   .forEach((m) => this.dateDataSets.push(m.date));
@@ -69,7 +70,7 @@ export default {
               this.dataSetsMeteo[index] = response.data.meteo[index].note;
             })
             response.data.ratings?.forEach((r,index) => {
-              this.dataSetsRating[index] = response.data.meteo[index].note;
+              this.dataSetsRating[index] = response.data.ratings[index].note;
             })
           })
           .catch(()=>console.log("Criteria not found"))
