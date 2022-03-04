@@ -96,7 +96,7 @@ export default {
       if (this.cityInput && this.dateInput) {
         if (this.cityInput.name) this.cityInput = this.cityInput.name;
         axios
-          .get("http://localhost:8080/cities/" + this.cityInput)
+          .get("http://localhost:8080/public/city/" + this.cityInput)
           .then(() => {
             this.steps.push({
               cityName: this.cityInput,
