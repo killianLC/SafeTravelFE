@@ -10,7 +10,7 @@
 
     <div class="col-12 md:col-6 lg:col-4" v-if="city.average"><GlobalRating :note="city.average" /></div>
     <div class="col-12 md:col-6 lg:col-4" v-if="city.meteo"><Weather :city="city" /></div>
-    <div class="col-12 md:col-6 lg:col-4" v-if="false">
+    <div class="col-12 md:col-6 lg:col-4">
       <Pictures :name="city.name" />
     </div>
     <div class="col-12 md:col-6 lg:col-4"><News :name="city.name" /></div>
